@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">NetKick</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="netkick_logo">NETKICK</string>
+    <string name="live_score_title">Live Score</string>
+    <string name="popular_teams_title">Popular Teams</string>
+    <string name="top_news">Top News</string>
+    <string name="explore_title">Explore</string>
+    <string name="view_all_btn">View All</string>
+    <string name="read_more">Read More</string>
+</resources>
