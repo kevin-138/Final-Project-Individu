@@ -1,7 +1,5 @@
 package com.kevin.netkick.network
 
-import com.bumptech.glide.util.Util
-import com.kevin.netkick.Utils
 import com.kevin.netkick.domain.DomainRepository
 import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
@@ -17,7 +15,7 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
     override suspend fun getLiveMatches(live: String): Flow<FixturesResponse> {
         return flow {
         try {
-           val response = footballApi.getLiveMatches(Utils.LIVE_PARAMS)
+           val response = footballApi.getLiveMatches(live)
            emit(FixturesResponseModel.transformToEntity(response))
         } catch (e: Throwable){
             e.printStackTrace()

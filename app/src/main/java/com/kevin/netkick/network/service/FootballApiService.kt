@@ -8,6 +8,6 @@ import retrofit2.http.Query
 interface FootballApiService {
 
     @Headers("x-apisports-key: c544dcdd442a1c5159c476243f1299d8")
-    @GET("teams")
-    fun getLiveMatches(@Query("live") live:String): FixturesResponseModel
+    @GET("fixtures")
+    suspend fun getLiveMatches(@Query("live") live:String): FixturesResponseModel
 }

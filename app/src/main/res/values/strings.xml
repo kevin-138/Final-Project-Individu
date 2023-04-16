@@ -9,4 +9,6 @@
     <string name="explore_title">Explore</string>
     <string name="view_all_btn">View All</string>
     <string name="read_more">Read More</string>
+    <string name="goalsFixture">%d - %d</string>
+    <string name="vsFixture">%s vs %s</string>
 </resources>

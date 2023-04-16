@@ -5,7 +5,7 @@ import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
-import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.FragmentActivity
 
 
 object Utils {
@@ -16,7 +16,7 @@ object Utils {
     const val NEWS_API_KEY = "1f0d9449fae149998f765270b1c23cbc"
     const val NEWS_API_BASE = "https://newsapi.org/v2/"
 
-    fun isOnline(activity: AppCompatActivity): Boolean {
+    fun isOnline(activity: FragmentActivity): Boolean {
         val connectivityManager =
             activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
         if (connectivityManager != null) {
