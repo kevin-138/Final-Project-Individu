@@ -20,7 +20,10 @@ import javax.inject.Inject
 
 class MainActivity: AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-
+    private lateinit var activeFragment:Fragment
+    private lateinit var homeFragment: HomeFragment
+    private lateinit var exploreFragment: ExploreFragment
+    private lateinit var trophiesFragment: TrophiesFragment
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
@@ -39,21 +42,43 @@ class MainActivity: AppCompatActivity() {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        setupFragments()
         TooLargeTool.startLogging(application)
         setupNavigation()
 
     }
 
+    private fun setupFragments(){
+        homeFragment = HomeFragment(viewModel,application)
+        exploreFragment = ExploreFragment()
+        trophiesFragment = TrophiesFragment()
+        supportFragmentManager.beginTransaction().apply {
+            add(R.id.fl_home_activity, homeFragment)
+            add(R.id.fl_home_activity, exploreFragment)
+            add(R.id.fl_home_activity, trophiesFragment)
+            hide(exploreFragment)
+            hide(trophiesFragment)
+        }.commit()
+    }
+
     private fun setupNavigation(){
-        val homeFragment = HomeFragment(viewModel,application)
-        val exploreFragment = ExploreFragment()
-        val trophiesFragment = TrophiesFragment()
-        setCurrentFragment(homeFragment)
+        activeFragment = exploreFragment
         binding.bnvNavBar.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.nav_home -> setCurrentFragment(homeFragment)
-                R.id.nav_explore -> setCurrentFragment(exploreFragment)
-                R.id.nav_trophies -> setCurrentFragment(trophiesFragment)
+                R.id.nav_home -> {
+                    setCurrentFragment(homeFragment)
+                    activeFragment = homeFragment
+                }
+                R.id.nav_explore -> {
+                    setCurrentFragment(exploreFragment)
+                    activeFragment = exploreFragment
+                }
+                R.id.nav_trophies -> {
+
+                    setCurrentFragment(trophiesFragment)
+                    activeFragment = trophiesFragment
+                }
             }
             true
         }
@@ -62,7 +87,7 @@ class MainActivity: AppCompatActivity() {
     private fun setCurrentFragment(fragment: Fragment){
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
-        fragmentTransaction.replace(binding.flHomeActivity.id,fragment)
+        fragmentTransaction.hide(activeFragment).show(fragment)
         fragmentTransaction.commit()
     }
 

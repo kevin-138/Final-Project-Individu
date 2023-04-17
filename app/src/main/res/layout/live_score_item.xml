@@ -50,7 +50,7 @@
             tools:text="First Half"
             android:textSize="15sp"
             android:textColor="@color/white"
-           app:layout_constraintTop_toBottomOf="@id/tv_live_score"
+           app:layout_constraintBottom_toTopOf="@id/tv_match_opponents"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             />
@@ -102,13 +102,6 @@
             app:layout_constraintStart_toEndOf="@id/tv_live_score"
             app:layout_constraintTop_toTopOf="@id/tv_live_score"
             app:layout_constraintBottom_toBottomOf="@id/tv_live_score"/>
-
-
-
-
-
-
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

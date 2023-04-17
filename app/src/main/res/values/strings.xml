@@ -13,4 +13,5 @@
     <string name="vsFixture">%s vs %s</string>
     <string name="DateLiveTime">%s %s</string>
     <string name="vs">VS</string>
+    <string name="oops">UH OH</string>
 </resources>

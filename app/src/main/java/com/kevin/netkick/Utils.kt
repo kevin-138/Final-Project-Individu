@@ -1,11 +1,17 @@
 package com.kevin.netkick
 
-import android.app.AlertDialog
+import androidx.appcompat.app.AlertDialog
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
+import com.kevin.netkick.presentation.view.home.fragments.HomeFragment
+import kotlinx.coroutines.delay
+import okhttp3.internal.wait
+import java.util.*
+import kotlin.concurrent.schedule
+import kotlin.time.Duration.Companion.seconds
 
 
 object Utils {
@@ -34,20 +40,24 @@ object Utils {
                     return true
                 }
             }
-        }else{
-            val dialogBuilder = AlertDialog.Builder(activity)
+        }
+            val dialogBuilder = AlertDialog.Builder(activity,R.style.NetworkAlertDialogTheme)
             dialogBuilder.setMessage("No Network Connection detected, press retry to refresh the app and try again. Please make sure you have a stable connection to the internet")
             dialogBuilder.setCancelable(false)
-            dialogBuilder.setPositiveButton("Retry") { dialog, which ->
-                activity.recreate()
+            dialogBuilder.setIcon(R.drawable.no_internet_logo)
+            dialogBuilder.setTitle("No Network Connection")
+            dialogBuilder.setPositiveButton("Retry") { _, _ ->
+                Timer().schedule(1000L) {
+                    activity?.runOnUiThread {
+                        (activity.supportFragmentManager.fragments[0] as HomeFragment).checkOnline()
+                    }
+                }
             }
-            dialogBuilder.setNegativeButton("cancel") { dialog, which ->
-                dialog.cancel()
+            dialogBuilder.setNegativeButton("Close App") { _, _ ->
+                activity.finish()
             }
-            val deleteDialog = dialogBuilder.create()
-            deleteDialog.setTitle("No Network Connection")
-            deleteDialog.setIcon(R.drawable.no_internet_logo)
-            deleteDialog.show()
-        }
+            val connectionAlertDialog = dialogBuilder.create()
+        connectionAlertDialog.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background);
+        connectionAlertDialog.show()
         return false}
 }

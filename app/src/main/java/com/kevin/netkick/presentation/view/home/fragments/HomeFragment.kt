@@ -30,18 +30,23 @@ class HomeFragment(private val mainViewModel: MainViewModel, private val applica
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        val onlineCheck = activity?.let { Utils.isOnline(it) }
+
+        checkOnline()
+
+    }
+
+    fun checkOnline() {
+        val onlineCheck = activity?.let { Utils.isOnline(requireActivity()) }
         if (onlineCheck == true){
             getLiveData()
         }
-
     }
 
     private fun getLiveData() {
         val pageSnapHelper = PagerSnapHelper()
         lifecycleScope.launch {
             mainViewModel.getLiveMatches(Utils.LIVE_PARAMS).collectLatest {
-                liveScoreAdapter = LiveScoreAdapter(it.response,application)
+                liveScoreAdapter = LiveScoreAdapter(it.response,listOf("sd","sd"),application)
                 binding.rvLivescore.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvLivescore.adapter = liveScoreAdapter
                 pageSnapHelper.attachToRecyclerView(binding.rvLivescore)
