@@ -1,115 +1,124 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.view.home.fragments.HomeFragment"
     android:background="@color/background1">
 
-    <TextView
-        android:id="@+id/tv_netkick_logo"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/netkick_logo"
-        android:textColor="@color/white"
-        android:fontFamily="@font/postnobills"
-        android:textSize="38sp"
-        android:paddingHorizontal="30dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <TextView
-        android:id="@+id/tv_live_score_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/live_score_title"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        android:textColor="@color/white"
-        app:layout_constraintTop_toBottomOf="@id/tv_netkick_logo"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-    
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_livescore"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="240dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_live_score_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/live_score_item"/>
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/tv_netkick_logo"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/netkick_logo"
+            android:textColor="@color/white"
+            android:fontFamily="@font/postnobills"
+            android:textSize="38sp"
+            android:paddingHorizontal="30dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
 
-    <TextView
-        android:id="@+id/tv_popular_teams_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/popular_teams_title"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:paddingHorizontal="30dp"
-        app:layout_constraintTop_toBottomOf="@id/rv_livescore"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
-    
-    <TextView
-        android:id="@+id/tv_see_all_popular_teams"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/view_all_btn"
-        android:textColor="@color/gray1"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@id/tv_popular_teams_title"
-        app:layout_constraintTop_toTopOf="@id/tv_popular_teams_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingHorizontal="30dp"
-        />
+        <TextView
+            android:id="@+id/tv_live_score_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/live_score_title"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            app:layout_constraintTop_toBottomOf="@id/tv_netkick_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_popular_teams"
-        android:layout_width="match_parent"
-        android:layout_height="80dp"
-        app:layout_constraintTop_toBottomOf="@id/tv_popular_teams_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:listitem="@layout/popular_team_item"/>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_livescore"
+            android:layout_width="0dp"
+            android:layout_height="210dp"
+            android:paddingStart="25dp"
+            android:paddingEnd="25dp"
+            android:clipToPadding="false"
+            app:layout_constraintTop_toBottomOf="@id/tv_live_score_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/live_score_item"/>
 
-    <TextView
-        android:id="@+id/tv_news_title"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/top_news"
-        android:textSize="20sp"
-        android:textColor="@color/white"
-        android:textStyle="bold"
-        android:paddingHorizontal="30dp"
-        app:layout_constraintTop_toBottomOf="@id/rv_popular_teams"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"/>
+        <TextView
+            android:id="@+id/tv_popular_teams_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/popular_teams_title"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingHorizontal="30dp"
+            app:layout_constraintTop_toBottomOf="@id/rv_livescore"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rv_news_headline"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/tv_news_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginHorizontal="20dp"
-        tools:listitem="@layout/news_headline_item"/>
+        <TextView
+            android:id="@+id/tv_see_all_popular_teams"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_all_btn"
+            android:textColor="@color/gray1"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tv_popular_teams_title"
+            app:layout_constraintTop_toTopOf="@id/tv_popular_teams_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingHorizontal="30dp"
+            />
 
-    <TextView
-        android:id="@+id/tv_see_all_news"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/view_all_btn"
-        android:textColor="@color/gray1"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_news_title"
-        app:layout_constraintTop_toTopOf="@+id/tv_news_title"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:paddingHorizontal="30dp"
-        />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_popular_teams"
+            android:layout_width="match_parent"
+            android:layout_height="80dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_popular_teams_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:listitem="@layout/popular_team_item"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/tv_news_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/top_news"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:paddingHorizontal="30dp"
+            app:layout_constraintTop_toBottomOf="@id/rv_popular_teams"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_news_headline"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/tv_news_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="20dp"
+            tools:listitem="@layout/news_headline_item"/>
+
+        <TextView
+            android:id="@+id/tv_see_all_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/view_all_btn"
+            android:textColor="@color/gray1"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_news_title"
+            app:layout_constraintTop_toTopOf="@+id/tv_news_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:paddingHorizontal="30dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

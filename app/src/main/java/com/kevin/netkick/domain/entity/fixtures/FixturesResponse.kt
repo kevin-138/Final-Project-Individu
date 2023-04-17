@@ -6,8 +6,4 @@ data class FixturesResponse(
     val paging: Paging,
     val results: Int,
     val response: List<ResponseF>
-){
-    companion object{
-
-    }
-}
+)

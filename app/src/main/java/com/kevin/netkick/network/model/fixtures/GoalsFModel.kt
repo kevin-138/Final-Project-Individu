@@ -12,7 +12,7 @@ data class GoalsFModel(
     companion object{
         fun transformToEntity(it:GoalsFModel):GoalsF{
             return GoalsF(
-                0,0
+                it.home ?: 0,it.away ?: 0
             )
         }
     }

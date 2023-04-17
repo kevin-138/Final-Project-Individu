@@ -19,6 +19,7 @@ class LiveScoreAdapter(private val dataList: List<ResponseF>,val context: Contex
                 tvStatusLive.text = data.fixture.status.long
                 tvLiveScore.text = context.resources.getString(R.string.goalsFixture, data.goals.home,data.goals.away)
                 tvMatchOpponents.text = context.resources.getString(R.string.vsFixture, data.teams.homeTeam.name, data.teams.awayTeam.name)
+                tvTimeMatchStart.text = context.resources.getString(R.string.DateLiveTime, data.fixture.timezone,data.fixture.date )
                 Glide.with(itemView).load(data.teams.homeTeam.logo).into(ivLivescoreHomeLogo)
                 Glide.with(itemView).load(data.teams.awayTeam.logo).into(ivLivescoreAwayLogo)
             }

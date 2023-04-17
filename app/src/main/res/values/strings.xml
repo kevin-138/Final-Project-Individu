@@ -11,4 +11,6 @@
     <string name="read_more">Read More</string>
     <string name="goalsFixture">%d - %d</string>
     <string name="vsFixture">%s vs %s</string>
+    <string name="DateLiveTime">%s %s</string>
+    <string name="vs">VS</string>
 </resources>

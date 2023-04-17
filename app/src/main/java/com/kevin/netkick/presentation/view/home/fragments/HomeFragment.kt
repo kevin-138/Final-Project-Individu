@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.PagerSnapHelper
 import com.kevin.netkick.Utils
 import com.kevin.netkick.databinding.FragmentHomeBinding
 import com.kevin.netkick.presentation.adapters.LiveScoreAdapter
@@ -37,11 +38,13 @@ class HomeFragment(private val mainViewModel: MainViewModel, private val applica
     }
 
     private fun getLiveData() {
+        val pageSnapHelper = PagerSnapHelper()
         lifecycleScope.launch {
             mainViewModel.getLiveMatches(Utils.LIVE_PARAMS).collectLatest {
                 liveScoreAdapter = LiveScoreAdapter(it.response,application)
                 binding.rvLivescore.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvLivescore.adapter = liveScoreAdapter
+                pageSnapHelper.attachToRecyclerView(binding.rvLivescore)
             }
         }
     }
