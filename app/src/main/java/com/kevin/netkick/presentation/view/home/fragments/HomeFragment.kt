@@ -45,7 +45,8 @@ class HomeFragment(private val mainViewModel: MainViewModel, private val applica
     private fun getLiveData() {
         val pageSnapHelper = PagerSnapHelper()
         lifecycleScope.launch {
-            mainViewModel.getLiveMatches(Utils.LIVE_PARAMS).collectLatest {
+            mainViewModel.getLiveMatches(Utils.LIVE_PARAMS)
+            mainViewModel.liveScoreFlow.collectLatest {
                 liveScoreAdapter = LiveScoreAdapter(it.response,listOf("sd","sd"),application)
                 binding.rvLivescore.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
                 binding.rvLivescore.adapter = liveScoreAdapter
