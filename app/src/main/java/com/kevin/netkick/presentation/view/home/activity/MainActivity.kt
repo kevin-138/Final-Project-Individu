@@ -63,7 +63,7 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun setupNavigation(){
-        activeFragment = exploreFragment
+        activeFragment = homeFragment
         binding.bnvNavBar.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.nav_home -> {
