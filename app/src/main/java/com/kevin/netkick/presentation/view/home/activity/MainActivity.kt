@@ -69,15 +69,17 @@ class MainActivity: AppCompatActivity() {
                 R.id.nav_home -> {
                     setCurrentFragment(homeFragment)
                     activeFragment = homeFragment
+                    homeFragment.checkOnline(true)
                 }
                 R.id.nav_explore -> {
                     setCurrentFragment(exploreFragment)
                     activeFragment = exploreFragment
+                    exploreFragment.checkOnline(true)
                 }
                 R.id.nav_trophies -> {
-
                     setCurrentFragment(trophiesFragment)
                     activeFragment = trophiesFragment
+                    trophiesFragment.checkOnline(true)
                 }
             }
             true

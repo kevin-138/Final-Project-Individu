@@ -6,14 +6,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kevin.netkick.R
+import com.kevin.netkick.presentation.PresentationUtils
 
 
 class ExploreFragment : Fragment() {
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -22,5 +18,22 @@ class ExploreFragment : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_explore, container, false)
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    fun checkOnline(current:Boolean = false) {
+        val onlineCheck = activity?.let { PresentationUtils.isOnline(requireActivity()) }
+        if (onlineCheck == true){
+//            getLiveData()
+        }else{
+            if (current){
+                PresentationUtils.networkDialog(requireActivity(),PresentationUtils.EXPLORE)
+            }
+        }
+    }
+
+
 
 }

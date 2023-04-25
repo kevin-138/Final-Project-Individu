@@ -1,6 +1,7 @@
 package com.kevin.netkick.network.di
 
-import com.kevin.netkick.Utils
+import com.kevin.netkick.network.NetworkUtils
+import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.network.service.FootballApiService
 import dagger.Module
 import dagger.Provides
@@ -21,7 +22,7 @@ class NetworkModule {
             .addInterceptor(loggingInterceptor)
             .build()
         val retrofit = Retrofit.Builder()
-            .baseUrl(Utils.FOOTBALL_API_BASE)
+            .baseUrl(NetworkUtils.FOOTBALL_API_BASE)
             .addConverterFactory(GsonConverterFactory.create())
             .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(client)

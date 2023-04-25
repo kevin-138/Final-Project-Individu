@@ -14,4 +14,6 @@
     <string name="DateLiveTime">%s %s</string>
     <string name="vs">VS</string>
     <string name="oops">UH OH</string>
+    <string name="no_live_matches">No Live Matches</string>
+    <string name="no_current">Our Database does not return any live matches currently</string>
 </resources>
