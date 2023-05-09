@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background1"
-    tools:context=".presentation.view.home.activity.MainActivity">
+    tools:context=".presentation.view.Main.activity.MainActivity">
 
     <FrameLayout
         android:id="@+id/fl_home_activity"
@@ -29,7 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/background3"
-        android:paddingVertical="@dimen/pd_1"
+        android:paddingTop="@dimen/pd_1"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

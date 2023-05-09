@@ -1,4 +1,4 @@
-package com.kevin.netkick.presentation.view.home.fragments
+package com.kevin.netkick.presentation.view.Main.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

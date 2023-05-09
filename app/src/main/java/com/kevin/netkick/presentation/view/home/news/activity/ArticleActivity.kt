@@ -1,4 +1,4 @@
-package com.kevin.netkick.presentation.view.news.activity
+package com.kevin.netkick.presentation.view.home.news.activity
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle

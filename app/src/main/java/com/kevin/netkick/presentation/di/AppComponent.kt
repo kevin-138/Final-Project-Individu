@@ -1,7 +1,7 @@
 package com.kevin.netkick.presentation.di
 
 import com.kevin.netkick.network.di.DataComponent
-import com.kevin.netkick.presentation.view.home.activity.MainActivity
+import com.kevin.netkick.presentation.view.Main.activity.MainActivity
 import dagger.Component
 
 @AppScope

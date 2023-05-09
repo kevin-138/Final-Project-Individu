@@ -10,7 +10,7 @@ import com.kevin.netkick.network.model.fixtures.subscore.SubScoreModel
 import com.kevin.netkick.network.model.fixtures.subteams.TeamsFModel
 import com.kevin.netkick.network.model.fixtures.subteams.TeamsSubFModel
 
-data class ResponseFModel(
+data class  ResponseFModel(
     @SerializedName("fixture")
     val fixture: FixtureModel?,
     @SerializedName("league")

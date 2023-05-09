@@ -7,9 +7,9 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import com.kevin.netkick.R
-import com.kevin.netkick.presentation.view.home.fragments.ExploreFragment
-import com.kevin.netkick.presentation.view.home.fragments.HomeFragment
-import com.kevin.netkick.presentation.view.home.fragments.TrophiesFragment
+import com.kevin.netkick.presentation.view.Main.fragments.ExploreFragment
+import com.kevin.netkick.presentation.view.Main.fragments.HomeFragment
+import com.kevin.netkick.presentation.view.Main.fragments.TrophiesFragment
 import java.util.*
 import kotlin.concurrent.schedule
 
