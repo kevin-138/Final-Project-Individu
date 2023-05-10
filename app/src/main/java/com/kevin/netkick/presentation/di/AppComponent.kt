@@ -21,4 +21,5 @@ interface AppComponent {
 
   fun injectInto(popularTeamsListActivity: PopularTeamsListActivity)
 
+//  fun injectInto(popularTeamsListActivity: PopularTeamsListActivity)
 }

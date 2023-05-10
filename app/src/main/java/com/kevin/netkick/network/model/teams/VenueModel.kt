@@ -5,19 +5,19 @@ import com.kevin.netkick.domain.entity.teams.Venue
 
 data class VenueModel(
     @SerializedName("id")
-    var id: Int?,
+    val id: Int?,
     @SerializedName("name")
-    var name: String?,
+    val name: String?,
     @SerializedName("address")
-    var address: String?,
+    val address: String?,
     @SerializedName("city")
-    var city: String?,
+    val city: String?,
     @SerializedName("capacity")
-    var capacity: Int?,
+    val capacity: Int?,
     @SerializedName("surface")
-    var surface: String?,
+    val surface: String?,
     @SerializedName("image")
-    var image: String?
+    val image: String?
 ){
     companion object{
         fun transformToEntity(it:VenueModel):Venue {
