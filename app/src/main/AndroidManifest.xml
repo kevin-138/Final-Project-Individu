@@ -16,8 +16,21 @@
         android:theme="@style/Theme.App.Starting"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.view.home.news.activity.AllNewsListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NetKick"/>
+        <activity
+            android:name=".presentation.view.home.popularteams.activity.PopularTeamsDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NetKick"/>
+        <activity
+            android:name=".presentation.view.home.popularteams.activity.PopularTeamsListActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NetKick"/>
+        <activity
             android:name=".presentation.view.home.news.activity.ArticleActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.NetKick"/>
         <activity
             android:name=".presentation.view.Main.activity.MainActivity"
             android:exported="true"
@@ -25,6 +38,7 @@
             android:theme="@style/Theme.App.Starting">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

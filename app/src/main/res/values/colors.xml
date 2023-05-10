@@ -24,4 +24,6 @@
     <color name="lightPurple">#D2B5FF</color>
     <color name="purple">#6C5ECF</color>
 
+    <color name="transparant">#00FFFFFF</color>
+
 </resources>
