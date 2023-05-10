@@ -12,7 +12,7 @@ data class ArticleModel(
     companion object{
         fun transformToListEntity(item: List<ArticleModel?>):List<Article>{
             return item.map {
-
+                    transformToEntity(it ?: ArticleModel())
             }
         }
 
