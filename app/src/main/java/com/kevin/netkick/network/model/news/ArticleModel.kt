@@ -12,7 +12,13 @@ data class ArticleModel(
     companion object{
         fun transformToListEntity(item: List<ArticleModel?>):List<Article>{
             return item.map {
-                    transformToEntity(it ?: ArticleModel())
+                    transformToEntity(it ?: ArticleModel(
+                        source = SourceModel("",""),
+                        author = "",
+                        title = "",
+                        url = "",
+                        publishedAt = ""
+                    ))
             }
         }
 
