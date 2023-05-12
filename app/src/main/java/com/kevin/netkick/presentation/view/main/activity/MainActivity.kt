@@ -1,4 +1,4 @@
-package com.kevin.netkick.presentation.view.Main.activity
+package com.kevin.netkick.presentation.view.main.activity
 
 import android.os.Bundle
 import androidx.activity.viewModels
@@ -10,9 +10,9 @@ import com.gu.toolargetool.TooLargeTool
 import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.ActivityMainBinding
-import com.kevin.netkick.presentation.view.Main.fragments.ExploreFragment
-import com.kevin.netkick.presentation.view.Main.fragments.HomeFragment
-import com.kevin.netkick.presentation.view.Main.fragments.TrophiesFragment
+import com.kevin.netkick.presentation.view.main.fragments.ExploreFragment
+import com.kevin.netkick.presentation.view.main.fragments.HomeFragment
+import com.kevin.netkick.presentation.view.main.fragments.TrophiesFragment
 import com.kevin.netkick.presentation.view.viewmodels.MainViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
 import javax.inject.Inject

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background1"
-    tools:context=".presentation.view.Main.activity.MainActivity">
+    tools:context=".presentation.view.main.activity.MainActivity">
 
     <FrameLayout
         android:id="@+id/fl_home_activity"

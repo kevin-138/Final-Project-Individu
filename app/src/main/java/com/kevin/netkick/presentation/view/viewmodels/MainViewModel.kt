@@ -3,8 +3,10 @@ package com.kevin.netkick.presentation.view.viewmodels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.kevin.netkick.domain.DomainUseCase
+import com.kevin.netkick.domain.entity.country.CountryResponse
 import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.domain.entity.general.Paging
+import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.network.NetworkUtils
 import kotlinx.coroutines.delay
@@ -42,6 +44,23 @@ class MainViewModel @Inject constructor(private val useCase: DomainUseCase):View
     suspend fun getPopularTeams(){
         useCase.getPopularTeamsHome(league = NetworkUtils.POPULAR_LEAGUE, season = NetworkUtils.POPULAR_SEASON).collectLatest {
             _popularTeamsFlow.value = it
+        }
+    }
+
+    private val _newsHeadlinesFlow = MutableStateFlow(NewsResponse("",0, listOf()))
+    val newsHeadlineFlow: StateFlow<NewsResponse> = _newsHeadlinesFlow
+
+    suspend fun getNewsHeadline(){
+        useCase.getNewsHeadlines().collectLatest {
+            _newsHeadlinesFlow.value = it
+        }
+    }
+
+    private val _allCountriesFLow = MutableStateFlow(CountryResponse(0, Paging(0,0), listOf()))
+    val allCountriesFlow: StateFlow<CountryResponse> = _allCountriesFLow
+    suspend fun getAllCountries(){
+        useCase.getAllCountries().collectLatest {
+            _allCountriesFLow.value = it
         }
     }
 

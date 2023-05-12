@@ -16,4 +16,6 @@
     <string name="oops">UH OH</string>
     <string name="no_live_matches">No Live Matches</string>
     <string name="no_current">Our Database does not return any live matches currently</string>
+    <string name="no_head">Currently No Headline</string>
+    <string name="no_live">UH OH</string>
 </resources>

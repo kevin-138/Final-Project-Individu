@@ -12,7 +12,8 @@ data class SubScoreModel(
     companion object{
         fun transformToEntity(it:SubScoreModel):SubScore{
             return SubScore(
-                0,0
+                home = it.home ?: 0,
+                away = it.away ?: 0
             )
         }
     }

@@ -7,9 +7,9 @@ import android.net.NetworkCapabilities
 import android.util.Log
 import androidx.fragment.app.FragmentActivity
 import com.kevin.netkick.R
-import com.kevin.netkick.presentation.view.Main.fragments.ExploreFragment
-import com.kevin.netkick.presentation.view.Main.fragments.HomeFragment
-import com.kevin.netkick.presentation.view.Main.fragments.TrophiesFragment
+import com.kevin.netkick.presentation.view.main.fragments.ExploreFragment
+import com.kevin.netkick.presentation.view.main.fragments.HomeFragment
+import com.kevin.netkick.presentation.view.main.fragments.TrophiesFragment
 import java.util.*
 import kotlin.concurrent.schedule
 
@@ -21,6 +21,8 @@ object PresentationUtils {
     const val HOME = "001"
     const val EXPLORE = "002"
     const val TROPHIES = "003"
+
+    const val NEWS_URL = "NEWS_URL"
 
     fun isOnline(activity: FragmentActivity): Boolean {
         val connectivityManager =
@@ -73,5 +75,9 @@ object PresentationUtils {
         val connectionAlertDialog = dialogBuilder.create()
         connectionAlertDialog.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)
         connectionAlertDialog.show()
+    }
+
+    fun newsDateFormatter(date:String):String{
+        return date.split("T")[0]
     }
 }

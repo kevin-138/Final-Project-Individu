@@ -19,4 +19,6 @@ interface DataComponent {
     }
 
     fun provideRepository(): DomainRepository
+
+
 }

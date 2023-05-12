@@ -1,12 +1,18 @@
 package com.kevin.netkick.network.model.news
 
+import com.google.gson.annotations.SerializedName
 import com.kevin.netkick.domain.entity.news.Article
 
 data class ArticleModel(
+    @SerializedName("source")
     val source: SourceModel?,
+    @SerializedName("author")
     val author: String?,
+    @SerializedName("title")
     val title: String?,
+    @SerializedName("url")
     val url: String?,
+    @SerializedName("publishedAt")
     val publishedAt: String?
 ){
     companion object{

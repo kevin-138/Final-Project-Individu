@@ -32,7 +32,7 @@
             android:exported="false"
             android:theme="@style/Theme.NetKick"/>
         <activity
-            android:name=".presentation.view.Main.activity.MainActivity"
+            android:name=".presentation.view.main.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.App.Starting"

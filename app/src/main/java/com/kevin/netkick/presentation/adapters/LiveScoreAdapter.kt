@@ -13,9 +13,8 @@ import com.kevin.netkick.databinding.LiveScoreItemBinding
 import com.kevin.netkick.domain.entity.fixtures.ResponseF
 
 
-class LiveScoreAdapter(private val dataList: List<ResponseF>, private val emptyDataPlaceholder: String,val context: Context): RecyclerView.Adapter<LiveScoreAdapter.LiveViewHolder>() {
-
-
+class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEmpty: Boolean): RecyclerView.Adapter<LiveScoreAdapter.LiveViewHolder>() {
+    lateinit var context: Context
 
     inner class LiveViewHolder(private val binding: LiveScoreItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: ResponseF, context: Context) {
@@ -63,14 +62,14 @@ class LiveScoreAdapter(private val dataList: List<ResponseF>, private val emptyD
             }
         }
 
-        fun bindDataEmpty(context: Context, dataPlaceholder: String) {
+        fun bindDataEmpty() {
             changeVisibility(2)
             binding.apply {
-                tvLeagueName.text = dataPlaceholder
+                tvLeagueName.text = context.getString(R.string.no_live)
             }
         }
 
-        fun changeVisibility(dataState: Int) {
+        private fun changeVisibility(dataState: Int) {
             if (dataState == 1) {
                 binding.apply {
                     tvDatabaseStatus.visibility = View.INVISIBLE
@@ -98,6 +97,7 @@ class LiveScoreAdapter(private val dataList: List<ResponseF>, private val emptyD
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LiveViewHolder {
+        context = parent.context
         val binding = LiveScoreItemBinding.inflate(
             LayoutInflater.from(parent.context), parent, false
         )
@@ -105,12 +105,16 @@ class LiveScoreAdapter(private val dataList: List<ResponseF>, private val emptyD
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        return if (dataEmpty){
+            1
+        }else{
+            dataList.size
+        }
     }
 
     override fun onBindViewHolder(holder: LiveViewHolder, position: Int) {
-        if (dataList.isEmpty()){
-            holder.bindDataEmpty(context,emptyDataPlaceholder)
+        if (dataEmpty){
+            holder.bindDataEmpty()
         }else{
             holder.bindData(dataList[position],context)
         }
