@@ -50,8 +50,8 @@ class MainActivity: AppCompatActivity() {
     }
 
     private fun setupFragments(){
-        homeFragment = HomeFragment(viewModel,application)
-        exploreFragment = ExploreFragment()
+        homeFragment = HomeFragment(viewModel)
+        exploreFragment = ExploreFragment(viewModel)
         trophiesFragment = TrophiesFragment()
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fl_home_activity, homeFragment)

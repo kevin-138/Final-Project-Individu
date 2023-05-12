@@ -38,7 +38,7 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
             } catch (e: Exception){
                 e.printStackTrace()
             }
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     override suspend fun getAllCountries(): Flow<CountryResponse> {
@@ -49,7 +49,7 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
             }catch (e:Exception){
                 e.printStackTrace()
             }
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
     override suspend fun getNewsHeadlines(): Flow<NewsResponse> {
@@ -60,7 +60,7 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
             } catch (e: Exception){
                 e.printStackTrace()
             }
-        }
+        }.flowOn(Dispatchers.IO)
     }
 
 

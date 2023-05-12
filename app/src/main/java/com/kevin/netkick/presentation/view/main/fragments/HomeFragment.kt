@@ -11,16 +11,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.kevin.netkick.databinding.FragmentHomeBinding
-import com.kevin.netkick.domain.entity.fixtures.GoalsF
-import com.kevin.netkick.domain.entity.fixtures.LeagueF
-import com.kevin.netkick.domain.entity.fixtures.ResponseF
-import com.kevin.netkick.domain.entity.fixtures.subfixture.Fixture
-import com.kevin.netkick.domain.entity.fixtures.subfixture.Status
-import com.kevin.netkick.domain.entity.fixtures.subfixture.VenueF
-import com.kevin.netkick.domain.entity.fixtures.subscore.Score
-import com.kevin.netkick.domain.entity.fixtures.subscore.SubScore
-import com.kevin.netkick.domain.entity.fixtures.subteams.TeamsF
-import com.kevin.netkick.domain.entity.fixtures.subteams.TeamsSubF
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.LiveScoreAdapter
@@ -33,7 +23,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class HomeFragment(private val mainViewModel: MainViewModel, private val application: Application) : Fragment() {
+class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var liveScoreAdapter: LiveScoreAdapter
     private lateinit var popularTeamsAdapter: PopularTeamsPreviewAdapter
@@ -87,11 +77,15 @@ class HomeFragment(private val mainViewModel: MainViewModel, private val applica
         lifecycleScope.launch {
             mainViewModel.getPopularTeams()
             mainViewModel.popularTeamsFlow.collectLatest {
-                val popularTeamsPreview = it.response.slice(0..14)
+
+                val popularTeamsPreview = if (it.response.size > 14){it.response.slice(0..14) } else listOf()
+
                 popularTeamsAdapter = PopularTeamsPreviewAdapter(popularTeamsPreview)
-                binding.rvPopularTeams.layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                binding.rvPopularTeams.adapter = popularTeamsAdapter
+                binding.apply {
+                    rvPopularTeams.layoutManager =
+                        LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+                    rvPopularTeams.adapter = popularTeamsAdapter
+                }
             }
         }
     }
@@ -144,10 +138,6 @@ class HomeFragment(private val mainViewModel: MainViewModel, private val applica
         }
     }
 
-//        popularTeamsAdapter = PopularTeamsPreviewAdapter(popularTeamsPreview)
-//        binding.rvPopularTeams.layoutManager = LinearLayoutManager(requireContext(),LinearLayoutManager.HORIZONTAL, false)
-//        binding.rvPopularTeams.adapter = popularTeamsAdapter
-//    }
 
 
     private fun getLiveMatches() {
