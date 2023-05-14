@@ -17,10 +17,17 @@ interface FootballApiService {
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("teams")
-    suspend fun getPopularTeamsHome(@Query("league") league:String,@Query("season") season:String): TeamResponseModel
+    suspend fun getPopularTeamsHome(@Query("league") league:Int,@Query("season") season:Int): TeamResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("countries")
     suspend fun getAllCountries(): CountryResponseModel
+
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("teams")
+    suspend fun getTeamsDetail(@Query("id") id:Int): TeamResponseModel
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("players")
+    suspend fun getPlayerInTeams(@Query("team") team:Int,@Query("season") season: Int): PlayerResponseModel
 
 }

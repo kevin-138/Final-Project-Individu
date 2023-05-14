@@ -5,6 +5,7 @@ import com.kevin.netkick.domain.DomainRepository
 import com.kevin.netkick.domain.entity.country.CountryResponse
 import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
+import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.network.model.countries.CountryResponseModel
 import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
@@ -30,7 +31,7 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
     }.flowOn(Dispatchers.IO)
 }
 
-    override suspend fun getPopularTeamsHome(league: String, season: String): Flow<TeamResponse> {
+    override suspend fun getPopularTeamsHome(league: Int, season: Int): Flow<TeamResponse> {
         return flow {
             try {
                 val response = footballApi.getPopularTeamsHome(league,season)
@@ -61,6 +62,14 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
                 e.printStackTrace()
             }
         }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getTeamDetail(id: Int): Flow<TeamResponse> {
+        TODO("Not yet implemented")
+    }
+
+    override suspend fun getPlayerList(team: Int, season: Int): Flow<PlayerResponse> {
+        TODO("Not yet implemented")
     }
 
 

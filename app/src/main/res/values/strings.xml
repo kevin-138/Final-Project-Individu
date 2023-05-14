@@ -27,4 +27,13 @@
     <string name="coach">Coach</string>
     <string name="no_country_found">No Country Found</string>
     <string name="news">Football News</string>
+    <string name="code">Code:</string>
+    <string name="country">Country:</string>
+    <string name="venue">Venue</string>
+    <string name="name">Name:</string>
+    <string name="city">City:</string>
+    <string name="surface">Surface:</string>
+    <string name="capacity">Capacity:</string>
+    <string name="address">Address:</string>
+    <string name="see_all_players">See all Players</string>
 </resources>

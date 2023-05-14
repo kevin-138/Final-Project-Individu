@@ -1,9 +1,295 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.view.general.activity.TeamDetailActivity">
+    tools:context=".presentation.view.general.activity.TeamDetailActivity"
+    android:background="@color/background1">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/iv_venue_stadium"
+        android:layout_width="match_parent"
+        android:layout_height="292dp"
+        android:scaleType="centerCrop"
+        tools:src="@drawable/image19"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:src="@drawable/border_gradient"
+        app:layout_constraintTop_toBottomOf="top_deta" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="150dp"
+        android:rotationX="180"
+        android:src="@drawable/border_gradient"
+        app:layout_constraintBottom_toBottomOf="@id/iv_venue_stadium" />
+
+    <ImageButton
+        android:id="@+id/ib_back_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginVertical="20dp"
+        android:background="@drawable/background_back_button"
+        android:src="@drawable/arrrowssc"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <ImageView
+        android:id="@+id/iv_team_logo_detail"
+        android:layout_width="110dp"
+        android:layout_height="110dp"
+        tools:src="@drawable/team_logo_pc"
+        app:layout_constraintTop_toTopOf="@id/iv_venue_stadium"
+        app:layout_constraintBottom_toBottomOf="@id/iv_venue_stadium"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintVertical_bias="1.05"
+        android:layout_marginStart="50dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_team_detail_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Paris saint germain"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@id/iv_team_logo_detail"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_team_detail_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Est 2020"
+        android:textSize="18sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_team_detail_name"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_team_detail_code_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/code"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="15dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_team_detail_date"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_team_detail_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="PSG"
+        android:textSize="18sp"
+        android:textColor="@color/lightPurple"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@id/tv_team_detail_code_title"
+        app:layout_constraintBottom_toBottomOf="@id/tv_team_detail_code_title"
+        app:layout_constraintStart_toEndOf="@id/tv_team_detail_code_title"/>
+
+    <TextView
+        android:id="@+id/tv_team_detail_country_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/country"
+        android:textSize="20sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_team_detail_code_title"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_team_country_code"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="France"
+        android:textSize="18sp"
+        android:textColor="@color/lightPurple"
+        android:textStyle="bold"
+        android:layout_marginStart="8dp"
+        app:layout_constraintTop_toTopOf="@id/tv_team_detail_country_title"
+        app:layout_constraintBottom_toBottomOf="@id/tv_team_detail_country_title"
+        app:layout_constraintStart_toEndOf="@id/tv_team_detail_country_title"/>
+
+    <TextView
+        android:id="@+id/tv_venue_title_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/venue"
+        android:textSize="30sp"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:layout_marginTop="20dp"
+        android:layout_marginStart="30dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_team_detail_country_title"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_team_venue_name_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/name"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="15dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_venue_title_detail"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_team_venue_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="France"
+            android:textSize="18sp"
+            android:textColor="@color/lightPurple"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@id/tv_team_venue_name_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_team_venue_name_title"
+            app:layout_constraintStart_toEndOf="@id/tv_team_venue_name_title"/>
+
+        <TextView
+            android:id="@+id/tv_team_venue_city_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/city"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_team_venue_name_title"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_team_venue_city"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="France"
+            android:textSize="18sp"
+            android:textColor="@color/lightPurple"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@id/tv_team_venue_city_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_team_venue_city_title"
+            app:layout_constraintStart_toEndOf="@id/tv_team_venue_city_title"/>
+
+        <TextView
+            android:id="@+id/tv_team_venue_surface_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/surface"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_team_venue_city_title"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_team_venue_surface"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="France"
+            android:textSize="18sp"
+            android:textColor="@color/lightPurple"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@id/tv_team_venue_surface_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_team_venue_surface_title"
+            app:layout_constraintStart_toEndOf="@id/tv_team_venue_surface_title"/>
+
+        <TextView
+            android:id="@+id/tv_team_venue_capacity_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/capacity"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_team_venue_surface_title"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_team_venue_capacity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="France"
+            android:textSize="18sp"
+            android:textColor="@color/lightPurple"
+            android:textStyle="bold"
+            android:layout_marginStart="8dp"
+            app:layout_constraintTop_toTopOf="@id/tv_team_venue_capacity_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_team_venue_capacity_title"
+            app:layout_constraintStart_toEndOf="@id/tv_team_venue_capacity_title"/>
+
+        <TextView
+            android:id="@+id/tv_team_venue_address_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/address"
+            android:textSize="20sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="3dp"
+            android:layout_marginStart="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_team_venue_capacity_title"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_team_venue_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="France"
+            android:textSize="18sp"
+            android:textColor="@color/lightPurple"
+            android:textStyle="bold"
+            android:layout_marginHorizontal="30dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_team_venue_address_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="200dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="30dp"
+            android:text="@string/see_all_players"
+            android:textAllCaps="false"
+            android:textColor="@color/lightPurple"
+            android:background="@drawable/article_button"
+            android:textSize="18sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_team_venue_address"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

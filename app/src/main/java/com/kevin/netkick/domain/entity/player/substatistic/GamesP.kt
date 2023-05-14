@@ -1,7 +1,7 @@
 package com.kevin.netkick.domain.entity.player.substatistic
 
 data class GamesP (
-        val appearences: Int,
+        val appearances: Int,
         val lineups: Int,
         val minutes: Int,
         val number: Any,

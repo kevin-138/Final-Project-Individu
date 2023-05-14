@@ -35,6 +35,9 @@ class PopularTeamsListActivity : AppCompatActivity() {
         binding = ActivityPopularTeamsListBinding.inflate(layoutInflater)
         setContentView(binding.root)
         setProgressBar()
+        binding.ibBackButton.setOnClickListener {
+            finish()
+        }
         setupAdapter()
         checkOnline()
     }
@@ -65,7 +68,7 @@ class PopularTeamsListActivity : AppCompatActivity() {
 
     private fun setupAdapter() {
         binding.apply {
-            adapter = PopularTeamsListAdapter(arrayListOf())
+            adapter = PopularTeamsListAdapter(arrayListOf(),PresentationUtils.POPULAR_SEASON)
             rvPopularTeamsList.layoutManager = LinearLayoutManager(this@PopularTeamsListActivity)
             rvPopularTeamsList.adapter = adapter
         }

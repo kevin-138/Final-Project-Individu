@@ -27,6 +27,9 @@ object PresentationUtils {
     const val COUNTRY_CODE = "COUNTRY_CODE"
     const val TEAM_ID = "TEAM_ID"
 
+    const val POPULAR_SEASON = 2019
+    const val POPULAR_LEAGUE = 2
+
     fun isOnline(activity: FragmentActivity): Boolean {
         val connectivityManager =
             activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
@@ -87,7 +90,7 @@ object PresentationUtils {
         dialogBuilder.setIcon(R.drawable.no_internet_logo)
         dialogBuilder.setTitle("No Network Connection")
         dialogBuilder.setPositiveButton("Back") { _, _ ->
-            Timer().schedule(1000L) {
+            Timer().schedule(500L) {
                 activity.runOnUiThread {
                     activity.finish()
                 }

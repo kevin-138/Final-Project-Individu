@@ -21,8 +21,8 @@ class PopularTeamViewModel @Inject constructor(private val useCase: DomainUseCas
         }
     }
 
-    suspend fun getPopularTeamDetail(){
-        useCase.getPopularTeamsHome(league = NetworkUtils.POPULAR_LEAGUE, season = NetworkUtils.POPULAR_SEASON).collectLatest {
+    suspend fun getPopularTeamDetail(id: Int){
+        useCase..collectLatest {
             _popularTeamsFlow.value = it
         }
     }
