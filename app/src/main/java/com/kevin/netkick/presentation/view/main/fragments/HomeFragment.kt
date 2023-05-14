@@ -1,6 +1,5 @@
 package com.kevin.netkick.presentation.view.main.fragments
 
-import android.app.Application
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -11,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.kevin.netkick.databinding.FragmentHomeBinding
+import com.kevin.netkick.domain.entity.news.Article
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.LiveScoreAdapter
@@ -55,9 +55,7 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
     fun checkOnline(current: Boolean = false) {
         val onlineCheck = activity?.let { PresentationUtils.isOnline(requireActivity()) }
         if (onlineCheck == true) {
-            if (
-                binding.rvLivescore.adapter == null && binding.rvPopularTeams.adapter == null && binding.rvNewsHeadline.adapter == null
-            ) {
+            if (!mainViewModel.runnedHome) {
                 getLiveData()
             }
         } else {
@@ -77,9 +75,7 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
         lifecycleScope.launch {
             mainViewModel.getPopularTeams()
             mainViewModel.popularTeamsFlow.collectLatest {
-
                 val popularTeamsPreview = if (it.response.size > 14){it.response.slice(0..14) } else listOf()
-
                 popularTeamsAdapter = PopularTeamsPreviewAdapter(popularTeamsPreview)
                 binding.apply {
                     rvPopularTeams.layoutManager =
@@ -104,21 +100,21 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
             data.totalResults == 0 -> {
                 binding.apply {
                     tvSeeAllNews.visibility = View.INVISIBLE
-                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles, true)
+                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles as ArrayList<Article>, true)
                     setupNewsAdapter(newsAdapter)
                 }
             }
             data.totalResults <= 4 -> {
                 binding.apply {
                     tvSeeAllNews.visibility = View.INVISIBLE
-                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles, false)
+                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles as ArrayList<Article>, false)
                     setupNewsAdapter(newsAdapter)
                 }
             }
             else -> {
                 binding.apply {
                     tvSeeAllNews.visibility = View.VISIBLE
-                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles.slice(0..3), false)
+                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles.slice(0..3) as ArrayList<Article>, false)
                     setupNewsAdapter(newsAdapter)
                 }
             }

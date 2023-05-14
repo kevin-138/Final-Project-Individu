@@ -4,8 +4,8 @@ import com.kevin.netkick.network.di.DataComponent
 import com.kevin.netkick.presentation.view.home.news.activity.AllNewsListActivity
 import com.kevin.netkick.presentation.view.home.news.activity.ArticleActivity
 import com.kevin.netkick.presentation.view.home.popularteams.activity.PopularTeamsDetailActivity
-import com.kevin.netkick.presentation.view.main.activity.MainActivity
 import com.kevin.netkick.presentation.view.home.popularteams.activity.PopularTeamsListActivity
+import com.kevin.netkick.presentation.view.main.activity.MainActivity
 import dagger.Component
 
 @AppScope
@@ -27,7 +27,9 @@ interface AppComponent {
   fun injectInto(popularTeamsDetailActivity: PopularTeamsDetailActivity)
 
   fun injectInto(allNewsListActivity: AllNewsListActivity)
+
   fun injectInto(articleActivity: ArticleActivity)
 
-//  fun injectInto(popularTeamsListActivity: PopularTeamsListActivity)
+//  fun injectInto(leagueSearchActivity: LeagueSearchActivity)
+
 }

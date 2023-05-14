@@ -11,7 +11,7 @@ import com.kevin.netkick.domain.entity.news.Article
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.home.news.activity.ArticleActivity
 
-class NewsHeadlinePreviewAdapter(private val dataList: List<Article>, private val dataEmpty: Boolean):RecyclerView.Adapter<NewsHeadlinePreviewAdapter.NewsViewHolder>() {
+class NewsHeadlinePreviewAdapter(private val dataList: ArrayList<Article>, private val dataEmpty: Boolean):RecyclerView.Adapter<NewsHeadlinePreviewAdapter.NewsViewHolder>() {
     lateinit var context: Context
 
     inner class NewsViewHolder(private val binding: NewsHeadlineItemBinding): RecyclerView.ViewHolder(binding.root) {
@@ -68,14 +68,23 @@ class NewsHeadlinePreviewAdapter(private val dataList: List<Article>, private va
     }
 
     override fun getItemCount(): Int {
-        return dataList.size
+        return if (dataEmpty){
+            1
+        }else{
+            dataList.size
+        }
     }
 
-    override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: NewsHeadlinePreviewAdapter.NewsViewHolder, position: Int) {
         if (dataEmpty){
             holder.bindDataEmpty()
         } else {
             holder.bindData(dataList[position])
         }
+    }
+    fun addDataToList(articleList: List<Article>) {
+        dataList.clear()
+        dataList.addAll(articleList)
+        notifyItemRangeChanged(0,dataList.size)
     }
 }

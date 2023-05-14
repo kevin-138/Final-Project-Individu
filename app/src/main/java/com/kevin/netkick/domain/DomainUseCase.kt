@@ -8,7 +8,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface DomainUseCase {
     suspend fun getLiveMatches(live:String): Flow<FixturesResponse>
-    suspend fun getPopularTeamsHome(league:String, season:String): Flow<TeamResponse>
+    suspend fun getPopularTeamsHome(league:Int, season:Int): Flow<TeamResponse>
     suspend fun getAllCountries():Flow<CountryResponse>
 
     suspend fun getNewsHeadlines(): Flow<NewsResponse>

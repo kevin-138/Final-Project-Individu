@@ -1,5 +1,6 @@
 package com.kevin.netkick.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -10,8 +11,11 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.kevin.netkick.databinding.CountryItemBinding
 import com.kevin.netkick.domain.entity.country.CountryC
+import com.kevin.netkick.presentation.PresentationUtils
+import com.kevin.netkick.presentation.view.general.activity.LeagueSearchActivity
 
-class CountriesAdapter(private val dataList: List<CountryC>):RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
+class CountriesAdapter(private var dataList: ArrayList<CountryC>):RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
+    private lateinit var dataListMemory: MutableList<CountryC>
     lateinit var context: Context
 
     inner class CountryViewHolder(private val binding: CountryItemBinding):RecyclerView.ViewHolder(binding.root) {
@@ -24,13 +28,18 @@ class CountriesAdapter(private val dataList: List<CountryC>):RecyclerView.Adapte
             loadingDrawable1.start()
 
             binding.apply {
+
+                tvCountryName.text = data.name
+
             Glide.with(itemView)
                 .load(data.flag)
                 .placeholder(loadingDrawable1)
                 .into(ivCountryFlag)
 
                 root.setOnClickListener {
-                    val intent = Intent(context,)
+                    val intent = Intent(context,LeagueSearchActivity::class.java)
+                    intent.putExtra(PresentationUtils.COUNTRY_CODE,data.code)
+                    context.startActivity(intent)
                 }
             }
         }
@@ -46,7 +55,16 @@ class CountriesAdapter(private val dataList: List<CountryC>):RecyclerView.Adapte
        return dataList.size
     }
 
-    override fun onBindViewHolder(holder: CountryViewHolder, position: Int) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun filterList(filterlist: ArrayList<CountryC>){
+
+        dataList = filterlist
+        notifyDataSetChanged()
+    }
+
+    override fun onBindViewHolder(holder: CountriesAdapter.CountryViewHolder, position: Int) {
         holder.bindData(dataList[position])
     }
+
+
 }

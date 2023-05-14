@@ -16,21 +16,29 @@
         android:theme="@style/Theme.App.Starting"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.view.general.activity.TeamDetailActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NetKick" />
+        <activity
+            android:name=".presentation.view.general.activity.LeagueSearchActivity"
+            android:exported="false"
+            android:theme="@style/Theme.NetKick" />
+        <activity
             android:name=".presentation.view.home.news.activity.AllNewsListActivity"
             android:exported="false"
-            android:theme="@style/Theme.NetKick"/>
+            android:theme="@style/Theme.NetKick" />
         <activity
             android:name=".presentation.view.home.popularteams.activity.PopularTeamsDetailActivity"
             android:exported="false"
-            android:theme="@style/Theme.NetKick"/>
+            android:theme="@style/Theme.NetKick" />
         <activity
             android:name=".presentation.view.home.popularteams.activity.PopularTeamsListActivity"
             android:exported="false"
-            android:theme="@style/Theme.NetKick"/>
+            android:theme="@style/Theme.NetKick" />
         <activity
             android:name=".presentation.view.home.news.activity.ArticleActivity"
             android:exported="false"
-            android:theme="@style/Theme.NetKick"/>
+            android:theme="@style/Theme.NetKick" />
         <activity
             android:name=".presentation.view.main.activity.MainActivity"
             android:exported="true"

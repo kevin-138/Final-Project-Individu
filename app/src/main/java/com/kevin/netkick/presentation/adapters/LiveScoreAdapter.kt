@@ -112,7 +112,7 @@ class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEm
         }
     }
 
-    override fun onBindViewHolder(holder: LiveViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: LiveScoreAdapter.LiveViewHolder, position: Int) {
         if (dataEmpty){
             holder.bindDataEmpty()
         }else{

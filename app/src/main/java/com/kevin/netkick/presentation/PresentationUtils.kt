@@ -1,10 +1,11 @@
 package com.kevin.netkick.presentation
 
-import androidx.appcompat.app.AlertDialog
+import android.app.Activity
 import android.content.Context
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.FragmentActivity
 import com.kevin.netkick.R
 import com.kevin.netkick.presentation.view.main.fragments.ExploreFragment
@@ -23,6 +24,8 @@ object PresentationUtils {
     const val TROPHIES = "003"
 
     const val NEWS_URL = "NEWS_URL"
+    const val COUNTRY_CODE = "COUNTRY_CODE"
+    const val TEAM_ID = "TEAM_ID"
 
     fun isOnline(activity: FragmentActivity): Boolean {
         val connectivityManager =
@@ -71,6 +74,24 @@ object PresentationUtils {
         }
         dialogBuilder.setNegativeButton("CLOSE APP") { _, _ ->
             activity.finish()
+        }
+        val connectionAlertDialog = dialogBuilder.create()
+        connectionAlertDialog.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)
+        connectionAlertDialog.show()
+    }
+
+    fun networkDialog(activity: Activity){
+        val dialogBuilder = AlertDialog.Builder(activity, R.style.NetworkAlertDialogTheme)
+        dialogBuilder.setMessage("No Network Connection detected, Please make sure you have a stable connection to the internet")
+        dialogBuilder.setCancelable(false)
+        dialogBuilder.setIcon(R.drawable.no_internet_logo)
+        dialogBuilder.setTitle("No Network Connection")
+        dialogBuilder.setPositiveButton("Back") { _, _ ->
+            Timer().schedule(1000L) {
+                activity.runOnUiThread {
+                    activity.finish()
+                }
+            }
         }
         val connectionAlertDialog = dialogBuilder.create()
         connectionAlertDialog.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)

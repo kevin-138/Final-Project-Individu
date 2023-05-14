@@ -38,6 +38,9 @@ android {
 }
 
 dependencies {
+    //svglide
+    implementation 'com.github.2coffees1team:GlideToVectorYou:v2.0.0'
+
     //loading
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
@@ -56,6 +59,9 @@ dependencies {
 
     //paging
     implementation "androidx.paging:paging-runtime-ktx:3.1.1"
+
+    // loading gif
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.22'
 
     //room
     implementation 'androidx.room:room-runtime:2.5.1'

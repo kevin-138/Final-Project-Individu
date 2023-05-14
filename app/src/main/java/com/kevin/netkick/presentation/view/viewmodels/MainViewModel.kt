@@ -29,12 +29,16 @@ class MainViewModel @Inject constructor(private val useCase: DomainUseCase):View
         }
     }
 
+    var runnedHome = false
+    var runnedExplore = false
+
     private val _liveScoreFlow = MutableStateFlow(FixturesResponse(Paging(0,0),0, listOf()))
     val liveScoreFlow : StateFlow<FixturesResponse> =  _liveScoreFlow
 
     suspend fun getLiveMatches(live:String){
         useCase.getLiveMatches(live).collectLatest {
             _liveScoreFlow.value = it
+            runnedHome = true
         }
     }
 
@@ -61,6 +65,7 @@ class MainViewModel @Inject constructor(private val useCase: DomainUseCase):View
     suspend fun getAllCountries(){
         useCase.getAllCountries().collectLatest {
             _allCountriesFLow.value = it
+            runnedExplore = true
         }
     }
 

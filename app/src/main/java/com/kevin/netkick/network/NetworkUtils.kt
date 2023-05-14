@@ -7,8 +7,8 @@ object NetworkUtils {
     const val NEWS_API_KEY = "X-Api-Key: 1f0d9449fae149998f765270b1c23cbc"
     const val NEWS_API_BASE = "https://newsapi.org/v2/"
 
-    const val POPULAR_SEASON = "2019"
-    const val POPULAR_LEAGUE = "2"
+    const val POPULAR_SEASON = 2019
+    const val POPULAR_LEAGUE = 2
 
     const val NEWS_COUNTRY = "gb"
     const val NEWS_CATEGORY = "sports"

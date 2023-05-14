@@ -18,4 +18,13 @@
     <string name="no_current">Our Database does not return any live matches currently</string>
     <string name="no_head">Currently No Headline</string>
     <string name="no_live">UH OH</string>
+    <string name="skip">Skip</string>
+    <string name="pick_one_to_show_all_league_in_that_country">Pick one to show all league in that country</string>
+    <string name="top_scorer">Top Scorer</string>
+    <string name="trophies_title">Trophies</string>
+    <string name="by_league">By League</string>
+    <string name="players">Players</string>
+    <string name="coach">Coach</string>
+    <string name="no_country_found">No Country Found</string>
+    <string name="news">Football News</string>
 </resources>
