@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
 import com.kevin.netkick.domain.entity.player.ResponseP
+import com.kevin.netkick.network.model.player.ResponsePModel
 import com.kevin.netkick.network.service.FootballApiService
 import kotlinx.coroutines.flow.Flow
 
@@ -16,10 +17,10 @@ class PlayersPagingDataSource(private val apiService: FootballApiService, privat
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ResponseP> {
         val position = params.key ?: 1
         return try {
-            val listData = apiService.getPlayerInTeams()
+            val listData = apiService.getPlayerInTeams(team,season,)
             LoadResult.Page(
-                data = list,
-                nextKey = if (list.isEmpty()) null else position + 1,
+                data = ResponsePModel.transformToListEntity(listData.response),
+                nextKey = if ((listData.paging?.current ?: 0) == (listData.paging?.total ?: 0)) null else position + 1,
                 prevKey = null
             )
         } catch (e: Exception) {
@@ -27,9 +28,9 @@ class PlayersPagingDataSource(private val apiService: FootballApiService, privat
         }
     }
 
-    private suspend fun getPlayerInTeams(position: Int): List<ReviewEntity> {
-        val response = apiService.getTvShowReview(id, Utils.API_KEY,page = if (position == 1) 1 else position * 10 - 10)
-        val data = ReviewModel.transforms(response.results ?: listOf<ReviewModel>())
-        return data
-    }
+//    private suspend fun getPlayerInTeams(team:Int,season: Int): List<ResponseP> {
+//        val response = apiService.getPlayerInTeams()
+//        val data = Respon.transforms(response.results ?: listOf<ReviewModel>())
+//        return data
+//    }
 }

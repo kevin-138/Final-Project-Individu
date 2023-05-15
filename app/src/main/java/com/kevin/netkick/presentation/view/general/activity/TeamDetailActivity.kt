@@ -99,10 +99,12 @@ class TeamDetailActivity : AppCompatActivity() {
                         tvTeamVenueCapacity.text = dataTeam.venue.capacity.toString()
                         tvTeamVenueAddress.text = dataTeam.venue.address
 
-//                        binding.btnSeeAllPlayers.setOnClickListener {
-//                            val intentPlayers = Intent(this,)
-//                            intentPlayers   (PresentationUtils.TEAM_ID,dataTeam.team.id)
-//                        }
+                        binding.btnSeeAllPlayers.setOnClickListener {
+                            val intentPlayers = Intent(this@TeamDetailActivity,AllPlayerInTeamsActivity::class.java)
+                            intentPlayers.putExtra(PresentationUtils.TEAM_ID,dataTeam.team.id)
+                            intentPlayers.putExtra(PresentationUtils.TEAM_SEASON,PresentationUtils.POPULAR_SEASON)
+                            this@TeamDetailActivity.startActivity(intentPlayers)
+                        }
                         progressBar.dismiss()
                     }
                 }

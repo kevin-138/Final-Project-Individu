@@ -12,11 +12,11 @@ data class BirthModel(
     val country: String?
 ){
     companion object{
-        fun transformToEntity(it:BirthModel):Birth {
+        fun transformToEntity(it:BirthModel?):Birth {
             return Birth(
-                date = it.date ?: "",
-                place = it.place ?: "",
-                country = it.country ?: ""
+                date = it?.date ?: "",
+                place = it?.place ?: "",
+                country = it?.country ?: ""
             )
         }
     }

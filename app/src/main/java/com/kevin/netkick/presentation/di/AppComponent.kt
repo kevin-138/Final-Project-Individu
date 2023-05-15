@@ -1,6 +1,7 @@
 package com.kevin.netkick.presentation.di
 
 import com.kevin.netkick.network.di.DataComponent
+import com.kevin.netkick.presentation.view.general.activity.AllPlayerInTeamsActivity
 import com.kevin.netkick.presentation.view.general.activity.TeamDetailActivity
 import com.kevin.netkick.presentation.view.home.news.activity.AllNewsListActivity
 import com.kevin.netkick.presentation.view.home.news.activity.ArticleActivity
@@ -31,6 +32,8 @@ interface AppComponent {
 
   fun injectInto(articleActivity: ArticleActivity)
   fun injectInto(teamDetailActivity: TeamDetailActivity)
+
+  fun injectInto( allPlayerInTeamsActivity: AllPlayerInTeamsActivity)
 
 //  fun injectInto(leagueSearchActivity: LeagueSearchActivity)
 

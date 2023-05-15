@@ -9,13 +9,11 @@ import com.kevin.netkick.domain.DomainRepository
 import com.kevin.netkick.domain.entity.country.CountryResponse
 import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
-import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.network.model.countries.CountryResponseModel
 import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
 import com.kevin.netkick.network.model.news.NewsResponseModel
-import com.kevin.netkick.network.model.player.PlayerResponseModel
 import com.kevin.netkick.network.paging.PlayersPagingDataSource
 import com.kevin.netkick.network.service.FootballApiService
 import com.kevin.netkick.network.service.NewsApiService
