@@ -25,7 +25,9 @@ object PresentationUtils {
 
     const val NEWS_URL = "NEWS_URL"
     const val COUNTRY_CODE = "COUNTRY_CODE"
+
     const val TEAM_ID = "TEAM_ID"
+    const val TEAM_SEASON = "TEAM_SEASON"
 
     const val POPULAR_SEASON = 2019
     const val POPULAR_LEAGUE = 2

@@ -36,4 +36,12 @@
     <string name="capacity">Capacity:</string>
     <string name="address">Address:</string>
     <string name="see_all_players">See all Players</string>
+    <string name="est_year">Est %d</string>
+    <string name="country_code">"%s"</string>
+    <string name="nationality">Nationality:</string>
+    <string name="age">Age:</string>
+    <string name="birth_date">Birth Date:</string>
+    <string name="height">Height:</string>
+    <string name="weight">Weight:</string>
+    <string name="members">Members:</string>
 </resources>

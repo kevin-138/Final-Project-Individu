@@ -76,7 +76,7 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
             mainViewModel.getPopularTeams()
             mainViewModel.popularTeamsFlow.collectLatest {
                 val popularTeamsPreview = if (it.response.size > 14){it.response.slice(0..14) } else listOf()
-                popularTeamsAdapter = PopularTeamsPreviewAdapter(popularTeamsPreview)
+                popularTeamsAdapter = PopularTeamsPreviewAdapter(popularTeamsPreview,PresentationUtils.POPULAR_SEASON)
                 binding.apply {
                     rvPopularTeams.layoutManager =
                         LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)

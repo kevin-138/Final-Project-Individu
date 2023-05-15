@@ -1,17 +1,25 @@
 package com.kevin.netkick.network
 
 import TeamResponseModel
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
 import com.kevin.netkick.domain.DomainRepository
 import com.kevin.netkick.domain.entity.country.CountryResponse
 import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.domain.entity.player.PlayerResponse
+import com.kevin.netkick.domain.entity.player.ResponseP
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.network.model.countries.CountryResponseModel
 import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
 import com.kevin.netkick.network.model.news.NewsResponseModel
+import com.kevin.netkick.network.model.player.PlayerResponseModel
+import com.kevin.netkick.network.paging.PlayersPagingDataSource
 import com.kevin.netkick.network.service.FootballApiService
 import com.kevin.netkick.network.service.NewsApiService
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -65,11 +73,21 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
     }
 
     override suspend fun getTeamDetail(id: Int): Flow<TeamResponse> {
-        TODO("Not yet implemented")
+        return flow {
+            try {
+                val response = footballApi.getTeamsDetail(id)
+                emit(TeamResponseModel.transfromToEntity(response))
+            } catch (e: Exception){
+                e.printStackTrace()
+                }
+            }.flowOn(Dispatchers.IO)
     }
 
-    override suspend fun getPlayerList(team: Int, season: Int): Flow<PlayerResponse> {
-        TODO("Not yet implemented")
+    override suspend fun getPlayerList(scope:CoroutineScope, team: Int, season: Int): Flow<PagingData<ResponseP>> {
+        return Pager(config = PagingConfig(pageSize = 10)
+        ) {
+            PlayersPagingDataSource(footballApi, team = team, season = season)
+        }.flow.cachedIn(scope)
     }
 
 

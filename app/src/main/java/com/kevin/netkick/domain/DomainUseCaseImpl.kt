@@ -1,10 +1,13 @@
 package com.kevin.netkick.domain
 
+import androidx.paging.PagingData
 import com.kevin.netkick.domain.entity.country.CountryResponse
 import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.domain.entity.player.PlayerResponse
+import com.kevin.netkick.domain.entity.player.ResponseP
 import com.kevin.netkick.domain.entity.teams.TeamResponse
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -21,8 +24,8 @@ class DomainUseCaseImpl @Inject constructor(private val repository: DomainReposi
         return repository.getTeamDetail(id)
     }
 
-    override suspend fun getPlayerList(team: Int, season: Int): Flow<PlayerResponse> {
-        return repository.getPlayerList(team,season)
+    override suspend fun getPlayerList(scope: CoroutineScope, team: Int, season: Int): Flow<PagingData<ResponseP>> {
+        return repository.getPlayerList(scope,team,season)
     }
 
     override suspend fun getAllCountries(): Flow<CountryResponse> {

@@ -35,7 +35,8 @@ class PopularTeamsListAdapter(private val dataList: ArrayList<ResponseT>, privat
 
                 root.setOnClickListener {
                     val intent = Intent(context,TeamDetailActivity::class.java)
-                    intent.putExtra(PresentationUtils.TEAM_ID,Pair(data.team.id,season))
+                    intent.putExtra(PresentationUtils.TEAM_ID,data.team.id)
+                    intent.putExtra(PresentationUtils.TEAM_SEASON,season)
                     context.startActivity(intent)
                 }
             }
