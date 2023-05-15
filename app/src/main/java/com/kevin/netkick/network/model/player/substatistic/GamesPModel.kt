@@ -10,8 +10,6 @@ data class GamesPModel(
     val lineups: Int?,
     @SerializedName("minutes")
     val minutes: Int?,
-    @SerializedName("number")
-    val number: Any,
     @SerializedName("position")
     val position: String?,
     @SerializedName("rating")
@@ -25,7 +23,6 @@ data class GamesPModel(
                 appearances = it.appearances ?: 0,
                 lineups = it.lineups ?: 0,
                 minutes = it.minutes ?: 0,
-                number = it.number,
                 position = it.position ?: "",
                 rating = it.rating ?: "",
                 captain = it.captain ?: false

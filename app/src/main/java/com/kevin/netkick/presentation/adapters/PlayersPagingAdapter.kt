@@ -12,7 +12,7 @@ import com.bumptech.glide.Glide
 import com.kevin.netkick.databinding.PlayerTeamItemBinding
 import com.kevin.netkick.domain.entity.player.ResponseP
 
-class PlayersPagingAdapter(): PagingDataAdapter<ResponseP, PlayersPagingAdapter.PlayerViewHolder>(DiffCallback) {
+class PlayersPagingAdapter: PagingDataAdapter<ResponseP, PlayersPagingAdapter.PlayerViewHolder>(DiffCallback) {
     private lateinit var context: Context
     class PlayerViewHolder(val binding: PlayerTeamItemBinding):ViewHolder(binding.root)
 
