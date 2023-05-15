@@ -30,7 +30,7 @@ class PopularTeamsListActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as NetkickApplication).appComponent.injectInto(this)
+        (application as NetkickApplication).appComponent.injectIntoPopularTeamsListActivity(this)
         super.onCreate(savedInstanceState)
         binding = ActivityPopularTeamsListBinding.inflate(layoutInflater)
         setContentView(binding.root)

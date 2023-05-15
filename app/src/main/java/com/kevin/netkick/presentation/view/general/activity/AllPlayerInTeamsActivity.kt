@@ -1,11 +1,10 @@
 package com.kevin.netkick.presentation.view.general.activity
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
@@ -14,8 +13,6 @@ import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.PlayersPagingAdapter
 import com.kevin.netkick.presentation.view.viewmodels.PopularTeamViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -33,10 +30,11 @@ class AllPlayerInTeamsActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as NetkickApplication).appComponent.injectInto(this)
+        (application as NetkickApplication).appComponent.injectIntoAllPlayerInTeamsActivity(this)
         super.onCreate(savedInstanceState)
         binding = ActivityAllPlayerInTeamsBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setProgressBar()
         binding.ibBackButton.setOnClickListener {
             finish()

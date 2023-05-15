@@ -24,6 +24,7 @@ class MainActivity: AppCompatActivity() {
     private lateinit var homeFragment: HomeFragment
     private lateinit var exploreFragment: ExploreFragment
     private lateinit var trophiesFragment: TrophiesFragment
+
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
@@ -32,7 +33,7 @@ class MainActivity: AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as NetkickApplication).appComponent.injectInto(this)
+        (application as NetkickApplication).appComponent.injectIntoMainActivity(this)
         super.onCreate(savedInstanceState)
         installSplashScreen().apply {
             setKeepOnScreenCondition{

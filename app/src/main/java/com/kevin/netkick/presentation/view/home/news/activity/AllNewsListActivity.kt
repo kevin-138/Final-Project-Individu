@@ -30,7 +30,7 @@ class AllNewsListActivity : AppCompatActivity() {
         viewModelFactory
     }
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as NetkickApplication).appComponent.injectInto(this)
+        (application as NetkickApplication).appComponent.injectIntoAllNewsListActivity(this)
         super.onCreate(savedInstanceState)
         binding = ActivityAllNewsListBinding.inflate(layoutInflater)
         setContentView(binding.root)

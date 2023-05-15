@@ -6,14 +6,12 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import androidx.appcompat.view.menu.MenuView.ItemView
 import androidx.lifecycle.lifecycleScope
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.ActivityTeamDetailBinding
-import com.kevin.netkick.domain.entity.country.CountryC
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.viewmodels.PopularTeamViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
@@ -33,7 +31,7 @@ class TeamDetailActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as NetkickApplication).appComponent.injectInto(this)
+        (application as NetkickApplication).appComponent.injectIntoTeamDetailActivity(this)
         super.onCreate(savedInstanceState)
         binding = ActivityTeamDetailBinding.inflate(layoutInflater)
         setContentView(binding.root)

@@ -32,10 +32,6 @@
             android:exported="false"
       />
         <activity
-            android:name=".presentation.view.home.popularteams.activity.PopularTeamsDetailActivity"
-            android:exported="false"
-/>
-        <activity
             android:name=".presentation.view.home.popularteams.activity.PopularTeamsListActivity"
             android:exported="false"
          />

@@ -17,7 +17,7 @@ class ArticleActivity : AppCompatActivity() {
     private lateinit var progressBar: AlertDialog
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as NetkickApplication).appComponent.injectInto(this)
+        (application as NetkickApplication).appComponent.injectIntoArticleActivity(this)
         super.onCreate(savedInstanceState)
         binding = ActivityArticleBinding.inflate(layoutInflater)
         setContentView(binding.root)

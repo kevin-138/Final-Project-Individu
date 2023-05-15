@@ -5,7 +5,6 @@ import com.kevin.netkick.presentation.view.general.activity.AllPlayerInTeamsActi
 import com.kevin.netkick.presentation.view.general.activity.TeamDetailActivity
 import com.kevin.netkick.presentation.view.home.news.activity.AllNewsListActivity
 import com.kevin.netkick.presentation.view.home.news.activity.ArticleActivity
-import com.kevin.netkick.presentation.view.home.popularteams.activity.PopularTeamsDetailActivity
 import com.kevin.netkick.presentation.view.home.popularteams.activity.PopularTeamsListActivity
 import com.kevin.netkick.presentation.view.main.activity.MainActivity
 import dagger.Component
@@ -22,18 +21,16 @@ interface AppComponent {
     fun create(dataComponent: DataComponent): AppComponent
   }
 
-  fun injectInto(mainActivity: MainActivity)
+  fun injectIntoMainActivity(mainActivity: MainActivity)
 
-  fun injectInto(popularTeamsListActivity: PopularTeamsListActivity)
+  fun injectIntoPopularTeamsListActivity(popularTeamsListActivity: PopularTeamsListActivity)
 
-  fun injectInto(popularTeamsDetailActivity: PopularTeamsDetailActivity)
+  fun injectIntoAllNewsListActivity(allNewsListActivity: AllNewsListActivity)
 
-  fun injectInto(allNewsListActivity: AllNewsListActivity)
+  fun injectIntoArticleActivity(articleActivity: ArticleActivity)
+  fun injectIntoTeamDetailActivity(teamDetailActivity: TeamDetailActivity)
 
-  fun injectInto(articleActivity: ArticleActivity)
-  fun injectInto(teamDetailActivity: TeamDetailActivity)
-
-  fun injectInto( allPlayerInTeamsActivity: AllPlayerInTeamsActivity)
+  fun injectIntoAllPlayerInTeamsActivity(allPlayerInTeamsActivity: AllPlayerInTeamsActivity)
 
 //  fun injectInto(leagueSearchActivity: LeagueSearchActivity)
 
