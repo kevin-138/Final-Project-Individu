@@ -15,7 +15,7 @@ class PlayersPagingDataSource(private val apiService: FootballApiService, privat
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ResponseP> {
         val position = params.key ?: 1
         return try {
-            val listData = apiService.getPlayerInTeams(team,season)
+            val listData = apiService.getPlayerInTeams(team,season, position)
             LoadResult.Page(
                 data = ResponsePModel.transformToListEntity(listData.response),
                 nextKey = if ((listData.paging?.current ?: 0) == (listData.paging?.total ?: 0)) null else position + 1,

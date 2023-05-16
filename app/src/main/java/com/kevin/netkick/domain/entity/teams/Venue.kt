@@ -1,5 +1,9 @@
 package com.kevin.netkick.domain.entity.teams
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class Venue(
     val id: Int,
     val name: String,
@@ -8,4 +12,4 @@ data class Venue(
     val capacity: Int,
     val surface: String,
     val image: String
-)
+) : Parcelable

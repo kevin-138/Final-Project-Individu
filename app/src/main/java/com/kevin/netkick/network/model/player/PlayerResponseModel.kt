@@ -10,14 +10,14 @@ data class PlayerResponseModel(
     @SerializedName("results")
     val results: Int?,
     @SerializedName("response")
-    val response: List<ResponsePModel>
+    val response: List<ResponsePModel>?
 ){
     companion object{
         fun transformToEntity(it: PlayerResponseModel):PlayerResponse{
             return PlayerResponse(
                 results = it.results ?: 0,
                 paging =  PagingModel.transformsToEntity(it.paging ?: PagingModel(0,0)),
-                response = ResponsePModel.transformToListEntity(it.response)
+                response = ResponsePModel.transformToListEntity(it.response ?: listOf())
                 )
         }
     }

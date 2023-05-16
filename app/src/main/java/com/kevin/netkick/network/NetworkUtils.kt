@@ -5,7 +5,6 @@ object NetworkUtils {
 //    api kuota
 
 //     api wifi gli
-//    const val FOOTBALL_API_KEY = "x-apisports-key: c544dcdd442a1c5159c476243f1299d8"
 //     api wifi rumah
     const val FOOTBALL_API_KEY = "x-apisports-key: c544dcdd442a1c5159c476243f1299d8"
 

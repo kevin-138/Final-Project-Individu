@@ -1,4 +1,4 @@
-package com.kevin.netkick.domain.entity.league
+package com.kevin.netkick.domain.entity.league.submembers
 
 data class League(
     val id: Int,

@@ -1,26 +1,35 @@
 package com.kevin.netkick.presentation.view.general.activity
 
+import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
+import com.bumptech.glide.Glide
 import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.ActivityAllPlayerInTeamsBinding
+import com.kevin.netkick.domain.entity.teams.ResponseT
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.PlayersPagingAdapter
 import com.kevin.netkick.presentation.view.viewmodels.PopularTeamViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
+import kotlin.concurrent.schedule
 
+@Suppress("DEPRECATION")
 class AllPlayerInTeamsActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAllPlayerInTeamsBinding
     private lateinit var adapter: PlayersPagingAdapter
     private lateinit var progressBar: AlertDialog
+    private var teamData: ResponseT? = null
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -40,7 +49,37 @@ class AllPlayerInTeamsActivity : AppCompatActivity() {
             finish()
         }
         setupAdapter()
+        getTeamDataIntent()
         checkOnline()
+    }
+
+
+    private fun getTeamDataIntent() {
+        teamData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(PresentationUtils.TEAM_FULL_DATA,ResponseT::class.java)
+        }else{
+            intent.getParcelableExtra(PresentationUtils.TEAM_FULL_DATA)
+        }
+
+        if (teamData!=null){
+            setTeamDisplay()
+        }
+    }
+
+    private fun setTeamDisplay(){
+        val loadingDrawable1 = CircularProgressDrawable(this)
+        loadingDrawable1.strokeWidth = 5f
+        loadingDrawable1.centerRadius = 30f
+        loadingDrawable1.setColorSchemeColors(Color.WHITE)
+        loadingDrawable1.start()
+
+        binding.apply {
+            tvTeamNamePlayer.text = teamData?.team?.name ?: "No Data"
+            Glide.with(root)
+                .load(teamData?.team?.logo ?: "")
+                .placeholder(loadingDrawable1)
+                .into(ivTeamLogoDetail)
+        }
     }
 
     private fun setupAdapter() {
@@ -67,12 +106,13 @@ class AllPlayerInTeamsActivity : AppCompatActivity() {
 
     private fun getPlayerList() {
         lifecycleScope.launch {
-            viewModel.getTeamPlayers(this,
-            intent.getIntExtra(PresentationUtils.TEAM_ID,0),
-                intent.getIntExtra(PresentationUtils.TEAM_SEASON,0)
-                ).collectLatest {
+            viewModel.getTeamPlayers(this, teamData!!.team.id, PresentationUtils.POPULAR_SEASON)
+                .collectLatest {
                     adapter.submitData(lifecycle,it)
-                progressBar.dismiss()
+
+                    Timer().schedule(1000L) {
+                        progressBar.dismiss()
+                    }
             }
         }
     }

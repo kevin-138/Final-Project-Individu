@@ -99,8 +99,7 @@ class TeamDetailActivity : AppCompatActivity() {
 
                         binding.btnSeeAllPlayers.setOnClickListener {
                             val intentPlayers = Intent(this@TeamDetailActivity,AllPlayerInTeamsActivity::class.java)
-                            intentPlayers.putExtra(PresentationUtils.TEAM_ID,dataTeam.team.id)
-                            intentPlayers.putExtra(PresentationUtils.TEAM_SEASON,PresentationUtils.POPULAR_SEASON)
+                            intentPlayers.putExtra(PresentationUtils.TEAM_FULL_DATA,dataTeam)
                             this@TeamDetailActivity.startActivity(intentPlayers)
                         }
                         progressBar.dismiss()

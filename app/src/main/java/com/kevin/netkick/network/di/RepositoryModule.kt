@@ -11,4 +11,5 @@ abstract class RepositoryModule {
     @Binds
     abstract fun provideRepository(repositoryImpl: NetworkDataRepositoryImpl): DomainRepository
 
+
 }

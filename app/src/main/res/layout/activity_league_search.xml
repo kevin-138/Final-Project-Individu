@@ -4,6 +4,101 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.view.general.activity.LeagueSearchActivity">
+    tools:context=".presentation.view.general.activity.LeagueSearchActivity"
+    android:background="@color/background1">
+
+    <ImageButton
+        android:id="@+id/ib_back_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginVertical="20dp"
+        android:src="@drawable/arrrowssc"
+        android:background="@color/transparant"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/tv_nothing_found"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lightPurple"
+        android:text="@string/no_country_found"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_league_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/leagues"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@id/ib_back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <SearchView
+        android:id="@+id/sv_league"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:searchIcon="@drawable/search_icon"
+        android:searchHintIcon="@drawable/search_icon"
+        android:closeIcon="@drawable/x_purple"
+        android:queryHint="League Name"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/search_bar_background"
+        android:queryBackground="@color/transparant"
+        app:layout_constraintTop_toBottomOf="@id/tv_league_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <TextView
+        android:id="@+id/tv_league_search_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_for_league_by_name"
+        android:textColor="@color/lightPurple"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/sv_league"
+        app:layout_constraintStart_toStartOf="@id/sv_league"/>
+
+    <TextView
+        android:id="@+id/tv_league_search_filter_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_for_league_by_name"
+        android:textColor="@color/lightPurple"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@id/sv_league"
+        app:layout_constraintStart_toStartOf="@id/sv_league"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_countries_league"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginHorizontal="15dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_league_search_desc"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

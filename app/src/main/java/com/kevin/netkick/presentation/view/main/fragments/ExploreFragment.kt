@@ -1,5 +1,6 @@
 package com.kevin.netkick.presentation.view.main.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -12,6 +13,7 @@ import com.kevin.netkick.databinding.FragmentExploreBinding
 import com.kevin.netkick.domain.entity.country.CountryC
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.CountriesAdapter
+import com.kevin.netkick.presentation.view.general.activity.LeagueSearchActivity
 import com.kevin.netkick.presentation.view.viewmodels.MainViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -36,6 +38,10 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
         setAdapter()
         setSearchBar()
         checkOnline(false)
+        binding.btnSkip.setOnClickListener {
+            val intent = Intent(requireContext(), LeagueSearchActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setAdapter() {

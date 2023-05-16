@@ -3,6 +3,7 @@ package com.kevin.netkick.domain
 import androidx.paging.PagingData
 import com.kevin.netkick.domain.entity.country.CountryResponse
 import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
+import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
@@ -35,5 +36,14 @@ class DomainUseCaseImpl @Inject constructor(private val repository: DomainReposi
     override suspend fun getNewsHeadlines(): Flow<NewsResponse> {
         return repository.getNewsHeadlines()
     }
+
+    override suspend fun getLeagueSearch(search: String): Flow<LeagueResponse> {
+        return repository.getLeagueSearch(search)
+    }
+
+    override suspend fun getLeagueFilterCountry(country: String): Flow<LeagueResponse> {
+        return repository.getLeagueFilterCountry(country)
+    }
+
 
 }

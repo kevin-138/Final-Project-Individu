@@ -27,6 +27,7 @@ object PresentationUtils {
     const val COUNTRY_CODE = "COUNTRY_CODE"
 
     const val TEAM_ID = "TEAM_ID"
+    const val TEAM_FULL_DATA = "TEAM_FULL_DATA"
     const val TEAM_SEASON = "TEAM_SEASON"
 
     const val POPULAR_SEASON = 2019
