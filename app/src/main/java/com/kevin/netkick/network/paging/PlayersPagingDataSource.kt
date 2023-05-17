@@ -17,7 +17,7 @@ class PlayersPagingDataSource(private val apiService: FootballApiService, privat
         return try {
             val listData = apiService.getPlayerInTeams(team,season, position)
             LoadResult.Page(
-                data = ResponsePModel.transformToListEntity(listData.response),
+                data = ResponsePModel.transformToListEntity(listData.response ?: listOf()),
                 nextKey = if ((listData.paging?.current ?: 0) == (listData.paging?.total ?: 0)) null else position + 1,
                 prevKey = null
             )

@@ -100,21 +100,21 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
             data.totalResults == 0 -> {
                 binding.apply {
                     tvSeeAllNews.visibility = View.INVISIBLE
-                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles as ArrayList<Article>, true)
+                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles.toMutableList(), true)
                     setupNewsAdapter(newsAdapter)
                 }
             }
             data.totalResults <= 4 -> {
                 binding.apply {
                     tvSeeAllNews.visibility = View.INVISIBLE
-                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles as ArrayList<Article>, false)
+                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles.toMutableList(), false)
                     setupNewsAdapter(newsAdapter)
                 }
             }
             else -> {
                 binding.apply {
                     tvSeeAllNews.visibility = View.VISIBLE
-                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles.slice(0..3) as ArrayList<Article>, false)
+                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles.slice(0..3).toMutableList(), false)
                     setupNewsAdapter(newsAdapter)
                 }
             }

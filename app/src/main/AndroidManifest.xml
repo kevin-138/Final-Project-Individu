@@ -16,7 +16,7 @@
         android:theme="@style/Theme.NetKick"
         tools:targetApi="31">
         <activity
-            android:name=".LeagueStandingsActivity"
+            android:name=".presentation.view.explore.activity.LeagueStandingsActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.view.general.activity.AllPlayerInTeamsActivity"

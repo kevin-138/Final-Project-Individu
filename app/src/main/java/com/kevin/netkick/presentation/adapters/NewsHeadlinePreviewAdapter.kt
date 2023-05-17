@@ -11,7 +11,7 @@ import com.kevin.netkick.domain.entity.news.Article
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.home.news.activity.ArticleActivity
 
-class NewsHeadlinePreviewAdapter(private val dataList: ArrayList<Article>, private val dataEmpty: Boolean):RecyclerView.Adapter<NewsHeadlinePreviewAdapter.NewsViewHolder>() {
+class NewsHeadlinePreviewAdapter(private val dataList: MutableList<Article>, private val dataEmpty: Boolean):RecyclerView.Adapter<NewsHeadlinePreviewAdapter.NewsViewHolder>() {
     lateinit var context: Context
 
     inner class NewsViewHolder(private val binding: NewsHeadlineItemBinding): RecyclerView.ViewHolder(binding.root) {
