@@ -14,7 +14,7 @@ import com.kevin.netkick.domain.entity.fixtures.ResponseF
 
 
 class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEmpty: Boolean): RecyclerView.Adapter<LiveScoreAdapter.LiveViewHolder>() {
-    lateinit var context: Context
+    private lateinit var context: Context
 
     inner class LiveViewHolder(private val binding: LiveScoreItemBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: ResponseF, context: Context) {

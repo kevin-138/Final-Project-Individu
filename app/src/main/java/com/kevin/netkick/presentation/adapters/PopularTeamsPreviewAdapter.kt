@@ -14,7 +14,7 @@ import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.general.activity.TeamDetailActivity
 
 class PopularTeamsPreviewAdapter(private val dataList:List<ResponseT>, private val season: Int):RecyclerView.Adapter<PopularTeamsPreviewAdapter.TeamsViewHolder>() {
-    lateinit var context: Context
+    private lateinit var context: Context
 
     inner class TeamsViewHolder(private val binding: PopularTeamItemBinding) : RecyclerView.ViewHolder(binding.root) {
 

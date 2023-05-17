@@ -13,8 +13,8 @@ import com.kevin.netkick.domain.entity.teams.ResponseT
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.general.activity.TeamDetailActivity
 
-class PopularTeamsListAdapter(private val dataList: ArrayList<ResponseT>, private val season: Int): RecyclerView.Adapter<PopularTeamsListAdapter.TeamViewHolder>() {
-    lateinit var context: Context
+class PopularTeamsListAdapter(private val dataList: MutableList<ResponseT>, private val season: Int): RecyclerView.Adapter<PopularTeamsListAdapter.TeamViewHolder>() {
+    private lateinit var context: Context
 
     inner class TeamViewHolder(private val binding: TeamListItemBinding): RecyclerView.ViewHolder(binding.root)  {
 

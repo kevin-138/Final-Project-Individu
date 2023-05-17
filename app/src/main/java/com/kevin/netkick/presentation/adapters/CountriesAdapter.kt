@@ -15,8 +15,7 @@ import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.general.activity.LeagueSearchActivity
 
 class CountriesAdapter(private var dataList: ArrayList<CountryC>):RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
-    private lateinit var dataListMemory: MutableList<CountryC>
-    lateinit var context: Context
+    private lateinit var context: Context
 
     inner class CountryViewHolder(private val binding: CountryItemBinding):RecyclerView.ViewHolder(binding.root) {
 
