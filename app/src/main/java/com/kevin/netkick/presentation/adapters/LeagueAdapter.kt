@@ -1,5 +1,6 @@
 package com.kevin.netkick.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -50,12 +51,13 @@ class LeagueAdapter(private val dataList: MutableList<ResponseL>): RecyclerView.
         holder.bindData(dataList[position])
     }
 
-//    fun addDataToList(leagueList: List<ResponseL>) {
-//        dataList.clear()
-//        dataList.addAll(leagueList)
+    @SuppressLint("NotifyDataSetChanged")
+    fun addDataToList(leagueList: List<ResponseL>) {
+        dataList.clear()
+        dataList.addAll(leagueList)
 //        dataListMemory.addAll(leagueList)
-//        notifyItemRangeChanged(0,dataList.size)
-//    }
+        notifyDataSetChanged()
+    }
 
 
 
