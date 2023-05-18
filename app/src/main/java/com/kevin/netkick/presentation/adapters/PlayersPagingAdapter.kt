@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.kevin.netkick.R
 import com.kevin.netkick.databinding.PlayerTeamItemBinding
 import com.kevin.netkick.domain.entity.player.ResponseP
 
@@ -52,6 +53,7 @@ class PlayersPagingAdapter: PagingDataAdapter<ResponseP, PlayersPagingAdapter.Pl
             Glide.with(root)
                 .load(data.players.photo)
                 .placeholder(loadingDrawable1)
+                .error(R.drawable.broken_image_icon)
                 .into(ivPlayerPhoto)
             
         }

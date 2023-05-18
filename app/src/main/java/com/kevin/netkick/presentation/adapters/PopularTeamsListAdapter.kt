@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.kevin.netkick.R
 import com.kevin.netkick.databinding.TeamListItemBinding
 import com.kevin.netkick.domain.entity.teams.ResponseT
 import com.kevin.netkick.presentation.PresentationUtils
@@ -31,6 +32,7 @@ class PopularTeamsListAdapter(private val dataList: MutableList<ResponseT>, priv
                 Glide.with(itemView)
                     .load(data.team.logo)
                     .placeholder(loadingDrawable1)
+                    .error(R.drawable.broken_image_icon)
                     .into(ivTeamLogoList)
 
                 root.setOnClickListener {

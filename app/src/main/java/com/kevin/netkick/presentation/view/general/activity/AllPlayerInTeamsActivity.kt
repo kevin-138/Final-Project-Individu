@@ -78,6 +78,7 @@ class AllPlayerInTeamsActivity : AppCompatActivity() {
             Glide.with(root)
                 .load(teamData?.team?.logo ?: "")
                 .placeholder(loadingDrawable1)
+                .error(R.drawable.broken_image_icon)
                 .into(ivTeamLogoDetail)
         }
     }

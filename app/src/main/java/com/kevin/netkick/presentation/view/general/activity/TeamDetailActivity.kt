@@ -80,11 +80,13 @@ class TeamDetailActivity : AppCompatActivity() {
                         Glide.with(binding.root)
                             .load(dataTeam.venue.image)
                             .placeholder(loadingDrawable1)
+                            .error(R.drawable.broken_image_icon)
                             .into( ivVenueStadium)
 
                         Glide.with(binding.root)
                             .load(dataTeam.team.logo)
                             .placeholder(loadingDrawable2)
+                            .error(R.drawable.broken_image_icon)
                             .into(ivTeamLogoDetail)
 
                         tvTeamDetailName.text = dataTeam.team.name

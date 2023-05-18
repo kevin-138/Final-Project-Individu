@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(private val useCase: DomainUseCase):View
 
     init {
         viewModelScope.launch{
-            delay(2.seconds)
+            delay(3.seconds)
             _isLoading.value = false
         }
     }

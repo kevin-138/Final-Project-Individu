@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.kevin.netkick.R
 import com.kevin.netkick.databinding.CountryItemBinding
 import com.kevin.netkick.domain.entity.country.CountryC
 import com.kevin.netkick.presentation.PresentationUtils
@@ -33,6 +34,7 @@ class CountriesAdapter(private var dataList: ArrayList<CountryC>):RecyclerView.A
             Glide.with(itemView)
                 .load(data.flag)
                 .placeholder(loadingDrawable1)
+                .error(R.drawable.broken_image_icon)
                 .into(ivCountryFlag)
 
                 root.setOnClickListener {

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.kevin.netkick.R
 import com.kevin.netkick.databinding.LeagueItemBinding
 import com.kevin.netkick.domain.entity.league.ResponseL
 
@@ -26,6 +27,7 @@ class LeagueAdapter(private val dataList: MutableList<ResponseL>): RecyclerView.
                 Glide.with(itemView)
                     .load(data.league.logo)
                     .placeholder(loadingDrawable1)
+                    .error(R.drawable.broken_image_icon)
                     .into(ivLeagueLogoList)
 
                 tvLeagueName.text = data.league.name

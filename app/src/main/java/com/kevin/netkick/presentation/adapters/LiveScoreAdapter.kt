@@ -53,11 +53,13 @@ class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEm
                 Glide.with(itemView)
                     .load(data.teams.homeTeam.logo)
                     .placeholder(loadingDrawable1)
+                    .error(R.drawable.broken_image_icon)
                     .into(ivLivescoreHomeLogo)
 
                 Glide.with(itemView)
                     .load(data.teams.awayTeam.logo)
                     .placeholder(loadingDrawable2)
+                    .error(R.drawable.broken_image_icon)
                     .into(ivLivescoreAwayLogo)
             }
         }
