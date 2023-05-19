@@ -45,8 +45,8 @@ dependencies {
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 
     //table view
-//    implementation 'com.github.evrencoskun:TableView:v0.8.9.4'
-//    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.github.evrencoskun:TableView:v0.8.9.4'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
 
     //tooBig
     implementation 'com.gu.android:toolargetool:0.3.0'

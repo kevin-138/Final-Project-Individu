@@ -47,4 +47,8 @@
     <string name="leagues">Leagues</string>
     <string name="search_for_league_by_name">Search for League by name</string>
     <string name="no_league_found">No League Found</string>
+    <string name="type">Type:</string>
+    <string name="season">Season:</string>
+    <string name="matches">Matches</string>
+    <string name="standings">Standings</string>
 </resources>

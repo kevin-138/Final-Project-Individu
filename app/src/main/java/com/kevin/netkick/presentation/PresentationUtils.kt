@@ -31,6 +31,9 @@ object PresentationUtils {
     const val TEAM_SEASON = "TEAM_SEASON"
 
     const val POPULAR_SEASON = 2019
+
+    const val LEAGUE_FULL_DATA = "LEAGUE_FULL_DATA"
+
     const val POPULAR_LEAGUE = 2
 
     fun isOnline(activity: FragmentActivity): Boolean {

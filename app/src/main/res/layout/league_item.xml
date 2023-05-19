@@ -12,7 +12,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/background4"
+        android:background="@color/background7"
         android:paddingVertical="16dp"
         android:paddingHorizontal="20dp">
 
@@ -44,7 +44,7 @@
             android:id="@+id/tv_league_type_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Type:"
+            android:text="@string/type"
             android:textColor="@color/white"
             android:textStyle="bold"
             android:layout_marginTop="2dp"

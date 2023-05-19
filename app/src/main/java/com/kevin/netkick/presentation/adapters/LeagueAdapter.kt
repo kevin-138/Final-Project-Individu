@@ -2,9 +2,9 @@ package com.kevin.netkick.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -12,6 +12,8 @@ import com.bumptech.glide.Glide
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.LeagueItemBinding
 import com.kevin.netkick.domain.entity.league.ResponseL
+import com.kevin.netkick.presentation.PresentationUtils
+import com.kevin.netkick.presentation.view.explore.activity.LeagueStandingsActivity
 
 class LeagueAdapter(private var dataList: MutableList<ResponseL>): RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder>() {
     private lateinit var context: Context
@@ -34,6 +36,12 @@ class LeagueAdapter(private var dataList: MutableList<ResponseL>): RecyclerView.
 
                 tvLeagueName.text = data.league.name
                 tvLeagueType.text = data.league.type
+
+                root.setOnClickListener {
+                    val intent = Intent(context,LeagueStandingsActivity::class.java)
+                    intent.putExtra(PresentationUtils.LEAGUE_FULL_DATA,data)
+                    context.startActivity(intent)
+                }
             }
         }
     }
@@ -81,7 +89,5 @@ class LeagueAdapter(private var dataList: MutableList<ResponseL>): RecyclerView.
         dataListMemory.addAll(leagueList)
         notifyDataSetChanged()
     }
-
-
 
 }
