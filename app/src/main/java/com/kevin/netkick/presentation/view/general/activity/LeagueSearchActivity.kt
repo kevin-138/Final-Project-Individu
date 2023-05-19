@@ -41,9 +41,7 @@ class LeagueSearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLeagueSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        setProgressBar()
         setupAdapter()
-//        setObserver()
         binding.ibBackButton.setOnClickListener {
             finish()
         }

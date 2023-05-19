@@ -17,7 +17,7 @@ import com.kevin.netkick.domain.entity.league.ResponseL
 import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import com.kevin.netkick.presentation.PresentationUtils
 
-class LeagueStandingsAdapter(private var dataList: MutableList<Standings>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LeagueStandingsAdapter(private var dataList: MutableList<Standings>, private val resposne): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
 
     inner class StandingsItemViewHolder(private val itemBinding: StandingListItemBinding):RecyclerView.ViewHolder(itemBinding.root) {
@@ -72,6 +72,7 @@ class LeagueStandingsAdapter(private var dataList: MutableList<Standings>): Recy
 
     override fun getItemCount(): Int {
         return dataList.size + 1
+//        datalist.group.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -91,6 +92,14 @@ class LeagueStandingsAdapter(private var dataList: MutableList<Standings>): Recy
         dataList.addAll(inputData)
         notifyDataSetChanged()
     }
+
+    fun changeGroup(group: Int){
+        data clear
+        data add data.response[0].league.standings[group].group)
+        notifyDataSetChanged()
+    }
+
+//    globalval
 
 
 }

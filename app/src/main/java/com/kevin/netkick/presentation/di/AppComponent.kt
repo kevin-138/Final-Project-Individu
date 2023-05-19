@@ -1,6 +1,7 @@
 package com.kevin.netkick.presentation.di
 
 import com.kevin.netkick.network.di.DataComponent
+import com.kevin.netkick.presentation.view.explore.activity.LeagueStandingsActivity
 import com.kevin.netkick.presentation.view.general.activity.AllPlayerInTeamsActivity
 import com.kevin.netkick.presentation.view.general.activity.LeagueSearchActivity
 import com.kevin.netkick.presentation.view.general.activity.TeamDetailActivity
@@ -23,16 +24,13 @@ interface AppComponent {
   }
 
   fun injectIntoMainActivity(mainActivity: MainActivity)
-
   fun injectIntoPopularTeamsListActivity(popularTeamsListActivity: PopularTeamsListActivity)
-
   fun injectIntoAllNewsListActivity(allNewsListActivity: AllNewsListActivity)
-
   fun injectIntoArticleActivity(articleActivity: ArticleActivity)
   fun injectIntoTeamDetailActivity(teamDetailActivity: TeamDetailActivity)
-
   fun injectIntoAllPlayerInTeamsActivity(allPlayerInTeamsActivity: AllPlayerInTeamsActivity)
   fun injectIntoLeagueSearchActivity(leagueSearchActivity: LeagueSearchActivity)
+  fun injectIntoLeagueStandingActivity(leagueStandingActivity: LeagueStandingsActivity)
 
 //  fun injectInto(leagueSearchActivity: LeagueSearchActivity)
 
