@@ -7,6 +7,7 @@ import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
+import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -43,6 +44,10 @@ class DomainUseCaseImpl @Inject constructor(private val repository: DomainReposi
 
     override suspend fun getLeagueFilterCountry(country: String): Flow<LeagueResponse> {
         return repository.getLeagueFilterCountry(country)
+    }
+
+    override suspend fun getLeagueStandings(league: Int, season: Int): Flow<StandingsResponse> {
+        return repository.getLeagueStandings(league,season)
     }
 
 

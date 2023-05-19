@@ -11,11 +11,13 @@ import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
+import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.network.model.countries.CountryResponseModel
 import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
 import com.kevin.netkick.network.model.league.LeagueResponseModel
 import com.kevin.netkick.network.model.news.NewsResponseModel
+import com.kevin.netkick.network.model.standings.StandingsResponseModel
 import com.kevin.netkick.network.paging.PlayersPagingDataSource
 import com.kevin.netkick.network.service.FootballApiService
 import com.kevin.netkick.network.service.NewsApiService
@@ -106,6 +108,17 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
             try {
                 val response = footballApi.getLeagueFilterCountry(country)
                 emit(LeagueResponseModel.transformToEntity(response))
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getLeagueStandings(league: Int, season: Int): Flow<StandingsResponse> {
+        return flow {
+            try {
+                val response = footballApi.getLeagueStandings(league,season)
+                emit(StandingsResponseModel.transformToEntity(response))
             } catch (e: Exception){
                 e.printStackTrace()
             }

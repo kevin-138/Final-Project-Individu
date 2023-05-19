@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="scrollbar_style">
+        <item name="android:scrollbarAlwaysDrawHorizontalTrack">true</item>
+        <item name="android:scrollbars">horizontal</item>
+        <item name="android:fadeScrollbars">false</item>
+        <item name="android:scrollbarThumbVertical">@drawable/thumb_shape</item>
+        <item name="android:scrollbarTrackVertical">@drawable/scrollbar_track</item>
+    </style>
+</resources>

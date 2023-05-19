@@ -162,11 +162,24 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-    <com.evrencoskun.tableview.TableView
-        android:layout_width="wrap_content"
+    <HorizontalScrollView
+        android:id="@+id/hsv_standings"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf=""
-        />
+        android:layout_marginTop="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_league_standings_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_standings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:scrollbars="horizontal"
+            style="@style/scrollbar_style"
+            tools:listitem="@layout/standing_list_item"/>
+
+    </HorizontalScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

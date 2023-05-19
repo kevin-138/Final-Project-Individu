@@ -58,7 +58,6 @@ class CountriesAdapter(private var dataList: ArrayList<CountryC>):RecyclerView.A
 
     @SuppressLint("NotifyDataSetChanged")
     fun filterList(filterlist: ArrayList<CountryC>){
-
         dataList = filterlist
         notifyDataSetChanged()
     }

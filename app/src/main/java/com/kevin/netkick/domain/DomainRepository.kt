@@ -7,6 +7,7 @@ import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
+import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
@@ -20,4 +21,5 @@ interface DomainRepository {
     suspend fun getPlayerList(scope: CoroutineScope, team: Int, season:Int):Flow<PagingData<ResponseP>>
     suspend fun getLeagueSearch(search:String): Flow<LeagueResponse>
     suspend fun getLeagueFilterCountry(country:String): Flow<LeagueResponse>
+    suspend fun getLeagueStandings(league: Int, season:Int): Flow<StandingsResponse>
 }

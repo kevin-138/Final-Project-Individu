@@ -4,6 +4,7 @@ import androidx.lifecycle.*
 import com.kevin.netkick.domain.DomainUseCase
 import com.kevin.netkick.domain.entity.general.Paging
 import com.kevin.netkick.domain.entity.league.LeagueResponse
+import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -31,6 +32,21 @@ class ExploreViewModel @Inject constructor(private val useCase: DomainUseCase): 
 
     private fun getSearchResults(queryString: String) = liveData(Dispatchers.IO) {
         useCase.getLeagueSearch(queryString).collectLatest {
+            emit(
+                it
+            )
+        }
+    }
+
+    private val leagueStandingsSeason = MutableLiveData<Pair<Int,Int>>()
+
+    fun setSearchQuery(query:Pair<Int,Int>){
+        leagueStandingsSeason.value = query
+    }
+
+    val standingResults: LiveData<StandingsResponse> = leagueStandingsSeason.switchMap { getLeagueStandings(it.first,it.second) }
+    private fun getLeagueStandings(league: Int, season:Int) = liveData(Dispatchers.IO) {
+        useCase.getLeagueStandings(league,season).collectLatest {
             emit(
                 it
             )

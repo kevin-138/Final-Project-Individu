@@ -21,6 +21,7 @@
     <color name="background5">#272730</color>
     <color name="background6">#242539</color>
     <color name="background7">#3C3E5C</color>
+    <color name="background8">#484B6C</color>
 
     <color name="blue">#2648D1</color>
 
@@ -28,4 +29,11 @@
     <color name="purple">#6C5ECF</color>
 
     <color name="transparant">#00FFFFFF</color>
+
+    <color name="cell_background_color">#171827</color>
+    <color name="header_line_color">#0a0a0a</color>
+    <color name="table_view_default_text_color">#D2B5FF</color>
+
+    <color name="d_purple_blue">#38304D</color>
+    <color name="d_purp">#705EA0</color>
 </resources>

@@ -34,7 +34,11 @@ object PresentationUtils {
 
     const val LEAGUE_FULL_DATA = "LEAGUE_FULL_DATA"
 
-    const val POPULAR_LEAGUE = 2
+    const val LEAGUE_ID = "LEAGUE_ID"
+    const val LEAGUE_SEASON = "LEAGUE_SEASON"
+
+    const val TYPE_ITEM = 0
+    const val TYPE_HEADER = 1
 
     fun isOnline(activity: FragmentActivity): Boolean {
         val connectivityManager =

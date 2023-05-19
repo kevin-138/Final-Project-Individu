@@ -27,7 +27,6 @@ import kotlin.concurrent.schedule
 class LeagueSearchActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLeagueSearchBinding
     private lateinit var adapter: LeagueAdapter
-    private lateinit var dataList: ArrayList<CountryC>
     private lateinit var progressBar: AlertDialog
 
     @Inject

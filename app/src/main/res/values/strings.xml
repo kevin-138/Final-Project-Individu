@@ -51,4 +51,13 @@
     <string name="season">Season:</string>
     <string name="matches">Matches</string>
     <string name="standings">Standings</string>
+    <string name="ranks">#</string>
+    <string name="points">Points</string>
+    <string name="played">Played</string>
+    <string name="team">Team</string>
+    <string name="w">W</string>
+    <string name="d">D</string>
+    <string name="l">L</string>
+    <string name="gf">GF</string>
+    <string name="ga">GA</string>
 </resources>
