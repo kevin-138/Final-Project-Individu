@@ -39,7 +39,7 @@ class CountriesAdapter(private var dataList: ArrayList<CountryC>):RecyclerView.A
 
                 root.setOnClickListener {
                     val intent = Intent(context,LeagueSearchActivity::class.java)
-                    intent.putExtra(PresentationUtils.COUNTRY_CODE,data.code)
+                    intent.putExtra(PresentationUtils.COUNTRY_CODE,data.name)
                     context.startActivity(intent)
                 }
             }

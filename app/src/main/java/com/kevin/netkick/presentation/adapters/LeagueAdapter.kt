@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -12,9 +13,9 @@ import com.kevin.netkick.R
 import com.kevin.netkick.databinding.LeagueItemBinding
 import com.kevin.netkick.domain.entity.league.ResponseL
 
-class LeagueAdapter(private val dataList: MutableList<ResponseL>): RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder>() {
+class LeagueAdapter(private var dataList: MutableList<ResponseL>): RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder>() {
     private lateinit var context: Context
-//    private lateinit var dataListMemory: MutableList<ResponseL>
+    private var dataListMemory = mutableListOf<ResponseL>()
 
     inner class LeagueViewHolder(private val binding: LeagueItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: ResponseL){
@@ -37,6 +38,7 @@ class LeagueAdapter(private val dataList: MutableList<ResponseL>): RecyclerView.
         }
     }
 
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeagueViewHolder {
         context = parent.context
         val binding = LeagueItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
@@ -51,11 +53,32 @@ class LeagueAdapter(private val dataList: MutableList<ResponseL>): RecyclerView.
         holder.bindData(dataList[position])
     }
 
+    fun filterData(query:String):Int{
+        val dataListFiltered: MutableList<ResponseL> = mutableListOf()
+        for (item in dataListMemory) {
+            if (item.league.name.contains(query,true)) {
+                dataListFiltered.add(item)
+            }
+        }
+        return if (dataListFiltered.isEmpty()) {
+            1
+        } else {
+            changeList(dataListFiltered)
+            2
+        }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun changeList(leagueSearchList: List<ResponseL>) {
+        dataList = leagueSearchList.toMutableList()
+        notifyDataSetChanged()
+    }
+
     @SuppressLint("NotifyDataSetChanged")
     fun addDataToList(leagueList: List<ResponseL>) {
         dataList.clear()
         dataList.addAll(leagueList)
-//        dataListMemory.addAll(leagueList)
+        dataListMemory.addAll(leagueList)
         notifyDataSetChanged()
     }
 

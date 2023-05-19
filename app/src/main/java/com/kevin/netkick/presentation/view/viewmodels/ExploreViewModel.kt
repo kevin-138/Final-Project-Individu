@@ -25,12 +25,11 @@ class ExploreViewModel @Inject constructor(private val useCase: DomainUseCase): 
 
     fun setSearchQuery(query:String){
         leagueSearchQuery.value = query
-
     }
 
     val searchResults: LiveData<LeagueResponse> = leagueSearchQuery.switchMap { getSearchResults(it) }
 
-    private fun getSearchResults(queryString: String) = liveData(Dispatchers.Main) {
+    private fun getSearchResults(queryString: String) = liveData(Dispatchers.IO) {
         useCase.getLeagueSearch(queryString).collectLatest {
             emit(
                 it

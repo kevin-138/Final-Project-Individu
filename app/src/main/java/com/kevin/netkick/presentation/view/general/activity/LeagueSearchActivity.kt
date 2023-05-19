@@ -1,11 +1,13 @@
 package com.kevin.netkick.presentation.view.general.activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
@@ -15,6 +17,8 @@ import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.LeagueAdapter
 import com.kevin.netkick.presentation.view.viewmodels.ExploreViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
 import kotlin.concurrent.schedule
@@ -40,7 +44,7 @@ class LeagueSearchActivity : AppCompatActivity() {
         setContentView(binding.root)
 //        setProgressBar()
         setupAdapter()
-        setObserver()
+//        setObserver()
         binding.ibBackButton.setOnClickListener {
             finish()
         }
@@ -65,16 +69,40 @@ class LeagueSearchActivity : AppCompatActivity() {
     private fun checkOnline() {
         val onlineCheck = PresentationUtils.isOnline(this)
         if (onlineCheck) {
-            setSearchBar()
+            checkIntent()
         } else {
             PresentationUtils.networkDialog(this)
         }
     }
-    private fun setSearchBar() {
+
+    private fun checkIntent(){
+        if (intent.getStringExtra(PresentationUtils.COUNTRY_CODE).isNullOrEmpty()){
+            setObserver()
+            setSearchBar(false)
+        }else{
+            setProgressBar()
+            getData()
+            setSearchBar(true)
+        }
+    }
+
+    private fun getData() {
+        lifecycleScope.launch {
+            intent.getStringExtra(PresentationUtils.COUNTRY_CODE)
+                ?.let { viewModel.getLeagueFilterCountry(it) }
+            viewModel.leagueByCountryFlow.collectLatest {
+                adapter.addDataToList(it.response)
+                progressBar.dismiss()
+            }
+        }
+
+    }
+
+    private fun setSearchBar(filteredByCountry:Boolean) {
         binding.apply {
             svLeague.setOnQueryTextListener(object : SearchView.OnQueryTextListener,android.widget.SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String): Boolean {
-                    if (intent.getStringExtra(PresentationUtils.COUNTRY_CODE).isNullOrEmpty()){
+                    if (!filteredByCountry){
                         if (query.length < 3) {
                             Toast.makeText(this@LeagueSearchActivity,"Search Field must be at least 3 characters!",
                                 Toast.LENGTH_SHORT).show()
@@ -85,14 +113,24 @@ class LeagueSearchActivity : AppCompatActivity() {
                                 progressBar.dismiss()
                             }
                         }
-                    }else{
-
                     }
                     return false
                 }
 
                 override fun onQueryTextChange(inputTxt: String): Boolean {
-//                    filterList(inputTxt)
+                    if (filteredByCountry){
+                        when(adapter.filterData(inputTxt)){
+                            1 -> binding.apply {
+                                tvNothingFound.visibility = View.VISIBLE
+                                rvCountriesLeague.visibility = View.INVISIBLE
+                            }
+
+                            2 -> binding.apply {
+                                tvNothingFound.visibility = View.INVISIBLE
+                                rvCountriesLeague.visibility = View.VISIBLE
+                            }
+                        }
+                    }
                     return false
                 }
             })
