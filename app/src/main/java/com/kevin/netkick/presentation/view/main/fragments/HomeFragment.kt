@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.kevin.netkick.databinding.FragmentHomeBinding
-import com.kevin.netkick.domain.entity.news.Article
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.LiveScoreAdapter
@@ -137,15 +136,6 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
 
 
     private fun getLiveMatches() {
-//        val listDummy = listOf<ResponseF>(
-//            ResponseF(
-//            score = Score(SubScore(0,0),SubScore(0,0)),
-//            goals = GoalsF(0,0),
-//            teams = TeamsF(TeamsSubF(0,"","",false),TeamsSubF(0,"","",false)),
-//            league = LeagueF(0,"","","",0,""),
-//            fixture = Fixture(0,"","","", VenueF("",""), Status("",""))
-//          )
-//        )
         val pageSnapHelper = PagerSnapHelper()
         lifecycleScope.launch {
             mainViewModel.getLiveMatches(PresentationUtils.LIVE_PARAMS)

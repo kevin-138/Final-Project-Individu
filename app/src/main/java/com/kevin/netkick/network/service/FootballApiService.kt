@@ -60,4 +60,17 @@ interface FootballApiService {
     @GET("trophies")
     suspend fun getCoachTrophy(@Query("coach") coach:Int): TrophiesResponseModel
 
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("trophies")
+    suspend fun getPlayerTrophy(@Query("player") player:Int): TrophiesResponseModel
+
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("players")
+    suspend fun getPlayerSearch(@Query("search") search:String,@Query("team") team:Int): PlayerResponseModel
+
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("teams")
+    suspend fun getTeamsSearch(@Query("search") search:String): TeamResponseModel
+
+
 }

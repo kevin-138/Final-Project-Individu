@@ -2,7 +2,6 @@ package com.kevin.netkick.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -10,17 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.kevin.netkick.R
-import com.kevin.netkick.databinding.CoachItemBinding
-import com.kevin.netkick.domain.entity.coach.ResponseC
-import com.kevin.netkick.presentation.PresentationUtils
-import com.kevin.netkick.presentation.view.trophies.activity.coach.CoachDetailActivity
+import com.kevin.netkick.databinding.CareerItemBinding
+import com.kevin.netkick.domain.entity.coach.Career
 
-class CoachSearchAdapter(private var dataList: MutableList<ResponseC>): RecyclerView.Adapter<CoachSearchAdapter.CoachViewHolder>() {
+class CoachCareerAdapter(private var dataList: MutableList<Career>): RecyclerView.Adapter<CoachCareerAdapter.CoachViewHolder>() {
     private lateinit var context: Context
 
-    inner class CoachViewHolder(private val binding: CoachItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class CoachViewHolder(private val binding: CareerItemBinding): RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data:ResponseC){
+        fun bindData(data: Career){
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -29,28 +26,21 @@ class CoachSearchAdapter(private var dataList: MutableList<ResponseC>): Recycler
 
             binding.apply {
                 Glide.with(itemView)
-                    .load(data.photo)
+                    .load(data.team.logo)
                     .placeholder(loadingDrawable1)
                     .error(R.drawable.broken_image_icon)
-                    .into(ivCoachPhoto)
+                    .into(ivTeamLogoCareer)
 
-                tvCoachName.text = data.name
-                tvCoachAge.text = data.age.toString()
-                tvCoachNationality.text = data.nationality
-                tvPlayerBdate.text = data.birth.date
-
-                root.setOnClickListener {
-                    val intent = Intent(context,CoachDetailActivity::class.java)
-                    intent.putExtra(PresentationUtils.COACH_FULL_DATA,data)
-                    context.startActivity(intent)
-                }
+                tvEndCareer.text = data.end
+                tvStartCareer.text = data.start
+                tvTeamNameCareer.text = data.team.name
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoachViewHolder {
         context = parent.context
-        val binding = CoachItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = CareerItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
         return CoachViewHolder(binding)
     }
 
@@ -63,9 +53,9 @@ class CoachSearchAdapter(private var dataList: MutableList<ResponseC>): Recycler
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addDataToList(coachList: List<ResponseC>) {
+    fun addDataToList(careerList: List<Career>) {
         dataList.clear()
-        dataList.addAll(coachList)
+        dataList.addAll(careerList)
         notifyDataSetChanged()
     }
 }

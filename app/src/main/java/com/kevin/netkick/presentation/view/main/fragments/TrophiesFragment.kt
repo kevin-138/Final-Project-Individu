@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.kevin.netkick.databinding.FragmentTrophiesBinding
 import com.kevin.netkick.presentation.PresentationUtils
+import com.kevin.netkick.presentation.view.trophies.activity.coach.CoachSearchActivity
+import com.kevin.netkick.presentation.view.trophies.activity.players.TeamsSearchActivity
 import com.kevin.netkick.presentation.view.trophies.activity.topscorer.LeagueTopScorerSearchActivity
 
 class TrophiesFragment : Fragment() {
@@ -25,11 +27,11 @@ class TrophiesFragment : Fragment() {
         checkOnline(false)
         binding.apply {
             btnCoachTrophies.setOnClickListener {
-                val intent = Intent(requireContext(), LeagueTopScorerSearchActivity::class.java)
+                val intent = Intent(requireContext(), CoachSearchActivity::class.java)
                 startActivity(intent)
             }
             btnPlayerTrophies.setOnClickListener {
-                val intent = Intent(requireContext(), LeagueTopScorerSearchActivity::class.java)
+                val intent = Intent(requireContext(), TeamsSearchActivity::class.java)
                 startActivity(intent)
             }
             btnTopScorer.setOnClickListener {

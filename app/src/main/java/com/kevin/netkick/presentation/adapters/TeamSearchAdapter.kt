@@ -10,17 +10,17 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.kevin.netkick.R
-import com.kevin.netkick.databinding.CoachItemBinding
-import com.kevin.netkick.domain.entity.coach.ResponseC
+import com.kevin.netkick.databinding.TeamListItemBinding
+import com.kevin.netkick.domain.entity.teams.ResponseT
 import com.kevin.netkick.presentation.PresentationUtils
-import com.kevin.netkick.presentation.view.trophies.activity.coach.CoachDetailActivity
+import com.kevin.netkick.presentation.view.trophies.activity.players.PlayersSearchActivity
 
-class CoachSearchAdapter(private var dataList: MutableList<ResponseC>): RecyclerView.Adapter<CoachSearchAdapter.CoachViewHolder>() {
+class TeamSearchAdapter(private val dataList: MutableList<ResponseT>): RecyclerView.Adapter<TeamSearchAdapter.TeamViewHolder>() {
     private lateinit var context: Context
 
-    inner class CoachViewHolder(private val binding: CoachItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class TeamViewHolder(private val binding: TeamListItemBinding):RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data:ResponseC){
+        fun bindData(data: ResponseT){
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -28,44 +28,41 @@ class CoachSearchAdapter(private var dataList: MutableList<ResponseC>): Recycler
             loadingDrawable1.start()
 
             binding.apply {
+                tvTeamName.text = data.team.name
+                tvCountryOrigin.text = data.team.country
                 Glide.with(itemView)
-                    .load(data.photo)
+                    .load(data.team.logo)
                     .placeholder(loadingDrawable1)
                     .error(R.drawable.broken_image_icon)
-                    .into(ivCoachPhoto)
-
-                tvCoachName.text = data.name
-                tvCoachAge.text = data.age.toString()
-                tvCoachNationality.text = data.nationality
-                tvPlayerBdate.text = data.birth.date
+                    .into(ivTeamLogoList)
 
                 root.setOnClickListener {
-                    val intent = Intent(context,CoachDetailActivity::class.java)
-                    intent.putExtra(PresentationUtils.COACH_FULL_DATA,data)
+                    val intent = Intent(context, PlayersSearchActivity::class.java)
+                    intent.putExtra(PresentationUtils.TEAM_SEARCH_DATA,data)
                     context.startActivity(intent)
                 }
             }
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoachViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
         context = parent.context
-        val binding = CoachItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
-        return CoachViewHolder(binding)
+        val binding = TeamListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        return TeamViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         return dataList.size
     }
 
-    override fun onBindViewHolder(holder: CoachViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TeamViewHolder, position: Int) {
         holder.bindData(dataList[position])
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addDataToList(coachList: List<ResponseC>) {
+    fun addDataToList(teamList: List<ResponseT>) {
         dataList.clear()
-        dataList.addAll(coachList)
+        dataList.addAll(teamList)
         notifyDataSetChanged()
     }
 }

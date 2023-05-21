@@ -163,6 +163,39 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
             }
         }.flowOn(Dispatchers.IO)
     }
+
+    override suspend fun getTeamSearch(search: String): Flow<TeamResponse> {
+        return flow {
+            try {
+                val response = footballApi.getTeamsSearch(search)
+                emit(TeamResponseModel.transfromToEntity(response))
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getPlayerSearch(search: String, team: Int): Flow<PlayerResponse> {
+        return flow {
+            try {
+                val response = footballApi.getPlayerSearch(search,team)
+                emit(PlayerResponseModel.transformToEntity(response))
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getPlayerTrophies(player: Int): Flow<TrophiesResponse> {
+        return flow {
+            try {
+                val response = footballApi.getPlayerTrophy(player)
+                emit(TrophiesResponseModel.transformToEntity(response))
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+        }.flowOn(Dispatchers.IO)
+    }
 }
 
 

@@ -28,6 +28,7 @@ object PresentationUtils {
 
     const val TEAM_ID = "TEAM_ID"
     const val TEAM_FULL_DATA = "TEAM_FULL_DATA"
+    const val TEAM_SEARCH_DATA = "TEAM_SEARCH_DATA"
     const val TEAM_SEASON = "TEAM_SEASON"
 
     const val POPULAR_SEASON = 2019
@@ -43,6 +44,9 @@ object PresentationUtils {
     const val WINNER = "Winner"
     const val SECOND = "2nd Place"
     const val THIRD = "3rd Place"
+
+    const val COACH_FULL_DATA = "COACH_FULL_DATA"
+    const val PLAYER_FULL_DATA = "PLAYER_FULL_DATA"
 
 
     fun isOnline(activity: FragmentActivity): Boolean {

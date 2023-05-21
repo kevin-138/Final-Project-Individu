@@ -6,6 +6,7 @@ import com.kevin.netkick.domain.entity.coach.CoachResponse
 import com.kevin.netkick.domain.entity.general.Paging
 import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.player.PlayerResponse
+import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.domain.entity.trophies.TrophiesResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -71,4 +72,47 @@ class TrophiesViewModel @Inject constructor(private val useCase: DomainUseCase):
             _trophiesFlow.value = it
         }
     }
+
+    private val _playerTrophiesFlow = MutableStateFlow(TrophiesResponse(Paging(0,0),0, listOf()))
+    val playerTrophiesFlow : StateFlow<TrophiesResponse> =  _playerTrophiesFlow
+
+    suspend fun getPlayerTrophies(player:Int){
+        useCase.getPlayerTrophies(player).collectLatest {
+            _playerTrophiesFlow .value = it
+        }
+    }
+
+    private val teamsSearch = MutableLiveData<String>()
+
+    fun setTeamsSearchQuery(query:String){
+        teamsSearch.value = query
+    }
+
+    val teamsSearchResults: LiveData<TeamResponse> = teamsSearch.switchMap {getTeamsSearchResults(it)}
+
+    private fun getTeamsSearchResults(query: String) = liveData(Dispatchers.IO) {
+        useCase.getTeamSearch(query).collectLatest {
+            emit(
+                it
+            )
+        }
+    }
+
+    private val playerSearch = MutableLiveData<Pair<String,Int>>()
+
+    fun setPlayerSearchQuery(query:Pair<String,Int>){
+        playerSearch.value = query
+    }
+
+    val playerSearchResults: LiveData<PlayerResponse> = playerSearch.switchMap {getPlayerSearch(it.first,it.second)}
+
+    private fun getPlayerSearch(query: String,team:Int) = liveData(Dispatchers.IO) {
+        useCase.getPlayerSearch(query,team).collectLatest {
+            emit(
+                it
+            )
+        }
+    }
+
+
 }

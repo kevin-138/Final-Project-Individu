@@ -5,6 +5,8 @@ import com.kevin.netkick.domain.entity.coach.ResponseC
 import com.kevin.netkick.network.model.player.subplayer.BirthModel
 
 data class ResponseCModel(
+    @SerializedName("id")
+    val id: Int?,
     @SerializedName("name")
     val name: String?,
     @SerializedName("age")
@@ -28,6 +30,7 @@ data class ResponseCModel(
 
     fun transformToEntity(it:ResponseCModel):ResponseC{
         return ResponseC(
+            id = it.id ?: 0,
             name = it.name ?: "",
             age = it.age ?: 0,
             birth = BirthModel.transformToEntity(it.birth ?: BirthModel("","","")),

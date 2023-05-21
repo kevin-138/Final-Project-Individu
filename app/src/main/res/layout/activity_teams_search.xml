@@ -4,6 +4,89 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background1"
     tools:context=".presentation.view.trophies.activity.players.TeamsSearchActivity">
+
+    <ImageButton
+        android:id="@+id/ib_back_button"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginVertical="20dp"
+        android:src="@drawable/arrrowssc"
+        android:background="@color/transparant"
+        android:layout_marginStart="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="SpeakableTextPresentCheck" />
+
+    <TextView
+        android:id="@+id/tv_nothing_found_teams"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/lightPurple"
+        android:text="@string/no_league_found"
+        android:textStyle="bold"
+        android:textSize="20sp"
+        android:visibility="invisible"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/tv_teams_search_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/team_search"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:textColor="@color/white"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="3dp"
+        app:layout_constraintTop_toBottomOf="@id/ib_back_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <SearchView
+        android:id="@+id/sv_teams"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+        android:searchIcon="@drawable/search_icon"
+        android:searchHintIcon="@drawable/search_icon"
+        android:closeIcon="@drawable/x_purple"
+        android:queryHint="Team Name"
+        android:iconifiedByDefault="false"
+        android:background="@drawable/search_bar_background"
+        android:queryBackground="@color/transparant"
+        app:layout_constraintTop_toBottomOf="@+id/tv_teams_search_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:errorEnabled="true"/>
+
+    <TextView
+        android:id="@+id/tv_team_search_desc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/search_team_by_name"
+        android:textColor="@color/lightPurple"
+        android:textSize="11sp"
+        android:textStyle="bold"
+        android:layout_marginTop="4dp"
+        android:layout_marginStart="10dp"
+        app:layout_constraintTop_toBottomOf="@+id/sv_teams"
+        app:layout_constraintStart_toStartOf="@+id/sv_teams"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_team_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginHorizontal="15dp"
+        app:layout_constraintTop_toBottomOf="@+id/tv_team_search_desc"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

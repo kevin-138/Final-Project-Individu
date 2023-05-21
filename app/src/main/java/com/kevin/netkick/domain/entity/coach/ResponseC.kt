@@ -6,6 +6,7 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class ResponseC(
+    val id: Int,
     val name: String,
     val age: Int,
     val birth: Birth,

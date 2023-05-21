@@ -11,6 +11,9 @@ import com.kevin.netkick.presentation.view.home.popularteams.activity.PopularTea
 import com.kevin.netkick.presentation.view.main.activity.MainActivity
 import com.kevin.netkick.presentation.view.trophies.activity.coach.CoachDetailActivity
 import com.kevin.netkick.presentation.view.trophies.activity.coach.CoachSearchActivity
+import com.kevin.netkick.presentation.view.trophies.activity.players.PlayersAchievementActivity
+import com.kevin.netkick.presentation.view.trophies.activity.players.PlayersSearchActivity
+import com.kevin.netkick.presentation.view.trophies.activity.players.TeamsSearchActivity
 import com.kevin.netkick.presentation.view.trophies.activity.topscorer.LeagueTopScorerActivity
 import com.kevin.netkick.presentation.view.trophies.activity.topscorer.LeagueTopScorerSearchActivity
 import dagger.Component
@@ -39,7 +42,9 @@ interface AppComponent {
   fun injectIntoLeagueTopScorerActivity(leagueTopScorerActivity: LeagueTopScorerActivity)
   fun injectIntoCoachSearchActivity(coachSearchActivity: CoachSearchActivity)
   fun injectIntoCoachDetailActivity(coachDetailActivity: CoachDetailActivity)
+  fun injectIntoTeamsSearchActivity(teamsSearchActivity: TeamsSearchActivity)
+  fun injectIntoPlayersSearchActivity(playersSearchActivity: PlayersSearchActivity)
+  fun injectIntoPlayersAchievementActivity(playersAchievementActivity: PlayersAchievementActivity)
 
-//  fun injectInto(leagueSearchActivity: LeagueSearchActivity)
 
 }

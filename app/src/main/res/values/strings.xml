@@ -24,7 +24,7 @@
     <string name="trophies_title">Trophies</string>
     <string name="by_league">By League</string>
     <string name="players">Players</string>
-    <string name="coach">Coach</string>
+    <string name="coach">Coach Info</string>
     <string name="no_country_found">No Country Found</string>
     <string name="news">Football News</string>
     <string name="code">Code:</string>
@@ -78,4 +78,11 @@
     <string name="career">Career</string>
     <string name="to">To</string>
     <string name="leaguetr">League:</string>
+    <string name="start">Start:</string>
+    <string name="end">End:</string>
+    <string name="team_search">Team Search</string>
+    <string name="search_team_by_name">Search Team by name</string>
+    <string name="player_search">Player Search</string>
+    <string name="selected_team">Selected Team:</string>
+    <string name="search_player_in_team_by_name">Search player in team by name</string>
 </resources>

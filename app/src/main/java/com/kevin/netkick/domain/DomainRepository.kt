@@ -27,4 +27,7 @@ interface DomainRepository {
     suspend fun getLeagueTopscore(league: Int, season:Int): Flow<PlayerResponse>
     suspend fun getCoachSearch(search:String): Flow<CoachResponse>
     suspend fun getCoachTrophies(coach: Int): Flow<TrophiesResponse>
+    suspend fun getTeamSearch(search:String): Flow<TeamResponse>
+    suspend fun getPlayerSearch(search:String,team: Int): Flow<PlayerResponse>
+    suspend fun getPlayerTrophies(player: Int): Flow<TrophiesResponse>
 }

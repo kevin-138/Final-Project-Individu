@@ -20,8 +20,8 @@ data class CareerModel(
 
         fun transformToEntity(it:CareerModel):Career{
             return Career(
-                start = it.start ?: "",
-                end = it.end ?: "",
+                start = it.start ?: "-",
+                end = it.end ?: "-",
                 team = TeamCModel.transformToEntity(it.team ?: TeamCModel(0,"",""))
             )
         }

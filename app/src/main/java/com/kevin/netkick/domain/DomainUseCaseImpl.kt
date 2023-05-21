@@ -64,5 +64,17 @@ class DomainUseCaseImpl @Inject constructor(private val repository: DomainReposi
         return repository.getCoachTrophies(coach)
     }
 
+    override suspend fun getTeamSearch(search: String): Flow<TeamResponse> {
+        return repository.getTeamSearch(search)
+    }
+
+    override suspend fun getPlayerSearch(search: String, team: Int): Flow<PlayerResponse> {
+        return repository.getPlayerSearch(search,team)
+    }
+
+    override suspend fun getPlayerTrophies(player: Int): Flow<TrophiesResponse> {
+       return repository.getPlayerTrophies(player)
+    }
+
 
 }
