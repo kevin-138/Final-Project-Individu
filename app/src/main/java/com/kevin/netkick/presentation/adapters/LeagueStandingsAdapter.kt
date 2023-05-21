@@ -10,16 +10,15 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.kevin.netkick.R
-import com.kevin.netkick.databinding.CountryItemBinding
 import com.kevin.netkick.databinding.StandingListItemBinding
 import com.kevin.netkick.databinding.StandingsHeaderBinding
-import com.kevin.netkick.domain.entity.league.ResponseL
+import com.kevin.netkick.domain.entity.standings.Group
 import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import com.kevin.netkick.presentation.PresentationUtils
 
-class LeagueStandingsAdapter(private var dataList: MutableList<Standings>, private val resposne): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LeagueStandingsAdapter(private var dataList: MutableList<Group>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
-
+    private var currentGroup = 0
     inner class StandingsItemViewHolder(private val itemBinding: StandingListItemBinding):RecyclerView.ViewHolder(itemBinding.root) {
         fun bindData(data:Standings){
             val loadingDrawable1 = CircularProgressDrawable(context)
@@ -70,9 +69,21 @@ class LeagueStandingsAdapter(private var dataList: MutableList<Standings>, priva
 
     }
 
+    fun getGroupSize(): Int {
+        return dataList.size
+    }
+
+    fun setGroup(group:Int){
+        currentGroup = group
+        notifyDataSetChanged()
+    }
+
     override fun getItemCount(): Int {
-        return dataList.size + 1
-//        datalist.group.size
+        if (currentGroup == 0){
+            return dataList.size
+        }else{
+            return dataList[currentGroup].group.size
+        }
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -81,23 +92,23 @@ class LeagueStandingsAdapter(private var dataList: MutableList<Standings>, priva
 //            ini bisa ga ada coba dicek dlu
             }
             is StandingsItemViewHolder -> {
-                holder.bindData(dataList[position])
+                holder.bindData(dataList[0].group[currentGroup])
             }
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addDataToList(inputData: List<Standings>) {
+    fun addDataToList(inputData: List<Group>) {
         dataList.clear()
         dataList.addAll(inputData)
         notifyDataSetChanged()
     }
 
-    fun changeGroup(group: Int){
-        data clear
-        data add data.response[0].league.standings[group].group)
-        notifyDataSetChanged()
-    }
+//    fun changeGroup(group: Int){
+//        data clear
+//        data add data.response[0].league.standings[group].group)
+//        notifyDataSetChanged()
+//    }
 
 //    globalval
 
