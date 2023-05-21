@@ -6,5 +6,6 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Coverage(
     val fixtures: LeagueFixture,
-    val standings: Boolean
+    val standings: Boolean,
+    val topScorers: Boolean
 ) : Parcelable

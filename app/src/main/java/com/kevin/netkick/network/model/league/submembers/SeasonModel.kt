@@ -26,7 +26,7 @@ data class SeasonModel(
                 year = it.year ?: 0,
                 start = it.start ?: "",
                 end = it.end ?: "",
-                coverage =  CoverageModel.transformToEntity(it.coverage ?: CoverageModel(LeagueFixtureModel(false,false,false), false)))
+                coverage =  CoverageModel.transformToEntity(it.coverage ?: CoverageModel(LeagueFixtureModel(false,false,false), false,false)))
         }
     }
 }

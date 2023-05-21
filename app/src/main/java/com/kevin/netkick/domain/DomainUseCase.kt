@@ -22,4 +22,5 @@ interface DomainUseCase {
     suspend fun getLeagueSearch(search:String): Flow<LeagueResponse>
     suspend fun getLeagueFilterCountry(country:String): Flow<LeagueResponse>
     suspend fun getLeagueStandings(league: Int, season:Int): Flow<StandingsResponse>
+    suspend fun getLeagueTopscore(league: Int, season:Int): Flow<PlayerResponse>
 }

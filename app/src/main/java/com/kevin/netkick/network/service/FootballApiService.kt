@@ -46,4 +46,8 @@ interface FootballApiService {
     @GET("standings")
     suspend fun getLeagueStandings(@Query("league") league:Int,@Query("season") season:Int): StandingsResponseModel
 
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("players/topscorers")
+    suspend fun getLeagueTopscore(@Query("league") league:Int,@Query("season") season:Int): PlayerResponseModel
+
 }

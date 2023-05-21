@@ -50,5 +50,9 @@ class DomainUseCaseImpl @Inject constructor(private val repository: DomainReposi
         return repository.getLeagueStandings(league,season)
     }
 
+    override suspend fun getLeagueTopscore(league: Int, season: Int): Flow<PlayerResponse> {
+        return repository.getLeagueTopscore(league,season)
+    }
+
 
 }

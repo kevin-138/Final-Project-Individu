@@ -9,6 +9,8 @@ import com.kevin.netkick.presentation.view.home.news.activity.AllNewsListActivit
 import com.kevin.netkick.presentation.view.home.news.activity.ArticleActivity
 import com.kevin.netkick.presentation.view.home.popularteams.activity.PopularTeamsListActivity
 import com.kevin.netkick.presentation.view.main.activity.MainActivity
+import com.kevin.netkick.presentation.view.trophies.activity.topscorer.LeagueTopScorerActivity
+import com.kevin.netkick.presentation.view.trophies.activity.topscorer.LeagueTopScorerSearchActivity
 import dagger.Component
 
 @AppScope
@@ -31,6 +33,8 @@ interface AppComponent {
   fun injectIntoAllPlayerInTeamsActivity(allPlayerInTeamsActivity: AllPlayerInTeamsActivity)
   fun injectIntoLeagueSearchActivity(leagueSearchActivity: LeagueSearchActivity)
   fun injectIntoLeagueStandingActivity(leagueStandingActivity: LeagueStandingsActivity)
+  fun injectIntoLeagueTopScorerSearchActivity(leagueTopScorerSearchActivity: LeagueTopScorerSearchActivity)
+  fun injectIntoLeagueTopScorerActivity(leagueTopScorerActivity: LeagueTopScorerActivity)
 
 //  fun injectInto(leagueSearchActivity: LeagueSearchActivity)
 

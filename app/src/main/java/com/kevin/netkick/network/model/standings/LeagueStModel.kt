@@ -1,8 +1,9 @@
 package com.kevin.netkick.network.model.standings
 
 import com.google.gson.annotations.SerializedName
-import com.kevin.netkick.domain.entity.standings.Group
 import com.kevin.netkick.domain.entity.standings.LeagueSt
+import com.kevin.netkick.domain.entity.standings.substandings.Standings
+import com.kevin.netkick.network.model.standings.substandings.StandingsModel
 
 data class LeagueStModel(
     @SerializedName("id")
@@ -16,7 +17,7 @@ data class LeagueStModel(
     @SerializedName("season")
     val season: Int?,
     @SerializedName("standings")
-    val standings: List<GroupModel>?
+    val standings: List<List<StandingsModel>>?
 ){
     companion object{
         fun transformToEntity(it:LeagueStModel):LeagueSt{
@@ -26,8 +27,13 @@ data class LeagueStModel(
                 country = it.country ?: "",
                 logo = it.logo ?: "",
                 season = it.season ?: 0,
-                standings = GroupModel.transformToListEntity(it.standings ?: listOf())
+                standings = transformStandingToEntity(it.standings?: listOf())
             )
+        }
+        private fun transformStandingToEntity(item: List<List<StandingsModel>>):List<List<Standings>>{
+            return item.map {
+                StandingsModel.transformToListEntity(it)
+            }
         }
     }
 }

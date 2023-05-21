@@ -10,6 +10,7 @@ import com.kevin.netkick.domain.entity.country.CountryResponse
 import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
+import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
@@ -17,6 +18,7 @@ import com.kevin.netkick.network.model.countries.CountryResponseModel
 import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
 import com.kevin.netkick.network.model.league.LeagueResponseModel
 import com.kevin.netkick.network.model.news.NewsResponseModel
+import com.kevin.netkick.network.model.player.PlayerResponseModel
 import com.kevin.netkick.network.model.standings.StandingsResponseModel
 import com.kevin.netkick.network.paging.PlayersPagingDataSource
 import com.kevin.netkick.network.service.FootballApiService
@@ -119,6 +121,17 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
             try {
                 val response = footballApi.getLeagueStandings(league,season)
                 emit(StandingsResponseModel.transformToEntity(response))
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getLeagueTopscore(league: Int, season: Int): Flow<PlayerResponse> {
+        return flow {
+            try {
+                val response = footballApi.getLeagueTopscore(league,season)
+                emit(PlayerResponseModel.transformToEntity(response))
             } catch (e: Exception){
                 e.printStackTrace()
             }

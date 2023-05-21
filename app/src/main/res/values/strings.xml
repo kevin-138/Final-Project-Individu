@@ -60,4 +60,16 @@
     <string name="l">L</string>
     <string name="gf">GF</string>
     <string name="ga">GA</string>
+    <string name="top_scorerh">Top scorer</string>
+    <string name="info">Created by kevin Goutama. 2023</string>
+    <string name="goals">Goals:</string>
+    <string name="shots">Shots:</string>
+    <string name="passes">Passes:</string>
+    <string name="tackles">Tackles:</string>
+    <string name="duels_won">Duels Won:</string>
+    <string name="total_goals">Total Goals:</string>
+    <string name="position">Position:</string>
+    <string name="rating">Rating:</string>
+    <string name="appearances">Appearances:</string>
+    <string name="no_top_score_available">No Top Score Available</string>
 </resources>
