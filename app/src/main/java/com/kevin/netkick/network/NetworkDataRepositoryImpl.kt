@@ -6,6 +6,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.cachedIn
 import com.kevin.netkick.domain.DomainRepository
+import com.kevin.netkick.domain.entity.coach.CoachResponse
 import com.kevin.netkick.domain.entity.country.CountryResponse
 import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.domain.entity.league.LeagueResponse
@@ -14,12 +15,15 @@ import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
+import com.kevin.netkick.domain.entity.trophies.TrophiesResponse
+import com.kevin.netkick.network.model.coach.CoachResponseModel
 import com.kevin.netkick.network.model.countries.CountryResponseModel
 import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
 import com.kevin.netkick.network.model.league.LeagueResponseModel
 import com.kevin.netkick.network.model.news.NewsResponseModel
 import com.kevin.netkick.network.model.player.PlayerResponseModel
 import com.kevin.netkick.network.model.standings.StandingsResponseModel
+import com.kevin.netkick.network.model.trophies.TrophiesResponseModel
 import com.kevin.netkick.network.paging.PlayersPagingDataSource
 import com.kevin.netkick.network.service.FootballApiService
 import com.kevin.netkick.network.service.NewsApiService
@@ -132,6 +136,28 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
             try {
                 val response = footballApi.getLeagueTopscore(league,season)
                 emit(PlayerResponseModel.transformToEntity(response))
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getCoachSearch(search: String): Flow<CoachResponse> {
+        return flow {
+            try {
+                val response = footballApi.getCoachSearch(search)
+                emit(CoachResponseModel.transformToEntity(response))
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getCoachTrophies(coach: Int): Flow<TrophiesResponse> {
+        return flow {
+            try {
+                val response = footballApi.getCoachTrophy(coach)
+                emit(TrophiesResponseModel.transformToEntity(response))
             } catch (e: Exception){
                 e.printStackTrace()
             }

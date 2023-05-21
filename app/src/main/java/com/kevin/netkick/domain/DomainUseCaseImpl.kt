@@ -1,6 +1,7 @@
 package com.kevin.netkick.domain
 
 import androidx.paging.PagingData
+import com.kevin.netkick.domain.entity.coach.CoachResponse
 import com.kevin.netkick.domain.entity.country.CountryResponse
 import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.domain.entity.league.LeagueResponse
@@ -9,6 +10,7 @@ import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
+import com.kevin.netkick.domain.entity.trophies.TrophiesResponse
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
@@ -52,6 +54,14 @@ class DomainUseCaseImpl @Inject constructor(private val repository: DomainReposi
 
     override suspend fun getLeagueTopscore(league: Int, season: Int): Flow<PlayerResponse> {
         return repository.getLeagueTopscore(league,season)
+    }
+
+    override suspend fun getCoachSearch(search: String): Flow<CoachResponse> {
+        return repository.getCoachSearch(search)
+    }
+
+    override suspend fun getCoachTrophies(coach: Int): Flow<TrophiesResponse> {
+        return repository.getCoachTrophies(coach)
     }
 
 

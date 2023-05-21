@@ -40,6 +40,11 @@ object PresentationUtils {
     const val TYPE_ITEM = 0
     const val TYPE_HEADER = 1
 
+    const val WINNER = "Winner"
+    const val SECOND = "2nd Place"
+    const val THIRD = "3rd Place"
+
+
     fun isOnline(activity: FragmentActivity): Boolean {
         val connectivityManager =
             activity.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

@@ -3,11 +3,13 @@ package com.kevin.netkick.network.service
 
 import TeamResponseModel
 import com.kevin.netkick.network.NetworkUtils
+import com.kevin.netkick.network.model.coach.CoachResponseModel
 import com.kevin.netkick.network.model.countries.CountryResponseModel
 import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
 import com.kevin.netkick.network.model.league.LeagueResponseModel
 import com.kevin.netkick.network.model.player.PlayerResponseModel
 import com.kevin.netkick.network.model.standings.StandingsResponseModel
+import com.kevin.netkick.network.model.trophies.TrophiesResponseModel
 import retrofit2.http.GET
 import retrofit2.http.Headers
 import retrofit2.http.Query
@@ -49,5 +51,13 @@ interface FootballApiService {
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("players/topscorers")
     suspend fun getLeagueTopscore(@Query("league") league:Int,@Query("season") season:Int): PlayerResponseModel
+
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("coachs")
+    suspend fun getCoachSearch(@Query("search") search:String): CoachResponseModel
+
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("trophies")
+    suspend fun getCoachTrophy(@Query("coach") coach:Int): TrophiesResponseModel
 
 }

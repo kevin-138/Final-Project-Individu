@@ -76,4 +76,6 @@
     <string name="search_coach_by_name">Search coach by name</string>
     <string name="current_team">Current Team:</string>
     <string name="career">Career</string>
+    <string name="to">To</string>
+    <string name="leaguetr">League:</string>
 </resources>
