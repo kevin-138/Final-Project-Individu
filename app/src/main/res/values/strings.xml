@@ -21,7 +21,7 @@
     <string name="skip">Skip</string>
     <string name="pick_one_to_show_all_league_in_that_country">Pick one to show all league in that country</string>
     <string name="top_scorer">Top Scorer</string>
-    <string name="trophies_title">Trophies</string>
+    <string name="trophies_title">TROPHIES</string>
     <string name="by_league">By League</string>
     <string name="players">Players</string>
     <string name="coach">Coach Info</string>
@@ -75,7 +75,7 @@
     <string name="coach_search">Coach Search</string>
     <string name="search_coach_by_name">Search coach by name</string>
     <string name="current_team">Current Team:</string>
-    <string name="career">Career</string>
+    <string name="career">CAREER</string>
     <string name="to">To</string>
     <string name="leaguetr">League:</string>
     <string name="start">Start:</string>
@@ -85,4 +85,11 @@
     <string name="player_search">Player Search</string>
     <string name="selected_team">Selected Team:</string>
     <string name="search_player_in_team_by_name">Search player in team by name</string>
+    <string name="player_trophies">PLAYER TROPHIES</string>
+    <string name="team_selected">Team Selected:</string>
+    <string name="first_name">First Name:</string>
+    <string name="profile">PROFILE</string>
+    <string name="last_name">Last Name:</string>
+    <string name="age2">Age:</string>
+    <string name="in_team">In Team:</string>
 </resources>
