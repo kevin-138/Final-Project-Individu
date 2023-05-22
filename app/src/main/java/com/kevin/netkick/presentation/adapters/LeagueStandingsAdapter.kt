@@ -13,12 +13,31 @@ import com.kevin.netkick.R
 import com.kevin.netkick.databinding.StandingListItemBinding
 import com.kevin.netkick.databinding.StandingsHeaderBinding
 import com.kevin.netkick.domain.entity.standings.Group
+import com.kevin.netkick.domain.entity.standings.substandings.All
+import com.kevin.netkick.domain.entity.standings.substandings.GoalsSt
 import com.kevin.netkick.domain.entity.standings.substandings.Standings
+import com.kevin.netkick.domain.entity.standings.substandings.TeamSt
 import com.kevin.netkick.presentation.PresentationUtils
 
-class LeagueStandingsAdapter(private var dataList: MutableList<MutableList<Standings>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
     private var currentGroup = 0
+
+    fun next(){
+        if (currentGroup != getGroupSize()-1){
+            currentGroup  += 1
+            setGroup(currentGroup)
+        }
+    }
+
+    fun pref(){
+        if (currentGroup != 0){
+            currentGroup -= 1
+            setGroup(currentGroup)
+        }
+    }
+
+
     inner class StandingsItemViewHolder(private val itemBinding: StandingListItemBinding):RecyclerView.ViewHolder(itemBinding.root) {
         fun bindData(data:Standings){
             val loadingDrawable1 = CircularProgressDrawable(context)
@@ -75,15 +94,17 @@ class LeagueStandingsAdapter(private var dataList: MutableList<MutableList<Stand
 
     fun setGroup(group:Int){
         currentGroup = group
+//        val newList = dataList[currentGroup] as ArrayList
+        dataList[currentGroup].toMutableList().add(0, Standings(0, TeamSt(0,"",""),0,0,"","", All(0, GoalsSt(0,0),0,0,0)))
         notifyDataSetChanged()
     }
 
+    fun getCurrentGroup():String{
+        return currentGroup.toString()
+    }
+
     override fun getItemCount(): Int {
-        if (currentGroup == 0){
-            return dataList.size
-        }else{
-            return dataList[currentGroup].group.size
-        }
+            return dataList[currentGroup].size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -92,21 +113,22 @@ class LeagueStandingsAdapter(private var dataList: MutableList<MutableList<Stand
 //            ini bisa ga ada coba dicek dlu
             }
             is StandingsItemViewHolder -> {
-                holder.bindData(dataList[0].group[currentGroup])
+                holder.bindData( dataList[currentGroup][position])
             }
         }
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addDataToList(inputData: List<MutableList<Standings>>) {
+    fun addDataToList(inputData:  ArrayList<List<Standings>>) {
         dataList.clear()
         dataList.addAll(inputData)
+        currentGroup = 0
         notifyDataSetChanged()
     }
 
-    fun changeGroup(group:Int){
-
-    }
+//    fun changeGroup(group:Int){
+//
+//    }
 
 //    fun changeGroup(group: Int){
 //        data clear

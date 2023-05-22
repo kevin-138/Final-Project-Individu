@@ -16,6 +16,7 @@ import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.ActivityLeagueStandingsBinding
 import com.kevin.netkick.domain.entity.league.ResponseL
+import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.LeagueStandingsAdapter
 import com.kevin.netkick.presentation.view.viewmodels.ExploreViewModel
@@ -44,6 +45,7 @@ class LeagueStandingsActivity : AppCompatActivity() {
         binding.ibBackButton.setOnClickListener {
             finish()
         }
+        setGroup()
         checkOnline()
     }
 
@@ -93,7 +95,6 @@ class LeagueStandingsActivity : AppCompatActivity() {
                     if (leagueSeasonSelected[0].coverage.standings){
                         noStandingsData(false)
                         getOnlineData(leagueData.league.id, listSeason[position])
-                        setGroup()
                     }else{
                         noStandingsData(true)
                     }
@@ -106,7 +107,6 @@ class LeagueStandingsActivity : AppCompatActivity() {
                     if (leagueSeasonDefault[0].coverage.standings){
                         noStandingsData(false)
                         getOnlineData(leagueData.league.id, listSeason[0])
-                        setGroup()
                     }else{
                         noStandingsData(true)
                     }
@@ -118,21 +118,13 @@ class LeagueStandingsActivity : AppCompatActivity() {
 
     private fun setGroup() {
         binding.apply {
-            val size = adapter.getGroupSize()
-            var group = 0
             ibGroupNext.setOnClickListener {
-                if (group != size-1){
-                    group += 1
-                    adapter.setGroup(group)
-                    tvLeagueGroupTitle.text = "Group $group"
-                }
+                adapter.next()
+                tvLeagueGroupTitle.text = "Group ${adapter.getCurrentGroup()}"
             }
             ibGroupPrev.setOnClickListener {
-                if (group != 0){
-                    group -= 1
-                    adapter.setGroup(group)
-                    tvLeagueGroupTitle.text = "Group $group"
-                }
+                adapter.pref()
+                tvLeagueGroupTitle.text = "Group $${adapter.getCurrentGroup()}"
             }
 
         }
@@ -178,7 +170,7 @@ class LeagueStandingsActivity : AppCompatActivity() {
 
     private fun setupAdapter() {
         binding.apply {
-            adapter = LeagueStandingsAdapter(mutableListOf())
+            adapter = LeagueStandingsAdapter(arrayListOf(listOf()))
             rvStandings.layoutManager = LinearLayoutManager(this@LeagueStandingsActivity)
             rvStandings.adapter = adapter
         }
@@ -186,7 +178,7 @@ class LeagueStandingsActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.standingResults.observe(this){
-            adapter.addDataToList(it.response[0].league.standings)
+            adapter.addDataToList(it.response[0].league.standings as ArrayList<List<Standings>>)
         }
     }
 

@@ -5,6 +5,7 @@ import com.kevin.netkick.domain.DomainUseCase
 import com.kevin.netkick.domain.entity.general.Paging
 import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
+import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
