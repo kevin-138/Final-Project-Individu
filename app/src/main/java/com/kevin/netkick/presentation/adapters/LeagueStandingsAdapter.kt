@@ -16,7 +16,7 @@ import com.kevin.netkick.domain.entity.standings.Group
 import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import com.kevin.netkick.presentation.PresentationUtils
 
-class LeagueStandingsAdapter(private var dataList: MutableList<Group>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LeagueStandingsAdapter(private var dataList: MutableList<MutableList<Standings>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
     private var currentGroup = 0
     inner class StandingsItemViewHolder(private val itemBinding: StandingListItemBinding):RecyclerView.ViewHolder(itemBinding.root) {
@@ -98,10 +98,14 @@ class LeagueStandingsAdapter(private var dataList: MutableList<Group>): Recycler
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addDataToList(inputData: List<Group>) {
+    fun addDataToList(inputData: List<MutableList<Standings>>) {
         dataList.clear()
         dataList.addAll(inputData)
         notifyDataSetChanged()
+    }
+
+    fun changeGroup(group:Int){
+
     }
 
 //    fun changeGroup(group: Int){

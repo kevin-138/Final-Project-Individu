@@ -186,7 +186,7 @@ class LeagueStandingsActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.standingResults.observe(this){
-            adapter.addDataToList(listOf())
+            adapter.addDataToList(it.response[0].league.standings)
         }
     }
 

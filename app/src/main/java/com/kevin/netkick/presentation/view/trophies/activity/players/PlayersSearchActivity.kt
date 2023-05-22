@@ -39,11 +39,13 @@ class PlayersSearchActivity : AppCompatActivity() {
         (application as NetkickApplication).appComponent.injectIntoPlayersSearchActivity(this)
         super.onCreate(savedInstanceState)
         binding = ActivityPlayersSearchBinding.inflate(layoutInflater)
-        setContentView(R.layout.activity_players_search)
+        setContentView(binding.root)
         setupAdapter()
+
         binding.ibBackButton.setOnClickListener {
             finish()
         }
+
         checkOnline()
     }
 
@@ -91,7 +93,7 @@ class PlayersSearchActivity : AppCompatActivity() {
             svPlayer.setOnQueryTextListener(object : SearchView.OnQueryTextListener,android.widget.SearchView.OnQueryTextListener{
                 override fun onQueryTextSubmit(query: String): Boolean {
                         if (query.length < 4) {
-                            Toast.makeText(this@PlayersSearchActivity,"Search Field must be at least 3 characters!",
+                            Toast.makeText(this@PlayersSearchActivity,"Search Field must be at least 4 characters!",
                                 Toast.LENGTH_SHORT).show()
                         }else{
                             setProgressBar()

@@ -136,7 +136,7 @@ class PlayersAchievementActivity : AppCompatActivity() {
     private fun getLiveData() {
         lifecycleScope.launch {
             viewModel.getPlayerTrophies(playerData!!.players.id)
-            viewModel.trophiesFlow.collectLatest {
+            viewModel.playerTrophiesFlow.collectLatest {
                 adapterTrophy.addDataToList(it.response)
                 progressBar.dismiss()
             }

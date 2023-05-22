@@ -9,5 +9,5 @@ data class LeagueP(
     val name: String,
     val country: String,
     val logo: String,
-    val season: Int
+    val season: String
 ) : Parcelable
