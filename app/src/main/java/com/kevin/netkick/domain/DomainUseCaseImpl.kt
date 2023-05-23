@@ -8,6 +8,7 @@ import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
+import com.kevin.netkick.domain.entity.rounds.RoundsResponse
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.domain.entity.trophies.TrophiesResponse
@@ -74,6 +75,18 @@ class DomainUseCaseImpl @Inject constructor(private val repository: DomainReposi
 
     override suspend fun getPlayerTrophies(player: Int): Flow<TrophiesResponse> {
        return repository.getPlayerTrophies(player)
+    }
+
+    override suspend fun getLeagueRounds(league: Int, season: Int): Flow<RoundsResponse> {
+        return repository.getLeagueRounds(league,season)
+    }
+
+    override suspend fun getRoundMatches(
+        league: Int,
+        season: Int,
+        round: String
+    ): Flow<FixturesResponse> {
+        return repository.getRoundMatches(league,season,round)
     }
 
 

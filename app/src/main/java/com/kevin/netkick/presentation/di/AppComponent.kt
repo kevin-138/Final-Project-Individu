@@ -1,6 +1,7 @@
 package com.kevin.netkick.presentation.di
 
 import com.kevin.netkick.network.di.DataComponent
+import com.kevin.netkick.presentation.view.explore.activity.FixturesActivity
 import com.kevin.netkick.presentation.view.explore.activity.LeagueStandingsActivity
 import com.kevin.netkick.presentation.view.general.activity.AllPlayerInTeamsActivity
 import com.kevin.netkick.presentation.view.explore.activity.LeagueSearchActivity
@@ -45,6 +46,6 @@ interface AppComponent {
   fun injectIntoTeamsSearchActivity(teamsSearchActivity: TeamsSearchActivity)
   fun injectIntoPlayersSearchActivity(playersSearchActivity: PlayersSearchActivity)
   fun injectIntoPlayersAchievementActivity(playersAchievementActivity: PlayersAchievementActivity)
-
+  fun injectIntoLeagueMatches(fixturesActivity: FixturesActivity)
 
 }

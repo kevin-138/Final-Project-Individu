@@ -14,6 +14,7 @@ import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
+import com.kevin.netkick.domain.entity.rounds.RoundsResponse
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.domain.entity.trophies.TrophiesResponse
@@ -23,6 +24,7 @@ import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
 import com.kevin.netkick.network.model.league.LeagueResponseModel
 import com.kevin.netkick.network.model.news.NewsResponseModel
 import com.kevin.netkick.network.model.player.PlayerResponseModel
+import com.kevin.netkick.network.model.rounds.RoundsResponseModel
 import com.kevin.netkick.network.model.standings.StandingsResponseModel
 import com.kevin.netkick.network.model.trophies.TrophiesResponseModel
 import com.kevin.netkick.network.paging.PlayersPagingDataSource
@@ -194,6 +196,32 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
                 emit(TrophiesResponseModel.transformToEntity(response))
             } catch (e: Exception){
                 Log.d("errorrr", e.toString())
+                e.printStackTrace()
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getLeagueRounds(league: Int, season: Int): Flow<RoundsResponse> {
+        return flow {
+            try {
+                val response = footballApi.getLeagueRounds(league,season)
+                emit(RoundsResponseModel.transformToEntity(response))
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
+        }.flowOn(Dispatchers.IO)
+    }
+
+    override suspend fun getRoundMatches(
+        league: Int,
+        season: Int,
+        round: String
+    ): Flow<FixturesResponse> {
+        return flow {
+            try {
+                val response = footballApi.getLeagueFixtures(league,season,round)
+                emit(FixturesResponseModel.transformToEntity(response))
+            } catch (e: Exception){
                 e.printStackTrace()
             }
         }.flowOn(Dispatchers.IO)

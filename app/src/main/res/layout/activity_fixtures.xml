@@ -26,28 +26,28 @@
         tools:src="@drawable/team_logo_pc"
         android:layout_marginTop="5dp"
         android:layout_marginStart="15dp"
-        app:layout_constraintTop_toTopOf="@id/tv_league_name_topsc"
-        app:layout_constraintBottom_toBottomOf="@id/tv_league_type_title"
+        app:layout_constraintTop_toTopOf="@id/tv_league_name_matches"
+        app:layout_constraintBottom_toBottomOf="@id/tv_league_season_title"
         app:layout_constraintStart_toStartOf="@id/ib_back_button"
         />
 
     <TextView
-        android:id="@+id/tv_no_score"
+        android:id="@+id/tv_no_match"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/lightPurple"
-        android:text="@string/no_top_score_available"
+        android:text="@string/no_matches_available"
         android:textStyle="bold"
         android:textSize="20sp"
         android:visibility="invisible"
-        app:layout_constraintTop_toBottomOf="@id/tv_league_spinner_title"
+        app:layout_constraintTop_toBottomOf="@id/tv_league_season_title"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"/>
 
 
     <TextView
-        android:id="@+id/tv_league_name_topsc"
+        android:id="@+id/tv_league_name_matches"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         tools:text="Parss sd sdsds"
@@ -62,38 +62,38 @@
         app:layout_constraintTop_toBottomOf="@id/ib_back_button"/>
 
     <TextView
-        android:id="@+id/tv_league_type_title"
+        android:id="@+id/tv_league_season_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:ellipsize="end"
         android:maxLines="1"
-        android:text="@string/type"
+        android:text="@string/season"
         android:textColor="@color/white"
         android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@id/tv_league_name_topsc"
-        app:layout_constraintStart_toStartOf="@+id/tv_league_name_topsc"
+        app:layout_constraintTop_toBottomOf="@id/tv_league_name_matches"
+        app:layout_constraintStart_toStartOf="@+id/tv_league_name_matches"
         tools:layout_editor_absoluteY="124dp" />
 
     <TextView
-        android:id="@+id/tv_league_type_topsc"
+        android:id="@+id/tv_league_season"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="Cup"
+        tools:text="2022"
         android:textColor="@color/lightPurple"
         android:textStyle="bold"
         android:layout_marginHorizontal="5dp"
         android:ellipsize="end"
         android:maxLines="1"
-        app:layout_constraintEnd_toEndOf="@id/tv_league_name_topsc"
-        app:layout_constraintTop_toTopOf="@id/tv_league_type_title"
-        app:layout_constraintBottom_toBottomOf="@id/tv_league_type_title"
-        app:layout_constraintStart_toEndOf="@id/tv_league_type_title" />
+        app:layout_constraintEnd_toEndOf="@id/tv_league_name_matches"
+        app:layout_constraintTop_toTopOf="@id/tv_league_season_title"
+        app:layout_constraintBottom_toBottomOf="@id/tv_league_season_title"
+        app:layout_constraintStart_toEndOf="@id/tv_league_season_title" />
 
     <TextView
         android:id="@+id/tv_league_spinner_title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/season"
+        android:text="@string/round"
         android:textColor="@color/white"
         android:textStyle="bold"
         android:textSize="20sp"
@@ -102,7 +102,7 @@
         app:layout_constraintStart_toStartOf="@+id/iv_league_logo_topsc" />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/cs_spinner_topsc"
+        android:id="@+id/cs_spinner_rounds"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/back_spinner"
@@ -112,9 +112,9 @@
         app:layout_constraintTop_toBottomOf="@id/tv_league_spinner_title">
 
         <Spinner
-            android:id="@+id/sp_league_season_topsc"
+            android:id="@+id/sp_league_round"
             style="@style/Spinner"
-            android:layout_width="130dp"
+            android:layout_width="200dp"
             android:layout_height="40dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -125,7 +125,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <TextView
-        android:id="@+id/tv_league_topscorer_title"
+        android:id="@+id/tv_league_Matches_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/matchess"
@@ -133,7 +133,17 @@
         android:textStyle="bold"
         android:textSize="20sp"
         android:layout_marginTop="15dp"
-        app:layout_constraintTop_toBottomOf="@id/cs_spinner_topsc"
+        app:layout_constraintTop_toBottomOf="@id/cs_spinner_rounds"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_fixtures"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="5dp"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintTop_toBottomOf="@id/tv_league_Matches_title"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 

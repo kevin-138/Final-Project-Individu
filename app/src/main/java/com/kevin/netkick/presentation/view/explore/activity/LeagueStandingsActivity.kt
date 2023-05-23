@@ -137,11 +137,11 @@ class LeagueStandingsActivity : AppCompatActivity() {
         binding.apply {
             ibGroupNext.setOnClickListener {
                 adapter.next()
-                tvLeagueGroupTitle.text = getString(R.string.group,adapter.getCurrentGroup()+1)
+                tvLeagueGroupTitle.text = getString(R.string.group,adapter.getCurrentGroup())
             }
             ibGroupPrev.setOnClickListener {
                 adapter.pref()
-                tvLeagueGroupTitle.text  = getString(R.string.group,adapter.getCurrentGroup()+1)
+                tvLeagueGroupTitle.text  = getString(R.string.group,adapter.getCurrentGroup())
             }
         }
     }

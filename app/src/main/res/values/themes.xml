@@ -15,6 +15,7 @@
         <!-- Customize your theme here. -->
         <item name="android:editTextColor">@color/lightPurple</item>
         <item name="android:textColorHint">@color/lightPurple</item>
+        <item name="android:textColor">@color/lightPurple</item>
     </style>
 
     <style name="Spinner" parent="Widget.AppCompat.Light.DropDownItem.Spinner">

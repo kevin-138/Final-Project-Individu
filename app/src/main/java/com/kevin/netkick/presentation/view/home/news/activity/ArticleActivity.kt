@@ -10,6 +10,8 @@ import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.ActivityArticleBinding
 import com.kevin.netkick.presentation.PresentationUtils
+import java.util.*
+import kotlin.concurrent.schedule
 
 class ArticleActivity : AppCompatActivity() {
     private lateinit var binding: ActivityArticleBinding
@@ -47,7 +49,9 @@ class ArticleActivity : AppCompatActivity() {
             wvNews.webViewClient= object: WebViewClient(){
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
+                    Timer().schedule(4000L) {
                         progressBar.dismiss()
+                    }
                 }
             }
 

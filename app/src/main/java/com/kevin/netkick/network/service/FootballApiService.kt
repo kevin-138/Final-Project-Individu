@@ -8,6 +8,7 @@ import com.kevin.netkick.network.model.countries.CountryResponseModel
 import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
 import com.kevin.netkick.network.model.league.LeagueResponseModel
 import com.kevin.netkick.network.model.player.PlayerResponseModel
+import com.kevin.netkick.network.model.rounds.RoundsResponseModel
 import com.kevin.netkick.network.model.standings.StandingsResponseModel
 import com.kevin.netkick.network.model.trophies.TrophiesResponseModel
 import retrofit2.http.GET
@@ -71,6 +72,14 @@ interface FootballApiService {
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("teams")
     suspend fun getTeamsSearch(@Query("search") search:String): TeamResponseModel
+
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("fixtures")
+    suspend fun getLeagueFixtures(@Query("league") league:Int,@Query("season") season:Int,@Query("round") round:String): FixturesResponseModel
+
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("fixtures/rounds")
+    suspend fun getLeagueRounds(@Query("league") league:Int,@Query("season") season:Int): RoundsResponseModel
 
 
 }

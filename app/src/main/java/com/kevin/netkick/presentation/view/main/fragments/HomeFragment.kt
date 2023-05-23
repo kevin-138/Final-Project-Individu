@@ -65,8 +65,8 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
     }
 
     private fun getLiveData() {
-//        getLiveMatches()
-//        getPopularTeams()
+        getLiveMatches()
+        getPopularTeams()
         getNewsHeadline()
     }
 

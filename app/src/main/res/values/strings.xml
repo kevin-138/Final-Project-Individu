@@ -97,4 +97,7 @@
     <string name="no_team_found">No Team Found</string>
     <string name="no_player_found">No Player Found</string>
     <string name="matchess">MATCHES</string>
+    <string name="round">Round:</string>
+    <string name="no_matches_available">No Matches Available</string>
+    <string name="no_standings_available">No Standings Available</string>
 </resources>

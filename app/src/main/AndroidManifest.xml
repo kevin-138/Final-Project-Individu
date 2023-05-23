@@ -16,13 +16,13 @@
         android:theme="@style/Theme.NetKick"
         tools:targetApi="31">
         <activity
-            android:name=".LineupActivity"
+            android:name=".presentation.view.explore.activity.LineupActivity"
             android:exported="false" />
         <activity
-            android:name=".FixturesDetailActivity"
+            android:name=".presentation.view.explore.activity.FixturesDetailActivity"
             android:exported="false" />
         <activity
-            android:name=".FixturesActivity"
+            android:name=".presentation.view.explore.activity.FixturesActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.view.trophies.activity.players.PlayersAchievementActivity"

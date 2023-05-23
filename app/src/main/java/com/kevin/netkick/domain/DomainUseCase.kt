@@ -8,6 +8,7 @@ import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
+import com.kevin.netkick.domain.entity.rounds.RoundsResponse
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.domain.entity.trophies.TrophiesResponse
@@ -30,4 +31,6 @@ interface DomainUseCase {
     suspend fun getTeamSearch(search:String): Flow<TeamResponse>
     suspend fun getPlayerSearch(search:String,team: Int): Flow<PlayerResponse>
     suspend fun getPlayerTrophies(player: Int): Flow<TrophiesResponse>
+    suspend fun getLeagueRounds(league: Int,season:Int): Flow<RoundsResponse>
+    suspend fun getRoundMatches(league: Int,season:Int,round:String): Flow<FixturesResponse>
 }

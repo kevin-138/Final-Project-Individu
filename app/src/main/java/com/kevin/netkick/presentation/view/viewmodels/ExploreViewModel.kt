@@ -2,8 +2,10 @@ package com.kevin.netkick.presentation.view.viewmodels
 
 import androidx.lifecycle.*
 import com.kevin.netkick.domain.DomainUseCase
+import com.kevin.netkick.domain.entity.fixtures.FixturesResponse
 import com.kevin.netkick.domain.entity.general.Paging
 import com.kevin.netkick.domain.entity.league.LeagueResponse
+import com.kevin.netkick.domain.entity.rounds.RoundsResponse
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import kotlinx.coroutines.Dispatchers
@@ -48,6 +50,31 @@ class ExploreViewModel @Inject constructor(private val useCase: DomainUseCase): 
     val standingResults: LiveData<StandingsResponse> = leagueStandingsSeason.switchMap { getLeagueStandings(it.first,it.second) }
     private fun getLeagueStandings(league: Int, season:Int) = liveData(Dispatchers.IO) {
         useCase.getLeagueStandings(league,season).collectLatest {
+            emit(
+                it
+            )
+        }
+    }
+
+    private val _leagueRounds = MutableStateFlow(RoundsResponse(Paging(0,0),0, listOf()))
+    val leagueRounds : StateFlow<RoundsResponse> =   _leagueRounds
+
+    suspend fun getLeagueRoundsBySeason(league: Int,season: Int){
+        useCase.getLeagueRounds(league,season).collectLatest {
+            _leagueRounds.value = it
+        }
+    }
+
+
+    private val leagueFixturesQuery = MutableLiveData<Triple<Int,Int,String>>()
+
+    fun setFixtureQuery(query:Triple<Int,Int,String>){
+        leagueFixturesQuery.value = query
+    }
+
+    val fixtureResult: LiveData<FixturesResponse> = leagueFixturesQuery.switchMap { getLeagueStandings(it.first,it.second,it.third) }
+    private fun getLeagueStandings(league: Int, season:Int,round:String) = liveData(Dispatchers.IO) {
+        useCase.getRoundMatches(league,season,round).collectLatest {
             emit(
                 it
             )
