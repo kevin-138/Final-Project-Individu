@@ -1,6 +1,7 @@
 package com.kevin.netkick.network
 
 import TeamResponseModel
+import android.util.Log
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
@@ -192,6 +193,7 @@ class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:Foot
                 val response = footballApi.getPlayerTrophy(player)
                 emit(TrophiesResponseModel.transformToEntity(response))
             } catch (e: Exception){
+                Log.d("errorrr", e.toString())
                 e.printStackTrace()
             }
         }.flowOn(Dispatchers.IO)

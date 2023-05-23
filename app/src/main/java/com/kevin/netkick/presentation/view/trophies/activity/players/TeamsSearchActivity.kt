@@ -1,6 +1,7 @@
 package com.kevin.netkick.presentation.view.trophies.activity.players
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -86,8 +87,29 @@ class TeamsSearchActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.teamsSearchResults.observe(this){
-            adapter.addDataToList(it.response)
+            if (it.response.isEmpty()){
+                layoutVisibility(true)
+            }else{
+                layoutVisibility(false)
+                adapter.addDataToList(it.response)
+            }
         }
+    }
+
+    private fun layoutVisibility(isEmpty: Boolean) {
+        binding.apply {
+            when(isEmpty){
+                true -> {
+                    tvNothingFoundTeams.visibility = View.VISIBLE
+                    rvTeamList.visibility = View.INVISIBLE
+                }
+                else -> {
+                    tvNothingFoundTeams.visibility = View.INVISIBLE
+                    rvTeamList.visibility = View.VISIBLE
+                }
+            }
+        }
+
     }
 
     private fun setProgressBar() {

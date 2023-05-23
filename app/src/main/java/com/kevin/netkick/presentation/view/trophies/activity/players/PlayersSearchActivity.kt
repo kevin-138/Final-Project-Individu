@@ -3,6 +3,7 @@ package com.kevin.netkick.presentation.view.trophies.activity.players
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -121,8 +122,29 @@ class PlayersSearchActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.playerSearchResults.observe(this){
-            adapter.addDataToList(it.response)
+            if (it.response.isEmpty()){
+                layoutVisibility(true)
+            }else{
+                layoutVisibility(false)
+                adapter.addDataToList(it.response)
+            }
         }
+    }
+
+    private fun layoutVisibility(isEmpty: Boolean) {
+        binding.apply {
+            when(isEmpty){
+                true -> {
+                    tvNothingFoundPlayer.visibility = View.VISIBLE
+                    rvPlayerList.visibility = View.INVISIBLE
+                }
+                else -> {
+                    tvNothingFoundPlayer.visibility = View.INVISIBLE
+                    rvPlayerList.visibility = View.VISIBLE
+                }
+            }
+        }
+
     }
 
     private fun setupAdapter() {

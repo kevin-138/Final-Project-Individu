@@ -13,7 +13,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/background5"
+        android:background="@color/background6"
         android:padding="15dp">
 
         <ImageView
@@ -78,12 +78,13 @@
 
         <TextView
             android:id="@+id/tv_trophies_country"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="ddsd"
             android:layout_marginStart="5dp"
             android:textColor="@color/lightPurple"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tv_trophies_country_title"
             app:layout_constraintTop_toTopOf="@id/tv_trophies_country_title"
             app:layout_constraintStart_toEndOf="@id/tv_trophies_country_title"/>
@@ -100,12 +101,13 @@
 
         <TextView
             android:id="@+id/tv_trophies_season"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             tools:text="ddsd"
             android:layout_marginStart="5dp"
             android:textColor="@color/lightPurple"
             android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="@id/tv_trophies_season_title"
             app:layout_constraintTop_toTopOf="@id/tv_trophies_season_title"
             app:layout_constraintStart_toEndOf="@id/tv_trophies_season_title"/>

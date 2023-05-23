@@ -46,7 +46,11 @@ class PlayersTopAdapter(private var dataList: MutableList<ResponseP>): RecyclerV
                 tvPlayerName.text = data.players.name
                 tvPlayerNationality.text = data.players.nationality
                 tvPlayerPosition.text = data.statistics[0].games.position
-                tvPlayerRating.text = data.statistics[0].games.rating.substring(0,3)
+                tvPlayerRating.text = if (data.statistics[0].games.rating.length > 3){
+                    data.statistics[0].games.rating.substring(0,3)
+                }else{
+                    data.statistics[0].games.rating
+                }
                 tvPlayerAppearances.text = data.statistics[0].games.appearances.toString()
                 tvPlayerGoals.text = data.statistics[0].goals.total.toString()
             }

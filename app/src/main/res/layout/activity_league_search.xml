@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.view.general.activity.LeagueSearchActivity"
+    tools:context=".presentation.view.explore.activity.LeagueSearchActivity"
     android:background="@color/background1">
 
     <ImageButton

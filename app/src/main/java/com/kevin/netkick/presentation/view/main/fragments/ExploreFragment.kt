@@ -13,7 +13,7 @@ import com.kevin.netkick.databinding.FragmentExploreBinding
 import com.kevin.netkick.domain.entity.country.CountryC
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.CountriesAdapter
-import com.kevin.netkick.presentation.view.general.activity.LeagueSearchActivity
+import com.kevin.netkick.presentation.view.explore.activity.LeagueSearchActivity
 import com.kevin.netkick.presentation.view.viewmodels.MainViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch

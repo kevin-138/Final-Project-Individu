@@ -1,6 +1,7 @@
 package com.kevin.netkick.presentation.view.trophies.activity.topscorer
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
@@ -44,8 +45,29 @@ class LeagueTopScorerSearchActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.searchResults.observe(this){
-            adapter.addDataToList(it.response)
+            if (it.response.isEmpty()){
+                layoutVisibility(true)
+            }else{
+                layoutVisibility(false)
+                adapter.addDataToList(it.response)
+            }
         }
+    }
+
+    private fun layoutVisibility(isEmpty: Boolean) {
+        binding.apply {
+            when(isEmpty){
+                true -> {
+                    tvNothingFoundTopsc.visibility = View.VISIBLE
+                    rvLeagueTopsc.visibility = View.INVISIBLE
+                }
+                else -> {
+                    tvNothingFoundTopsc.visibility = View.INVISIBLE
+                    rvLeagueTopsc.visibility = View.VISIBLE
+                }
+            }
+        }
+
     }
 
     private fun setupAdapter() {
@@ -66,7 +88,7 @@ class LeagueTopScorerSearchActivity : AppCompatActivity() {
                         }else{
                             setProgressBar()
                             viewModel.setSearchQuery(query)
-                            Timer().schedule(1000L) {
+                            Timer().schedule(2000L) {
                                 progressBar.dismiss()
                             }
                         }

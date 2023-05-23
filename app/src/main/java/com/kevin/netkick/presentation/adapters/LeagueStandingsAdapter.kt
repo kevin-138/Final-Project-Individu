@@ -3,6 +3,7 @@ package com.kevin.netkick.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -12,16 +13,18 @@ import com.bumptech.glide.Glide
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.StandingListItemBinding
 import com.kevin.netkick.databinding.StandingsHeaderBinding
-import com.kevin.netkick.domain.entity.standings.Group
 import com.kevin.netkick.domain.entity.standings.substandings.All
 import com.kevin.netkick.domain.entity.standings.substandings.GoalsSt
 import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import com.kevin.netkick.domain.entity.standings.substandings.TeamSt
 import com.kevin.netkick.presentation.PresentationUtils
+import com.kevin.netkick.presentation.view.general.activity.TeamDetailActivity
 
 class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
     private var currentGroup = 0
+    private var standingsList = arrayListOf<Standings>()
+    private var season = 0
 
     fun next(){
         if (currentGroup != getGroupSize()-1){
@@ -62,6 +65,13 @@ class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>): 
                 tvLose.text = data.all.lose.toString()
                 tvGoalsa.text = data.all.goals.goalsAgainst.toString()
                 tvGoalsf.text = data.all.goals.goalsFor.toString()
+
+                root.setOnClickListener {
+                    val intent = Intent(context, TeamDetailActivity::class.java)
+                    intent.putExtra(PresentationUtils.TEAM_ID,data.team.id)
+                    intent.putExtra(PresentationUtils.TEAM_SEASON,season)
+                    context.startActivity(intent)
+                }
             }
         }
     }
@@ -92,19 +102,26 @@ class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>): 
         return dataList.size
     }
 
+    fun setSeason(inputSeason:Int){
+        season = inputSeason
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
     fun setGroup(group:Int){
         currentGroup = group
-//        val newList = dataList[currentGroup] as ArrayList
-        dataList[currentGroup].toMutableList().add(0, Standings(0, TeamSt(0,"",""),0,0,"","", All(0, GoalsSt(0,0),0,0,0)))
+        standingsList.clear()
+        standingsList.addAll(dataList[currentGroup] as ArrayList<Standings>)
+        standingsList.add(0,Standings(0,TeamSt(0,"",""),0,0,"","",All(0,GoalsSt(0,0),0,0,0)))
+//        dataList[currentGroup].toMutableList().add(0, Standings(0, TeamSt(0,"",""),0,0,"","", All(0, GoalsSt(0,0),0,0,0)))
         notifyDataSetChanged()
     }
 
     fun getCurrentGroup():String{
-        return currentGroup.toString()
+        return (currentGroup+1).toString()
     }
 
     override fun getItemCount(): Int {
-            return dataList[currentGroup].size
+            return standingsList.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -113,7 +130,7 @@ class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>): 
 //            ini bisa ga ada coba dicek dlu
             }
             is StandingsItemViewHolder -> {
-                holder.bindData( dataList[currentGroup][position])
+                holder.bindData(standingsList[position])
             }
         }
     }
@@ -122,7 +139,7 @@ class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>): 
     fun addDataToList(inputData:  ArrayList<List<Standings>>) {
         dataList.clear()
         dataList.addAll(inputData)
-        currentGroup = 0
+        setGroup(0)
         notifyDataSetChanged()
     }
 

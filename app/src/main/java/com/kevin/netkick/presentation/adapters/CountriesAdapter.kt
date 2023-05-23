@@ -13,7 +13,7 @@ import com.kevin.netkick.R
 import com.kevin.netkick.databinding.CountryItemBinding
 import com.kevin.netkick.domain.entity.country.CountryC
 import com.kevin.netkick.presentation.PresentationUtils
-import com.kevin.netkick.presentation.view.general.activity.LeagueSearchActivity
+import com.kevin.netkick.presentation.view.explore.activity.LeagueSearchActivity
 
 class CountriesAdapter(private var dataList: ArrayList<CountryC>):RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
     private lateinit var context: Context
@@ -38,7 +38,7 @@ class CountriesAdapter(private var dataList: ArrayList<CountryC>):RecyclerView.A
                 .into(ivCountryFlag)
 
                 root.setOnClickListener {
-                    val intent = Intent(context,LeagueSearchActivity::class.java)
+                    val intent = Intent(context, LeagueSearchActivity::class.java)
                     intent.putExtra(PresentationUtils.COUNTRY_CODE,data.name)
                     context.startActivity(intent)
                 }

@@ -24,7 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/lightPurple"
-        android:text="@string/no_league_found"
+        android:text="@string/no_player_found"
         android:textStyle="bold"
         android:textSize="20sp"
         android:visibility="invisible"

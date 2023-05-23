@@ -24,7 +24,7 @@ data class GamesPModel(
                 lineups = it.lineups ?: 0,
                 minutes = it.minutes ?: 0,
                 position = it.position ?: "",
-                rating = it.rating ?: "",
+                rating = it.rating ?: "-",
                 captain = it.captain ?: false
             )
         }

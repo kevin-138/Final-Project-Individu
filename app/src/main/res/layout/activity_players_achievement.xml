@@ -335,13 +335,22 @@
             app:layout_constraintBottom_toBottomOf="@id/tv_in_team_title"
             app:layout_constraintEnd_toEndOf="parent"/>
 
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:src="@drawable/border_gradient_slider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/rv_player_career"
+            app:layout_constraintBottom_toBottomOf="@id/rv_player_career"/>
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_player_career"
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:paddingHorizontal="20dp"
             android:clipToPadding="false"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="15dp"
+            tools:listitem="@layout/player_career_item"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -359,6 +368,14 @@
             android:layout_marginTop="20dp"
             app:layout_constraintTop_toBottomOf="@id/rv_player_career"
             app:layout_constraintStart_toStartOf="parent"/>
+
+        <ImageView
+            android:layout_width="80dp"
+            android:layout_height="0dp"
+            android:src="@drawable/border_gradient_slider"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/rv_player_trophies"
+            app:layout_constraintBottom_toBottomOf="@id/rv_player_trophies"/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_player_trophies"

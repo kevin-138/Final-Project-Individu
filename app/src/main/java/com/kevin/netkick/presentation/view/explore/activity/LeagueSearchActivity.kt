@@ -1,4 +1,4 @@
-package com.kevin.netkick.presentation.view.general.activity
+package com.kevin.netkick.presentation.view.explore.activity
 
 import android.os.Bundle
 import android.view.View
@@ -12,7 +12,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.ActivityLeagueSearchBinding
-import com.kevin.netkick.domain.entity.country.CountryC
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.LeagueAdapter
 import com.kevin.netkick.presentation.view.viewmodels.ExploreViewModel
@@ -51,8 +50,29 @@ class LeagueSearchActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.searchResults.observe(this){
-            adapter.addDataToList(it.response)
+            if (it.response.isEmpty()){
+                layoutVisibility(true)
+            }else{
+                layoutVisibility(false)
+                adapter.addDataToList(it.response)
+            }
         }
+    }
+
+    private fun layoutVisibility(isEmpty: Boolean) {
+        binding.apply {
+            when(isEmpty){
+                true -> {
+                    tvNothingFound.visibility = View.VISIBLE
+                    rvCountriesLeague.visibility = View.INVISIBLE
+                }
+                else -> {
+                    tvNothingFound.visibility = View.INVISIBLE
+                    rvCountriesLeague.visibility = View.VISIBLE
+                }
+            }
+        }
+
     }
 
     private fun setupAdapter() {
@@ -106,7 +126,7 @@ class LeagueSearchActivity : AppCompatActivity() {
                         }else{
                             setProgressBar()
                             viewModel.setSearchQuery(query)
-                            Timer().schedule(1000L) {
+                            Timer().schedule(2000L) {
                                 progressBar.dismiss()
                             }
                         }

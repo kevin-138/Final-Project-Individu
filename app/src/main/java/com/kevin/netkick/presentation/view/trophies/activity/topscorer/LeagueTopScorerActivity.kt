@@ -112,10 +112,10 @@ class LeagueTopScorerActivity : AppCompatActivity() {
                         it.year == listSeason[position]
                     }
                     if (leagueSeasonSelected[0].coverage.topScorers) {
-                        noStandingsData(false)
+                        noTopScorerData(false)
                         getOnlineData(leagueData.league.id, listSeason[position])
                     } else {
-                        noStandingsData(true)
+                        noTopScorerData(true)
                     }
                     Timer().schedule(1000L) {
                         progressBar.dismiss()
@@ -134,7 +134,7 @@ class LeagueTopScorerActivity : AppCompatActivity() {
         viewModel.setTopScoreQuery(Pair(id,season))
     }
 
-    private fun noStandingsData(boolean: Boolean) {
+    private fun noTopScorerData(boolean: Boolean) {
         if (boolean) {
             binding.apply {
                 tvNoScore.visibility = View.VISIBLE

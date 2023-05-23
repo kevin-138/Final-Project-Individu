@@ -92,4 +92,9 @@
     <string name="last_name">Last Name:</string>
     <string name="age2">Age:</string>
     <string name="in_team">In Team:</string>
+    <string name="group">Group %s</string>
+    <string name="no_coach_found">No Coach Found</string>
+    <string name="no_team_found">No Team Found</string>
+    <string name="no_player_found">No Player Found</string>
+    <string name="matchess">MATCHES</string>
 </resources>
