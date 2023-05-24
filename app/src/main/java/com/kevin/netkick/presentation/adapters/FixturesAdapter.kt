@@ -14,6 +14,8 @@ import com.kevin.netkick.databinding.FixturesItemBinding
 import com.kevin.netkick.databinding.LeagueItemBinding
 import com.kevin.netkick.domain.entity.fixtures.ResponseF
 import com.kevin.netkick.domain.entity.league.ResponseL
+import com.kevin.netkick.domain.entity.league.submembers.Coverage
+import com.kevin.netkick.domain.entity.league.submembers.Season
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.intentmodel.StatisticRequirement
 import com.kevin.netkick.presentation.view.explore.activity.FixturesDetailActivity
@@ -24,6 +26,8 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
     private var leagueName = ""
     private var season = 0
     private var round = ""
+    private var coverage = false
+
     inner class FixtureViewHolder(private val binding: FixturesItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: ResponseF){
             val loadingDrawable1 = CircularProgressDrawable(context)
@@ -61,17 +65,20 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
                     .error(R.drawable.broken_image_icon)
                     .into(ivLivescoreAwayLogo)
 
-                root.setOnClickListener {
-                    val intent = Intent(context,FixturesDetailActivity::class.java)
-                    intent.putExtra(PresentationUtils.FIXTURE_FULL_DATA,data)
-                    intent.putExtra(PresentationUtils.FIXTURE_REQUIREMENT, StatisticRequirement(
-                        leagueName = leagueName,
-                        leagueLogo = leagueLogo,
-                        season = season,
-                        round = round
-                    ))
-                    context.startActivity(intent)
+                if (coverage){
+                    root.setOnClickListener {
+                        val intent = Intent(context,FixturesDetailActivity::class.java)
+                        intent.putExtra(PresentationUtils.FIXTURE_FULL_DATA,data)
+                        intent.putExtra(PresentationUtils.FIXTURE_REQUIREMENT, StatisticRequirement(
+                            leagueName = leagueName,
+                            leagueLogo = leagueLogo,
+                            season = season,
+                            round = round
+                        ))
+                        context.startActivity(intent)
+                    }
                 }
+
             }
         }
     }
@@ -84,6 +91,10 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
 
     override fun getItemCount(): Int {
         return dataList.size
+    }
+
+    fun setCv(coverageIntent:Boolean){
+        coverage = coverageIntent
     }
 
     fun setSr(seasonInp:Int, roundInp:String){

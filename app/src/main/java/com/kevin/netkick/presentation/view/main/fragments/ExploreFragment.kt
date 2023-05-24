@@ -45,7 +45,7 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
     }
 
     private fun setAdapter() {
-        adapter = CountriesAdapter( dataList)
+        adapter = CountriesAdapter(dataList)
         binding.apply {
             rvCountriesLeague.layoutManager = GridLayoutManager(requireContext(),3)
             rvCountriesLeague.adapter = adapter
@@ -60,31 +60,10 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
                 }
 
                 override fun onQueryTextChange(inputTxt: String): Boolean {
-                    filterList(inputTxt)
+                    adapter.filterData(inputTxt)
                     return false
                 }
             })
-        }
-    }
-
-    private fun filterList(inputTxt: String) {
-        val filteredlist: ArrayList<CountryC> = ArrayList()
-        for (item in dataList) {
-            if (item.name.contains(inputTxt,true)) {
-                filteredlist.add(item)
-            }
-        }
-        if (filteredlist.isEmpty()) {
-            binding.apply {
-                tvNothingFound.visibility = View.VISIBLE
-                rvCountriesLeague.visibility = View.INVISIBLE
-            }
-        } else {
-            binding.apply {
-                tvNothingFound.visibility = View.INVISIBLE
-                rvCountriesLeague.visibility = View.VISIBLE
-            }
-            adapter.filterList(filteredlist)
         }
     }
 
@@ -92,7 +71,7 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
         val onlineCheck = activity?.let { PresentationUtils.isOnline(requireActivity()) }
         if (onlineCheck == true){
             if (!mainViewModel.runnedExplore){
-//                getLiveData()
+                getLiveData()
             }
         }else{
             if (current){
@@ -105,8 +84,7 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
         lifecycleScope.launch {
             mainViewModel.getAllCountries()
             mainViewModel.allCountriesFlow.collectLatest {
-                dataList.addAll(it.response)
-                adapter.notifyItemRangeChanged(0,adapter.itemCount)
+                adapter.addDataToList(it.response)
             }
         }
     }

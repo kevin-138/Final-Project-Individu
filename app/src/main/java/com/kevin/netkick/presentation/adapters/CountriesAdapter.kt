@@ -12,11 +12,13 @@ import com.bumptech.glide.Glide
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.CountryItemBinding
 import com.kevin.netkick.domain.entity.country.CountryC
+import com.kevin.netkick.domain.entity.league.ResponseL
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.explore.activity.LeagueSearchActivity
 
-class CountriesAdapter(private var dataList: ArrayList<CountryC>):RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
+class CountriesAdapter(private var dataList: MutableList<CountryC>):RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
     private lateinit var context: Context
+    private var dataListMemory = mutableListOf<CountryC>()
 
     inner class CountryViewHolder(private val binding: CountryItemBinding):RecyclerView.ViewHolder(binding.root) {
 
@@ -56,15 +58,40 @@ class CountriesAdapter(private var dataList: ArrayList<CountryC>):RecyclerView.A
        return dataList.size
     }
 
+    fun filterData(query:String):Int{
+        val dataListFiltered: MutableList<CountryC> = mutableListOf()
+        for (item in dataListMemory) {
+            if (item.name.contains(query,true)) {
+                dataListFiltered.add(item)
+            }
+        }
+        return if (dataListFiltered.isEmpty()) {
+            1
+        } else {
+            changeList(dataListFiltered)
+            2
+        }
+    }
+
     @SuppressLint("NotifyDataSetChanged")
-    fun filterList(filterlist: ArrayList<CountryC>){
-        dataList = filterlist
+    fun changeList(leagueSearchList: List<CountryC>) {
+        dataList = leagueSearchList.toMutableList()
         notifyDataSetChanged()
     }
+
 
     override fun onBindViewHolder(holder: CountriesAdapter.CountryViewHolder, position: Int) {
         holder.bindData(dataList[position])
     }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addDataToList(countryList: List<CountryC>) {
+        dataList.clear()
+        dataList.addAll(countryList)
+        dataListMemory.addAll(countryList)
+        notifyDataSetChanged()
+    }
+
 
 
 }

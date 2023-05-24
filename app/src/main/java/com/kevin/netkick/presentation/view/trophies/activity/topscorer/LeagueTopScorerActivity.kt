@@ -93,8 +93,7 @@ class LeagueTopScorerActivity : AppCompatActivity() {
             it.year
         }
         val arrayAdapter = ArrayAdapter(
-            this,
-            com.bumptech.glide.R.layout.support_simple_spinner_dropdown_item,
+            this, com.bumptech.glide.R.layout.support_simple_spinner_dropdown_item,
             listSeason
         )
         binding.apply {
@@ -116,11 +115,8 @@ class LeagueTopScorerActivity : AppCompatActivity() {
                         getOnlineData(leagueData.league.id, listSeason[position])
                     } else {
                         noTopScorerData(true)
-                    }
-                    Timer().schedule(1000L) {
                         progressBar.dismiss()
                     }
-
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
@@ -152,7 +148,11 @@ class LeagueTopScorerActivity : AppCompatActivity() {
     private fun setObserver() {
         viewModel.topScoreResults.observe(this) {
             adapter.addDataToList(it.response)
+            Timer().schedule(2000L) {
+                progressBar.dismiss()
+            }
         }
+
     }
 
     private fun setLayout(data: ResponseL) {

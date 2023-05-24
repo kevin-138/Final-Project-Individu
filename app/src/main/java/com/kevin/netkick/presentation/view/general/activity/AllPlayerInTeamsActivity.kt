@@ -30,6 +30,7 @@ class AllPlayerInTeamsActivity : AppCompatActivity() {
     private lateinit var adapter: PlayersPagingAdapter
     private lateinit var progressBar: AlertDialog
     private var teamData: ResponseT? = null
+    private var season: Int? = null
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -60,6 +61,8 @@ class AllPlayerInTeamsActivity : AppCompatActivity() {
         }else{
             intent.getParcelableExtra(PresentationUtils.TEAM_FULL_DATA)
         }
+
+        season =  intent.getIntExtra(PresentationUtils.TEAM_SEASON,0)
 
         if (teamData!=null){
             setTeamDisplay()
@@ -107,11 +110,11 @@ class AllPlayerInTeamsActivity : AppCompatActivity() {
 
     private fun getPlayerList() {
         lifecycleScope.launch {
-            viewModel.getTeamPlayers(this, teamData!!.team.id, PresentationUtils.POPULAR_SEASON)
+            viewModel.getTeamPlayers(this, teamData!!.team.id,season!!)
                 .collectLatest {
                     adapter.submitData(lifecycle,it)
 
-                    Timer().schedule(1000L) {
+                    Timer().schedule(2000L) {
                         progressBar.dismiss()
                     }
             }

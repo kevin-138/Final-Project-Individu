@@ -51,6 +51,9 @@ class LeagueTopScorerSearchActivity : AppCompatActivity() {
                 layoutVisibility(false)
                 adapter.addDataToList(it.response)
             }
+            Timer().schedule(1000L) {
+                progressBar.dismiss()
+            }
         }
     }
 
@@ -88,9 +91,6 @@ class LeagueTopScorerSearchActivity : AppCompatActivity() {
                         }else{
                             setProgressBar()
                             viewModel.setSearchQuery(query)
-                            Timer().schedule(2000L) {
-                                progressBar.dismiss()
-                            }
                         }
                     return false
                 }

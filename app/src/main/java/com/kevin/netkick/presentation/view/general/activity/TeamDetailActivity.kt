@@ -22,6 +22,7 @@ import javax.inject.Inject
 class TeamDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTeamDetailBinding
     private lateinit var progressBar:AlertDialog
+    private var season: Int? = null
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -72,6 +73,7 @@ class TeamDetailActivity : AppCompatActivity() {
         loadingDrawable2.start()
 
         if (intent!=null){
+            season = intent.getIntExtra(PresentationUtils.TEAM_SEASON,0)
             lifecycleScope.launch {
                 viewModel.getPopularTeamDetail(intent.getIntExtra(PresentationUtils.TEAM_ID,0))
                 viewModel.detailTeamsFlow.collectLatest {
@@ -99,9 +101,15 @@ class TeamDetailActivity : AppCompatActivity() {
                         tvTeamVenueCapacity.text = dataTeam.venue.capacity.toString()
                         tvTeamVenueAddress.text = dataTeam.venue.address
 
+
                         binding.btnSeeAllPlayers.setOnClickListener {
                             val intentPlayers = Intent(this@TeamDetailActivity,AllPlayerInTeamsActivity::class.java)
                             intentPlayers.putExtra(PresentationUtils.TEAM_FULL_DATA,dataTeam)
+                            intentPlayers.putExtra(PresentationUtils.TEAM_SEASON,
+                                if (season != 0){
+                                    season
+                                }else {PresentationUtils.POPULAR_SEASON }
+                            )
                             this@TeamDetailActivity.startActivity(intentPlayers)
                         }
                         progressBar.dismiss()

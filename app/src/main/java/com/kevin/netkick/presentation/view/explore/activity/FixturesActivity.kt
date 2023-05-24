@@ -17,20 +17,24 @@ import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.ActivityFixturesBinding
 import com.kevin.netkick.domain.entity.league.ResponseL
+import com.kevin.netkick.domain.entity.league.submembers.Season
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.FixturesAdapter
 import com.kevin.netkick.presentation.view.viewmodels.ExploreViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.sql.Time
+import java.util.*
 import javax.inject.Inject
+import kotlin.concurrent.schedule
 
 class FixturesActivity : AppCompatActivity() {
     private lateinit var binding: ActivityFixturesBinding
     private lateinit var adapter: FixturesAdapter
     private lateinit var progressBar: AlertDialog
     private var leagueData: ResponseL? = null
-    private var season: Int? = null
+    private var season: Season? = null
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -75,7 +79,13 @@ class FixturesActivity : AppCompatActivity() {
         }else{
             intent.getParcelableExtra(PresentationUtils.LEAGUE_FULL_DATA)
         }
-        season = intent.getIntExtra(PresentationUtils.LEAGUE_SEASON,0)
+        season = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(PresentationUtils.LEAGUE_SEASON, Season::class.java)
+        }else{
+            intent.getParcelableExtra(PresentationUtils.LEAGUE_SEASON)
+        }
+
+        adapter.setCv(season!!.coverage.fixtures.statistic)
 
         if (leagueData != null){
             setObserver()
@@ -86,16 +96,15 @@ class FixturesActivity : AppCompatActivity() {
 
     private fun getSpinnerSeason() {
         lifecycleScope.launch {
-            viewModel.getLeagueRoundsBySeason(leagueData!!.league.id,season!!)
+            viewModel.getLeagueRoundsBySeason(leagueData!!.league.id,season!!.year)
             viewModel.leagueRounds.collectLatest {
                 setSpinner(it.response)
-//                progressBar.dismiss()
             }
         }
     }
 
     private fun setSpinner(rounds: List<String>) {
-        val arrayAdapter = ArrayAdapter(this, android.R.layout.simple_spinner_item, rounds)
+        val arrayAdapter = ArrayAdapter(this, com.bumptech.glide.R.layout.support_simple_spinner_dropdown_item, rounds)
         binding.apply {
             spLeagueRound.adapter = arrayAdapter
 
@@ -109,17 +118,17 @@ class FixturesActivity : AppCompatActivity() {
                 ) {
                     setProgressBar()
                     val roundSelected = rounds[position]
-                    adapter.setSr(season!!,roundSelected)
+                    adapter.setSr(season!!.year,roundSelected)
                     adapter.setLe(leagueData!!.league.name,leagueData!!.league.logo)
-                    getOnlineData(leagueData!!.league.id, season!! ,roundSelected)
+                    getOnlineData(leagueData!!.league.id, season!!.year ,roundSelected)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     setProgressBar()
                     val roundSelected = rounds[0]
-                    adapter.setSr(season!!,roundSelected)
+                    adapter.setSr(season!!.year,roundSelected)
                     adapter.setLe(leagueData!!.league.name,leagueData!!.league.logo)
-                    getOnlineData(leagueData!!.league.id, season!! ,roundSelected)
+                    getOnlineData(leagueData!!.league.id, season!!.year,roundSelected)
                 }
             }
 
@@ -139,7 +148,7 @@ class FixturesActivity : AppCompatActivity() {
 
         binding.apply {
             tvLeagueNameMatches.text = data.league.name
-            tvLeagueSeason.text = season.toString()
+            tvLeagueSeason.text = season!!.year.toString()
 
             Glide.with(this@FixturesActivity)
                 .load(data.league.logo)
@@ -160,7 +169,10 @@ class FixturesActivity : AppCompatActivity() {
     private fun setObserver() {
         viewModel.fixtureResult.observe(this){
             adapter.addDataToList(it.response)
-            progressBar.dismiss()
+            Timer().schedule(1500L) {
+                progressBar.dismiss()
+            }
+
         }
     }
 }

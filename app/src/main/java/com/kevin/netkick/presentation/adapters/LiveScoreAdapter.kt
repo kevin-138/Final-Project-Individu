@@ -48,7 +48,7 @@ class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEm
                 tvTimeMatchStart.text = context.resources.getString(
                     R.string.DateLiveTime,
                     data.fixture.timezone,
-                    data.fixture.date
+                    data.fixture.date.substring(11,16)
                 )
                 Glide.with(itemView)
                     .load(data.teams.homeTeam.logo)

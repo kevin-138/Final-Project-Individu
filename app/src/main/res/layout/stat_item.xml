@@ -25,11 +25,25 @@
         android:layout_height="wrap_content"
         tools:text="2"
         android:textColor="@color/white"
-        android:layout_marginStart="15dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/pb_sog_home"
         app:layout_constraintBottom_toBottomOf="@id/pb_sog_home"
+        app:layout_constraintEnd_toStartOf="@id/guideline1"
         />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.1" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.9" />
 
     <TextView
         android:id="@+id/tv_away_sog"
@@ -37,7 +51,7 @@
         android:layout_height="wrap_content"
         tools:text="2"
         android:textColor="@color/white"
-        android:layout_marginEnd="15dp"
+        app:layout_constraintStart_toEndOf="@id/guideline2"
         app:layout_constraintTop_toTopOf="@id/pb_sog_away"
         app:layout_constraintBottom_toBottomOf="@id/pb_sog_away"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,11 +66,10 @@
         android:rotationY="180"
         android:background="@color/white"
         android:paddingEnd="5dp"
-        android:layout_marginStart="15dp"
         android:layout_marginTop="5dp"
         android:progressTint="@color/lightPurple"
         app:layout_constraintTop_toBottomOf="@id/tv_st_title_1"
-        app:layout_constraintStart_toEndOf="@id/tv_home_sog"
+        app:layout_constraintStart_toEndOf="@id/guideline1"
         app:layout_constraintEnd_toStartOf="@id/pb_sog_away"
         tools:ignore="RtlSymmetry" />
 
@@ -66,14 +79,13 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:min="0"
-        android:layout_marginEnd="15dp"
         android:progressTint="@color/blue"
         android:background="@color/white"
         android:paddingEnd="5dp"
         android:layout_marginTop="5dp"
         app:layout_constraintTop_toBottomOf="@id/tv_st_title_1"
         app:layout_constraintStart_toEndOf="@id/pb_sog_home"
-        app:layout_constraintEnd_toStartOf="@id/tv_away_sog"
+        app:layout_constraintEnd_toStartOf="@id/guideline2"
         tools:ignore="RtlSymmetry" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -17,9 +17,11 @@ import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.ActivityLeagueStandingsBinding
 import com.kevin.netkick.domain.entity.league.ResponseL
+import com.kevin.netkick.domain.entity.league.submembers.Season
 import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.LeagueStandingsAdapter
+import com.kevin.netkick.presentation.intentmodel.StatAvailability
 import com.kevin.netkick.presentation.view.viewmodels.ExploreViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
 import javax.inject.Inject
@@ -96,8 +98,9 @@ class LeagueStandingsActivity : AppCompatActivity() {
                     }
 
                     adapter.setSeason(leagueSeasonSelected[0].year)
-                    setMatchesButton(leagueSeasonSelected[0].year)
                     changeMatchesButtons(leagueSeasonSelected[0].coverage.fixtures.events)
+                    setMatchesButton(leagueSeasonSelected[0])
+
                     if (leagueSeasonSelected[0].coverage.standings){
                         noStandingsData(false)
                         getOnlineData(leagueData.league.id, listSeason[position])
@@ -112,8 +115,9 @@ class LeagueStandingsActivity : AppCompatActivity() {
                         it.year == listSeason[0]
                     }
                     adapter.setSeason(leagueSeasonDefault[0].year)
-                    setMatchesButton(leagueSeasonDefault[0].year)
                     changeMatchesButtons(leagueSeasonDefault[0].coverage.fixtures.events)
+                    setMatchesButton(leagueSeasonDefault[0])
+
                     if (leagueSeasonDefault[0].coverage.standings){
                         noStandingsData(false)
                         getOnlineData(leagueData.league.id, listSeason[0])
@@ -146,7 +150,7 @@ class LeagueStandingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun setMatchesButton(season:Int){
+    private fun setMatchesButton(season:Season){
         binding.apply {
             btMatchesLeague.setOnClickListener {
                 val intentMatches = Intent(this@LeagueStandingsActivity,FixturesActivity::class.java)

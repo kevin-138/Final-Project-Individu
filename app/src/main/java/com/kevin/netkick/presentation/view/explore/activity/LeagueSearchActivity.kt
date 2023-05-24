@@ -56,7 +56,11 @@ class LeagueSearchActivity : AppCompatActivity() {
                 layoutVisibility(false)
                 adapter.addDataToList(it.response)
             }
+            Timer().schedule(1500L) {
+                progressBar.dismiss()
+            }
         }
+
     }
 
     private fun layoutVisibility(isEmpty: Boolean) {
@@ -126,9 +130,6 @@ class LeagueSearchActivity : AppCompatActivity() {
                         }else{
                             setProgressBar()
                             viewModel.setSearchQuery(query)
-                            Timer().schedule(2000L) {
-                                progressBar.dismiss()
-                            }
                         }
                     }
                     return false
