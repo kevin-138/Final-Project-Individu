@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -49,9 +50,14 @@ class FixturesDetailActivity : AppCompatActivity() {
     }
 
     private fun setupAdapter() {
+        val noScrollLayoutManager = object : LinearLayoutManager(this) {
+            override fun canScrollVertically(): Boolean {
+                return false
+            }
+        }
         binding.apply {
             adapter = StatAdapter(mutableListOf())
-            rvStatistics.layoutManager = LinearLayoutManager(this@FixturesDetailActivity)
+            rvStatistics.layoutManager = noScrollLayoutManager
             rvStatistics.adapter = adapter
         }
     }

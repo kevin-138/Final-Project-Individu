@@ -2,6 +2,7 @@ package com.kevin.netkick.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -20,8 +21,7 @@ class StatAdapter(private var dataList: MutableList<ResponseS>): RecyclerView.Ad
             binding.apply {
                 tvStTitle1.text = home.type
 
-                tvAwaySog.text = away.value
-                tvHomeSog.text = home.value
+
 
                 val valueHome = if (home.value.contains('%')){
                     home.value.substringBefore('%').toInt()
@@ -40,6 +40,17 @@ class StatAdapter(private var dataList: MutableList<ResponseS>): RecyclerView.Ad
                 }
 
                 val max = valueHome+valueAway
+
+                tvAwaySog.text = if (away.value.contains('.')){
+                    valueAway.toString()
+                }else{
+                    away.value
+                }
+                tvHomeSog.text = if (home.value.contains('.')){
+                    valueHome.toString()
+                }else{
+                    home.value
+                }
 
                 pbSogAway.max = max
                 pbSogHome.max = max

@@ -23,7 +23,7 @@ data class FixtureModel(
                 id = it.id ?: 0,
                 referee = it.referee ?: "",
                 timezone = it.timezone?: "",
-                date = it.date?.substring(11,16) ?: "",
+                date = it.date ?: "",
                 venue = VenueFModel.transformToEntity(it.venue ?: VenueFModel("","")),
                 status = StatusModel.transformToEntity(it.status ?: StatusModel("","")),
             )
