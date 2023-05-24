@@ -333,7 +333,8 @@
             android:layout_marginEnd="30dp"
             app:layout_constraintTop_toTopOf="@id/tv_in_team_title"
             app:layout_constraintBottom_toBottomOf="@id/tv_in_team_title"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            android:contentDescription="Border"/>
 
         <ImageView
             android:layout_width="80dp"
@@ -341,7 +342,8 @@
             android:src="@drawable/border_gradient_slider"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/rv_player_career"
-            app:layout_constraintBottom_toBottomOf="@id/rv_player_career"/>
+            app:layout_constraintBottom_toBottomOf="@id/rv_player_career"
+            android:contentDescription="Border" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_player_career"

@@ -10,6 +10,7 @@ import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
 import com.kevin.netkick.domain.entity.rounds.RoundsResponse
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
+import com.kevin.netkick.domain.entity.statistics.StatisticResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.domain.entity.trophies.TrophiesResponse
 import kotlinx.coroutines.CoroutineScope
@@ -33,4 +34,5 @@ interface DomainRepository {
     suspend fun getPlayerTrophies(player: Int): Flow<TrophiesResponse>
     suspend fun getLeagueRounds(league: Int,season:Int): Flow<RoundsResponse>
     suspend fun getRoundMatches(league: Int,season:Int,round:String): Flow<FixturesResponse>
+    suspend fun getMatchesStatistic(fixture: Int): Flow<StatisticResponse>
 }

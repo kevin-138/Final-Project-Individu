@@ -1,5 +1,9 @@
 package com.kevin.netkick.domain.entity.fixtures
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
+
+@Parcelize
 data class LeagueF(
     val id: Int,
     val name: String,
@@ -7,4 +11,4 @@ data class LeagueF(
     val logo: String,
     val season: Int,
     val round: String
-)
+) : Parcelable

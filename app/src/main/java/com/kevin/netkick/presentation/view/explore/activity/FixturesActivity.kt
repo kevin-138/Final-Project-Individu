@@ -16,13 +16,9 @@ import com.bumptech.glide.Glide
 import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.ActivityFixturesBinding
-import com.kevin.netkick.domain.entity.fixtures.ResponseF
 import com.kevin.netkick.domain.entity.league.ResponseL
-import com.kevin.netkick.domain.entity.rounds.RoundsResponse
-import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.FixturesAdapter
-import com.kevin.netkick.presentation.adapters.LeagueStandingsAdapter
 import com.kevin.netkick.presentation.view.viewmodels.ExploreViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
@@ -113,12 +109,16 @@ class FixturesActivity : AppCompatActivity() {
                 ) {
                     setProgressBar()
                     val roundSelected = rounds[position]
+                    adapter.setSr(season!!,roundSelected)
+                    adapter.setLe(leagueData!!.league.name,leagueData!!.league.logo)
                     getOnlineData(leagueData!!.league.id, season!! ,roundSelected)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     setProgressBar()
                     val roundSelected = rounds[0]
+                    adapter.setSr(season!!,roundSelected)
+                    adapter.setLe(leagueData!!.league.name,leagueData!!.league.logo)
                     getOnlineData(leagueData!!.league.id, season!! ,roundSelected)
                 }
             }

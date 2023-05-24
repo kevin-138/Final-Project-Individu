@@ -92,7 +92,7 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
         val onlineCheck = activity?.let { PresentationUtils.isOnline(requireActivity()) }
         if (onlineCheck == true){
             if (!mainViewModel.runnedExplore){
-                getLiveData()
+//                getLiveData()
             }
         }else{
             if (current){

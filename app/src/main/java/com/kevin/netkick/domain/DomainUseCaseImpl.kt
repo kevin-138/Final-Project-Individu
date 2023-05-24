@@ -10,6 +10,7 @@ import com.kevin.netkick.domain.entity.player.PlayerResponse
 import com.kevin.netkick.domain.entity.player.ResponseP
 import com.kevin.netkick.domain.entity.rounds.RoundsResponse
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
+import com.kevin.netkick.domain.entity.statistics.StatisticResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.domain.entity.trophies.TrophiesResponse
 import kotlinx.coroutines.CoroutineScope
@@ -89,5 +90,8 @@ class DomainUseCaseImpl @Inject constructor(private val repository: DomainReposi
         return repository.getRoundMatches(league,season,round)
     }
 
+    override suspend fun getMatchesStatistic(fixture: Int): Flow<StatisticResponse> {
+        return repository.getMatchesStatistic(fixture)
+    }
 
 }

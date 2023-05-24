@@ -2,6 +2,7 @@ package com.kevin.netkick.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.Intent
 import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -13,10 +14,16 @@ import com.kevin.netkick.databinding.FixturesItemBinding
 import com.kevin.netkick.databinding.LeagueItemBinding
 import com.kevin.netkick.domain.entity.fixtures.ResponseF
 import com.kevin.netkick.domain.entity.league.ResponseL
+import com.kevin.netkick.presentation.PresentationUtils
+import com.kevin.netkick.presentation.intentmodel.StatisticRequirement
+import com.kevin.netkick.presentation.view.explore.activity.FixturesDetailActivity
 
 class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerView.Adapter<FixturesAdapter.FixtureViewHolder>() {
     private lateinit var context: Context
-
+    private var leagueLogo = ""
+    private var leagueName = ""
+    private var season = 0
+    private var round = ""
     inner class FixtureViewHolder(private val binding: FixturesItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: ResponseF){
             val loadingDrawable1 = CircularProgressDrawable(context)
@@ -31,7 +38,7 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
             loadingDrawable2.setColorSchemeColors(Color.WHITE)
             loadingDrawable2.start()
             binding.apply {
-                tvMatchDate.text = data.fixture.date.substringAfter("T"," ")
+                tvMatchDate.text = data.fixture.date.substringBefore('T'," ")
                 tvFixtureMatches.text = context.resources.getString(
                     R.string.goalsFixture,
                     data.goals.home,
@@ -53,6 +60,18 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
                     .placeholder(loadingDrawable2)
                     .error(R.drawable.broken_image_icon)
                     .into(ivLivescoreAwayLogo)
+
+                root.setOnClickListener {
+                    val intent = Intent(context,FixturesDetailActivity::class.java)
+                    intent.putExtra(PresentationUtils.FIXTURE_FULL_DATA,data)
+                    intent.putExtra(PresentationUtils.FIXTURE_REQUIREMENT, StatisticRequirement(
+                        leagueName = leagueName,
+                        leagueLogo = leagueLogo,
+                        season = season,
+                        round = round
+                    ))
+                    context.startActivity(intent)
+                }
             }
         }
     }
@@ -65,6 +84,15 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
 
     override fun getItemCount(): Int {
         return dataList.size
+    }
+
+    fun setSr(seasonInp:Int, roundInp:String){
+        season = seasonInp
+        round = roundInp
+    }
+    fun setLe(name:String, logo:String){
+        leagueLogo = logo
+        leagueName = name
     }
 
     override fun onBindViewHolder(holder: FixtureViewHolder, position: Int) {

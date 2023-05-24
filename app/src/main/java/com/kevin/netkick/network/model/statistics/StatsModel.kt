@@ -7,7 +7,7 @@ data class StatsModel(
     @SerializedName("type")
     val type: String?,
     @SerializedName("value")
-    val value: Int?
+    val value: Any?
 ){
     companion object{
         fun transformToListEntity(item:List<StatsModel>):List<Stats>{
@@ -18,7 +18,20 @@ data class StatsModel(
         fun transformToEntity(it:StatsModel):Stats{
             return Stats(
                 type = it.type ?: "",
-                value = it.value ?: 0
+                value = when (it.value) {
+                    is String -> {
+                        it.value
+                    }
+                    is Int -> {
+                        it.value.toString()
+                    }
+                    is Double -> {
+                        it.value.toString()
+                    }
+                    else -> {
+                        "0"
+                    }
+                }
             )
         }
     }

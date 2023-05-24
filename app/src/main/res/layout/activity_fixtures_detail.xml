@@ -1,9 +1,274 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background1"
     tools:context=".presentation.view.explore.activity.FixturesDetailActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageButton
+            android:id="@+id/ib_back_button"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginVertical="20dp"
+            android:src="@drawable/arrrowssc"
+            android:background="@color/transparant"
+            android:layout_marginStart="20dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="SpeakableTextPresentCheck" />
+
+        <ImageView
+            android:id="@+id/iv_league_logo_statistics"
+            android:layout_width="85dp"
+            android:layout_height="85dp"
+            tools:src="@drawable/team_logo_pc"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="20dp"
+            app:layout_constraintTop_toBottomOf="@id/ib_back_button"
+            app:layout_constraintStart_toStartOf="@id/ib_back_button"
+            />
+
+        <TextView
+            android:id="@+id/tv_league_name_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/leagues"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="10dp"
+            app:layout_constraintTop_toTopOf="@id/iv_league_logo_statistics"
+            app:layout_constraintStart_toEndOf="@id/iv_league_logo_statistics" />
+
+        <TextView
+            android:id="@+id/tv_league_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textColor="@color/lightPurple"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="@id/tv_league_name_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toEndOf="@id/tv_league_name_title"
+            app:layout_constraintTop_toTopOf="@id/tv_league_name_title"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Cup" />
+
+        <TextView
+            android:id="@+id/tv_league_season_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/season"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_league_name_title"
+            app:layout_constraintStart_toStartOf="@id/tv_league_name_title" />
+
+        <TextView
+            android:id="@+id/tv_league_season"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Cup"
+            android:textColor="@color/lightPurple"
+            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_league_season_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_league_season_title"
+            app:layout_constraintStart_toEndOf="@id/tv_league_season_title" />
+
+        <TextView
+            android:id="@+id/tv_league_round_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="@string/round"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_league_season_title"
+            app:layout_constraintStart_toStartOf="@id/tv_league_name_title" />
+
+        <TextView
+            android:id="@+id/tv_league_round"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Regular Season 1"
+            android:textColor="@color/lightPurple"
+            android:textStyle="bold"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_league_round_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_league_round_title"
+            app:layout_constraintStart_toEndOf="@id/tv_league_round_title" />
+
+                <TextView
+                    android:id="@+id/tv_match_title_banner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fixture"
+                    android:textStyle="bold"
+                    android:textColor="@color/white"
+                    android:layout_marginEnd="20dp"
+                    android:layout_marginTop="25dp"
+                    android:textSize="24sp"
+                    app:layout_constraintStart_toStartOf="@id/iv_league_logo_statistics"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/iv_league_logo_statistics"/>
+
+        <TextView
+            android:id="@+id/tv_fixture_matches"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="2-2"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="25dp"
+            app:layout_constraintTop_toBottomOf="@id/tv_match_title_banner"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_match_opponents"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Real madrid vs Barcelona"
+            android:textSize="15sp"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            app:layout_constraintTop_toBottomOf="@id/iv_livescore_home_logo"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:gravity="center"/>
+
+
+        <ImageView
+            android:id="@+id/iv_livescore_home_logo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            tools:src="@drawable/team_logo_pc"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="40dp"
+            app:layout_constraintTop_toTopOf="@id/tv_fixture_matches"
+            app:layout_constraintBottom_toBottomOf="@id/tv_fixture_matches"/>
+
+        <ImageView
+            android:id="@+id/iv_livescore_away_logo"
+            android:layout_width="70dp"
+            android:layout_height="70dp"
+            tools:src="@drawable/team_logo_pc"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="40dp"
+            app:layout_constraintTop_toTopOf="@id/tv_fixture_matches"
+            app:layout_constraintBottom_toBottomOf="@id/tv_fixture_matches"/>
+
+        <TextView
+            android:id="@+id/tv_fixture_status_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="18sp"
+            android:text="@string/status"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_match_opponents"
+            app:layout_constraintStart_toStartOf="@id/tv_match_title_banner" />
+
+        <TextView
+            android:id="@+id/tv_fixture_status"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Regular Season 1"
+            android:textColor="@color/lightPurple"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_fixture_status_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_fixture_status_title"
+            app:layout_constraintStart_toEndOf="@id/tv_fixture_status_title" />
+
+        <TextView
+            android:id="@+id/tv_fixture_winner_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:textSize="18sp"
+            android:text="@string/winner"
+            android:textColor="@color/white"
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/tv_fixture_status_title"
+            app:layout_constraintStart_toStartOf="@id/tv_match_title_banner" />
+
+        <TextView
+            android:id="@+id/tv_fixture_winner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            tools:text="Regular Season 1"
+            android:textColor="@color/lightPurple"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp"
+            android:ellipsize="end"
+            android:maxLines="1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/tv_fixture_winner_title"
+            app:layout_constraintBottom_toBottomOf="@id/tv_fixture_winner_title"
+            app:layout_constraintStart_toEndOf="@id/tv_fixture_winner_title" />
+
+        <TextView
+            android:id="@+id/tv_statistic_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/statistics"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_marginTop="25dp"
+            android:textSize="24sp"
+            app:layout_constraintTop_toBottomOf="@id/tv_fixture_winner_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_statistics"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:paddingBottom="30dp"
+                app:layout_constraintTop_toBottomOf="@+id/tv_statistic_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

@@ -8,6 +8,7 @@ import com.kevin.netkick.domain.entity.league.LeagueResponse
 import com.kevin.netkick.domain.entity.rounds.RoundsResponse
 import com.kevin.netkick.domain.entity.standings.StandingsResponse
 import com.kevin.netkick.domain.entity.standings.substandings.Standings
+import com.kevin.netkick.domain.entity.statistics.StatisticResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -78,6 +79,15 @@ class ExploreViewModel @Inject constructor(private val useCase: DomainUseCase): 
             emit(
                 it
             )
+        }
+    }
+
+    private val _fixtureStatistics = MutableStateFlow(StatisticResponse(Paging(0,0),0, listOf()))
+    val fixtureStatistics : StateFlow<StatisticResponse> =   _fixtureStatistics
+
+    suspend fun getFixtureStatistic(fixture: Int){
+        useCase.getMatchesStatistic(fixture).collectLatest {
+            _fixtureStatistics.value = it
         }
     }
 

@@ -11,6 +11,7 @@
     <string name="read_more">Read More</string>
     <string name="goalsFixture">%d - %d</string>
     <string name="vsFixture">%s vs %s</string>
+    <string name="unknown">Unknown</string>
     <string name="DateLiveTime">%s %s</string>
     <string name="vs">VS</string>
     <string name="oops">UH OH</string>
@@ -100,4 +101,24 @@
     <string name="round">Round:</string>
     <string name="no_matches_available">No Matches Available</string>
     <string name="no_standings_available">No Standings Available</string>
+    <string name="fixture">FIXTURE:</string>
+    <string name="status">Status:</string>
+    <string name="winner">Winner:</string>
+    <string name="statistics">STATISTICS</string>
+    <string name="shots_on_goal">Shots On Goal</string>
+    <string name="shots_off_goal">Shots off Goal</string>
+    <string name="total_shots">Total Shots</string>
+    <string name="blocked_shots">Blocked Shots</string>
+    <string name="shots_outsidebox">Shots Outsidebox</string>
+    <string name="shots_insidebox">Shots Insidebox</string>
+    <string name="foul">Foul</string>
+    <string name="corner_kicks">Corner Kicks</string>
+    <string name="ball_possession">Ball Possession</string>
+    <string name="offsides">Offsides</string>
+    <string name="yellow_card">Yellow Card</string>
+    <string name="red_card">Red Card</string>
+    <string name="goalkeeper_saves">Goalkeeper Saves</string>
+    <string name="total_passes">Total Passes</string>
+    <string name="passes_accurate">Passes Accurate</string>
+    <string name="passesper">Passes %</string>
 </resources>

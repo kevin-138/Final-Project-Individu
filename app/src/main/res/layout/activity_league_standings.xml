@@ -116,6 +116,7 @@
         android:background="@drawable/article_button"
         android:paddingHorizontal="35dp"
         android:text="@string/matches"
+        android:visibility="invisible"
         android:textAllCaps="false"
         android:textColor="@color/lightPurple"
         android:textSize="18sp"

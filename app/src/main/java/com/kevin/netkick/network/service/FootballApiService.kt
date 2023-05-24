@@ -2,6 +2,7 @@ package com.kevin.netkick.network.service
 
 
 import TeamResponseModel
+import com.kevin.netkick.domain.entity.statistics.StatisticResponse
 import com.kevin.netkick.network.NetworkUtils
 import com.kevin.netkick.network.model.coach.CoachResponseModel
 import com.kevin.netkick.network.model.countries.CountryResponseModel
@@ -10,6 +11,7 @@ import com.kevin.netkick.network.model.league.LeagueResponseModel
 import com.kevin.netkick.network.model.player.PlayerResponseModel
 import com.kevin.netkick.network.model.rounds.RoundsResponseModel
 import com.kevin.netkick.network.model.standings.StandingsResponseModel
+import com.kevin.netkick.network.model.statistics.StatisticResponseModel
 import com.kevin.netkick.network.model.trophies.TrophiesResponseModel
 import retrofit2.http.GET
 import retrofit2.http.Headers
@@ -81,5 +83,7 @@ interface FootballApiService {
     @GET("fixtures/rounds")
     suspend fun getLeagueRounds(@Query("league") league:Int,@Query("season") season:Int): RoundsResponseModel
 
-
+    @Headers(NetworkUtils.FOOTBALL_API_KEY)
+    @GET("fixtures/statistics")
+    suspend fun getFixtureStatistic(@Query("fixture") fixture:Int): StatisticResponseModel
 }

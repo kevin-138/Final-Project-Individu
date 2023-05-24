@@ -48,6 +48,8 @@ object PresentationUtils {
     const val COACH_FULL_DATA = "COACH_FULL_DATA"
     const val PLAYER_FULL_DATA = "PLAYER_FULL_DATA"
 
+    const val FIXTURE_FULL_DATA = "FIXTURE_FULL_DATA"
+    const val FIXTURE_REQUIREMENT= "FIXTURE_REQUIREMENT"
 
     fun isOnline(activity: FragmentActivity): Boolean {
         val connectivityManager =
