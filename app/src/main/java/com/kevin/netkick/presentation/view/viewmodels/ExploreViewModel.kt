@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 class ExploreViewModel @Inject constructor(private val useCase: DomainUseCase) : ViewModel() {
 
-    private val _leagueByCountryFlow = MutableStateFlow(LeagueResponse(Paging(0, 0), 0, listOf()))
+    private val _leagueByCountryFlow = MutableStateFlow(LeagueResponse(Paging(0, 0), 0, listOf(),error = ""))
     val leagueByCountryFlow: StateFlow<LeagueResponse> = _leagueByCountryFlow
 
     suspend fun getLeagueFilterCountry(country: String) {
@@ -59,7 +59,7 @@ class ExploreViewModel @Inject constructor(private val useCase: DomainUseCase) :
         }
     }
 
-    private val _leagueRounds = MutableStateFlow(RoundsResponse(Paging(0, 0), 0, listOf()))
+    private val _leagueRounds = MutableStateFlow(RoundsResponse(Paging(0, 0), 0, listOf(),error = ""))
     val leagueRounds: StateFlow<RoundsResponse> = _leagueRounds
 
     suspend fun getLeagueRoundsBySeason(league: Int, season: Int) {
@@ -87,7 +87,7 @@ class ExploreViewModel @Inject constructor(private val useCase: DomainUseCase) :
             }
         }
 
-    private val _fixtureStatistics = MutableStateFlow(StatisticResponse(Paging(0, 0), 0, listOf()))
+    private val _fixtureStatistics = MutableStateFlow(StatisticResponse(Paging(0, 0), 0, listOf(),error = ""))
     val fixtureStatistics: StateFlow<StatisticResponse> = _fixtureStatistics
 
     suspend fun getFixtureStatistic(fixture: Int) {

@@ -80,7 +80,7 @@ class AllNewsListActivity : AppCompatActivity() {
     }
 
     private fun setupNewsLayout(data: NewsResponse) {
-        newsAdapter.addDataToList(data.articles)
+        newsAdapter.addDataToList(data.articles,false)
     }
 
 }

@@ -17,7 +17,8 @@ data class StandingsResponseModel(
             return StandingsResponse(
                 paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0,0)),
                 results = it.results ?: 0,
-                response = ResponseStModel.transformToListEntity(it.response ?: listOf())
+                response = ResponseStModel.transformToListEntity(it.response ?: listOf()),
+                error = ""
             )
         }
     }

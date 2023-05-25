@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -42,7 +43,7 @@ class HomeFragment() : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         mainViewModel = (activity as MainActivity).provideMainViewModel()
         checkOnline(true)
-
+        setupAdapters()
         binding.tvSeeAllPopularTeams.setOnClickListener {
             val intentPopular = Intent(requireContext(), PopularTeamsListActivity::class.java)
             requireContext().startActivity(intentPopular)
@@ -51,6 +52,36 @@ class HomeFragment() : Fragment() {
             val intentNews = Intent(requireContext(), AllNewsListActivity::class.java)
             requireContext().startActivity(intentNews)
         }
+    }
+
+    private fun setupAdapters() {
+        binding.apply {
+        val pageSnapHelper = PagerSnapHelper()
+        liveScoreAdapter = LiveScoreAdapter(mutableListOf(),false)
+       rvLivescore.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+        rvLivescore.adapter = liveScoreAdapter
+        pageSnapHelper.attachToRecyclerView(binding.rvLivescore)
+
+        popularTeamsAdapter = PopularTeamsPreviewAdapter(
+           mutableListOf(),
+            PresentationUtils.POPULAR_SEASON
+        )
+            rvPopularTeams.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            rvPopularTeams.adapter = popularTeamsAdapter
+
+            val noScrollLayoutManager = object : LinearLayoutManager(requireContext()) {
+                override fun canScrollVertically(): Boolean {
+                    return false
+                }
+            }
+                newsAdapter = NewsHeadlinePreviewAdapter(mutableListOf(), true)
+                rvNewsHeadline.layoutManager = noScrollLayoutManager
+                rvNewsHeadline.adapter = newsAdapter
+        }
+
+
     }
 
     fun checkOnline(current: Boolean = false) {
@@ -79,14 +110,10 @@ class HomeFragment() : Fragment() {
                 val popularTeamsPreview = if (it.response.size > 14) {
                     it.response.slice(0..14)
                 } else listOf()
-                popularTeamsAdapter = PopularTeamsPreviewAdapter(
-                    popularTeamsPreview,
-                    PresentationUtils.POPULAR_SEASON
-                )
-                binding.apply {
-                    rvPopularTeams.layoutManager =
-                        LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                    rvPopularTeams.adapter = popularTeamsAdapter
+                if (it.error.isNotBlank()) {
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                } else {
+                    popularTeamsAdapter.addDataToList(popularTeamsPreview, PresentationUtils.POPULAR_SEASON)
                 }
             }
         }
@@ -97,6 +124,7 @@ class HomeFragment() : Fragment() {
             mainViewModel.getNewsHeadline()
             mainViewModel.newsHeadlineFlow.collectLatest {
                 setupNewsLayout(it)
+
             }
         }
     }
@@ -106,52 +134,35 @@ class HomeFragment() : Fragment() {
             data.totalResults == 0 -> {
                 binding.apply {
                     tvSeeAllNews.visibility = View.INVISIBLE
-                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles.toMutableList(), true)
-                    setupNewsAdapter(newsAdapter)
+                    newsAdapter.addDataToList(data.articles.toMutableList(), true)
                 }
             }
             data.totalResults <= 4 -> {
                 binding.apply {
                     tvSeeAllNews.visibility = View.INVISIBLE
-                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles.toMutableList(), false)
-                    setupNewsAdapter(newsAdapter)
+                    newsAdapter.addDataToList(data.articles.toMutableList(), false)
                 }
             }
             else -> {
                 binding.apply {
                     tvSeeAllNews.visibility = View.VISIBLE
-                    newsAdapter =
-                        NewsHeadlinePreviewAdapter(data.articles.slice(0..3).toMutableList(), false)
-                    setupNewsAdapter(newsAdapter)
+                    newsAdapter.addDataToList(data.articles.slice(0..3).toMutableList(), false)
                 }
             }
         }
 
     }
 
-    fun setupNewsAdapter(newsAdapter: NewsHeadlinePreviewAdapter) {
-        val noScrollLayoutManager = object : LinearLayoutManager(requireContext()) {
-            override fun canScrollVertically(): Boolean {
-                return false
-            }
-        }
-        binding.apply {
-            rvNewsHeadline.layoutManager = noScrollLayoutManager
-            rvNewsHeadline.adapter = newsAdapter
-        }
-    }
-
 
     private fun getLiveMatches() {
-        val pageSnapHelper = PagerSnapHelper()
         lifecycleScope.launch {
             mainViewModel.getLiveMatches(PresentationUtils.LIVE_PARAMS)
             mainViewModel.liveScoreFlow.collectLatest {
-                liveScoreAdapter = LiveScoreAdapter(it.response, it.response.isEmpty())
-                binding.rvLivescore.layoutManager =
-                    LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-                binding.rvLivescore.adapter = liveScoreAdapter
-                pageSnapHelper.attachToRecyclerView(binding.rvLivescore)
+                if (it.error.isNotBlank()) {
+                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                } else {
+                    liveScoreAdapter.addDataToList(it.response, it.response.isEmpty())
+                }
             }
         }
 

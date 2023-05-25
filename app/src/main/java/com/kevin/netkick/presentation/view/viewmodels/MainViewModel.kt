@@ -32,7 +32,7 @@ class MainViewModel @Inject constructor(private val useCase: DomainUseCase) : Vi
     var runnedHome = false
     var runnedExplore = false
 
-    private val _liveScoreFlow = MutableStateFlow(FixturesResponse(Paging(0, 0), 0, listOf()))
+    private val _liveScoreFlow = MutableStateFlow(FixturesResponse(Paging(0, 0), 0, listOf(),error = ""))
     val liveScoreFlow: StateFlow<FixturesResponse> = _liveScoreFlow
 
     suspend fun getLiveMatches(live: String) {
@@ -42,7 +42,7 @@ class MainViewModel @Inject constructor(private val useCase: DomainUseCase) : Vi
         }
     }
 
-    private val _popularTeamsFlow = MutableStateFlow(TeamResponse(Paging(0, 0), 0, listOf()))
+    private val _popularTeamsFlow = MutableStateFlow(TeamResponse(Paging(0, 0), 0, listOf(),error = ""))
     val popularTeamsFlow: StateFlow<TeamResponse> = _popularTeamsFlow
 
     suspend fun getPopularTeams() {
@@ -54,7 +54,7 @@ class MainViewModel @Inject constructor(private val useCase: DomainUseCase) : Vi
         }
     }
 
-    private val _newsHeadlinesFlow = MutableStateFlow(NewsResponse("", 0, listOf()))
+    private val _newsHeadlinesFlow = MutableStateFlow(NewsResponse("", 0, listOf(),error = ""))
     val newsHeadlineFlow: StateFlow<NewsResponse> = _newsHeadlinesFlow
 
     suspend fun getNewsHeadline() {
@@ -63,7 +63,7 @@ class MainViewModel @Inject constructor(private val useCase: DomainUseCase) : Vi
         }
     }
 
-    private val _allCountriesFLow = MutableStateFlow(CountryResponse(0, Paging(0, 0), listOf()))
+    private val _allCountriesFLow = MutableStateFlow(CountryResponse(0, Paging(0, 0), listOf(),error = ""))
     val allCountriesFlow: StateFlow<CountryResponse> = _allCountriesFLow
     suspend fun getAllCountries() {
         useCase.getAllCountries().collectLatest {

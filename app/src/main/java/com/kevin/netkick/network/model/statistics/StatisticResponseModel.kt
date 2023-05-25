@@ -17,7 +17,8 @@ data class StatisticResponseModel(
             return StatisticResponse(
                 paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
                 results = it.results ?: 0,
-                response = ResponseSModel.transformToListEntity(it.response ?: listOf())
+                response = ResponseSModel.transformToListEntity(it.response ?: listOf()),
+                error = ""
             )
         }
     }

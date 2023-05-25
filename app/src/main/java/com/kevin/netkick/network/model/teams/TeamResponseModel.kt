@@ -16,7 +16,8 @@ data class TeamResponseModel(
                 results = it.results ?: 0,
                 response = ResponseTModel.transformToListEntity(
                     it.response ?: listOf()
-                )
+                ),
+                error = ""
             )
         }
     }

@@ -13,7 +13,8 @@ data class RoundsResponseModel(
             return RoundsResponse(
                 paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
                 results = it.results ?: 0,
-                response = it.response ?: listOf()
+                response = it.response ?: listOf(),
+                error = ""
             )
         }
     }

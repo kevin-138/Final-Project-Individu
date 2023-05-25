@@ -7,4 +7,5 @@ data class StatisticResponse (
     val paging: Paging,
     val results: Int,
     val response: List<ResponseS>,
+    val error: String
 )

@@ -17,7 +17,8 @@ data class LeagueResponseModel(
             return LeagueResponse(
                 results = it.results ?: 0,
                 paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
-                response = ResponseLModel.transformToListEntity(it.response ?: listOf())
+                response = ResponseLModel.transformToListEntity(it.response ?: listOf()),
+                error = ""
             )
         }
     }

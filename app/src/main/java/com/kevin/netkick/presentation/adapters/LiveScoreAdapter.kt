@@ -1,5 +1,6 @@
 package com.kevin.netkick.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -11,9 +12,10 @@ import com.bumptech.glide.Glide
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.LiveScoreItemBinding
 import com.kevin.netkick.domain.entity.fixtures.ResponseF
+import com.kevin.netkick.domain.entity.standings.substandings.Standings
 
 
-class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEmpty: Boolean) :
+class LiveScoreAdapter(private val dataList: MutableList<ResponseF>, private var dataEmpty: Boolean) :
     RecyclerView.Adapter<LiveScoreAdapter.LiveViewHolder>() {
     private lateinit var context: Context
 
@@ -122,6 +124,14 @@ class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEm
         } else {
             holder.bindData(dataList[position], context)
         }
+    }
+
+    @SuppressLint("NotifyDataSetChanged")
+    fun addDataToList(inputData: List<ResponseF>, empty:Boolean) {
+        dataList.clear()
+        dataList.addAll(inputData)
+        dataEmpty = empty
+        notifyDataSetChanged()
     }
 
 }

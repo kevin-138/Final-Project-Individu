@@ -17,7 +17,8 @@ data class TrophiesResponseModel(
             return TrophiesResponse(
                 paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
                 results = it.results ?: 0,
-                response = ResponseTropModel.transformToListEntity(it.response ?: listOf())
+                response = ResponseTropModel.transformToListEntity(it.response ?: listOf()),
+                error = ""
             )
         }
     }

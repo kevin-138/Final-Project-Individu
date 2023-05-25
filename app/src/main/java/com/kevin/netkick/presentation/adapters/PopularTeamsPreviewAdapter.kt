@@ -1,5 +1,6 @@
 package com.kevin.netkick.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -10,11 +11,12 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.PopularTeamItemBinding
+import com.kevin.netkick.domain.entity.fixtures.ResponseF
 import com.kevin.netkick.domain.entity.teams.ResponseT
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.general.activity.TeamDetailActivity
 
-class PopularTeamsPreviewAdapter(private val dataList: List<ResponseT>, private val season: Int) :
+class PopularTeamsPreviewAdapter(private val dataList: MutableList<ResponseT>, private var season: Int) :
     RecyclerView.Adapter<PopularTeamsPreviewAdapter.TeamsViewHolder>() {
     private lateinit var context: Context
 
@@ -60,5 +62,13 @@ class PopularTeamsPreviewAdapter(private val dataList: List<ResponseT>, private 
     override fun onBindViewHolder(holder: TeamsViewHolder, position: Int) {
         holder.bindData(dataList[position])
     }
+    @SuppressLint("NotifyDataSetChanged")
+    fun addDataToList(inputData: List<ResponseT>, inputSeason:Int) {
+        dataList.clear()
+        dataList.addAll(inputData)
+        season = inputSeason
+        notifyDataSetChanged()
+    }
+
 
 }

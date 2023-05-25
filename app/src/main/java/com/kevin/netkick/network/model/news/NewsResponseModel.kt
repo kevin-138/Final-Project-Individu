@@ -16,7 +16,8 @@ data class NewsResponseModel(
             return NewsResponse(
                 status = it.status ?: "",
                 totalResults = it.totalResults ?: 0,
-                articles = ArticleModel.transformToListEntity(it.articles ?: listOf())
+                articles = ArticleModel.transformToListEntity(it.articles ?: listOf()),
+                error = ""
             )
         }
     }

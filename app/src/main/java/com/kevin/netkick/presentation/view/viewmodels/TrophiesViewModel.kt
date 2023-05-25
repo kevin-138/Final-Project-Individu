@@ -66,7 +66,7 @@ class TrophiesViewModel @Inject constructor(private val useCase: DomainUseCase) 
         }
     }
 
-    private val _trophiesFlow = MutableStateFlow(TrophiesResponse(Paging(0, 0), 0, listOf()))
+    private val _trophiesFlow = MutableStateFlow(TrophiesResponse(Paging(0, 0), 0, listOf(),error = ""))
     val trophiesFlow: StateFlow<TrophiesResponse> = _trophiesFlow
 
     suspend fun getTrophies(coach: Int) {
@@ -75,7 +75,7 @@ class TrophiesViewModel @Inject constructor(private val useCase: DomainUseCase) 
         }
     }
 
-    private val _playerTrophiesFlow = MutableStateFlow(TrophiesResponse(Paging(0, 0), 0, listOf()))
+    private val _playerTrophiesFlow = MutableStateFlow(TrophiesResponse(Paging(0, 0), 0, listOf(),error = ""))
     val playerTrophiesFlow: StateFlow<TrophiesResponse> = _playerTrophiesFlow
 
     suspend fun getPlayerTrophies(player: Int) {

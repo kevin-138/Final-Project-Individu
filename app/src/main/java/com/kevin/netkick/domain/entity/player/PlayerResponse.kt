@@ -6,4 +6,5 @@ data class PlayerResponse(
     val paging: Paging,
     val results: Int,
     val response: List<ResponseP>,
+    val error: String
 )

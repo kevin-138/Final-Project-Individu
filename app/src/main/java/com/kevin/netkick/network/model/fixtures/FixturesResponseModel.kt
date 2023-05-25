@@ -17,7 +17,8 @@ data class FixturesResponseModel(
             return FixturesResponse(
                 paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
                 results = it.results ?: 0,
-                response = ResponseFModel.transformToListEntity(it.response ?: listOf())
+                response = ResponseFModel.transformToListEntity(it.response ?: listOf()),
+                error = ""
             )
         }
     }

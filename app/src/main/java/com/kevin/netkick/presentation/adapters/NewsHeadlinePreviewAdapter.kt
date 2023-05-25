@@ -1,5 +1,6 @@
 package com.kevin.netkick.presentation.adapters
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.LayoutInflater
@@ -13,7 +14,7 @@ import com.kevin.netkick.presentation.view.home.news.activity.ArticleActivity
 
 class NewsHeadlinePreviewAdapter(
     private val dataList: MutableList<Article>,
-    private val dataEmpty: Boolean
+    private var dataEmpty: Boolean
 ) : RecyclerView.Adapter<NewsHeadlinePreviewAdapter.NewsViewHolder>() {
     private lateinit var context: Context
 
@@ -89,9 +90,11 @@ class NewsHeadlinePreviewAdapter(
         }
     }
 
-    fun addDataToList(articleList: List<Article>) {
+    @SuppressLint("NotifyDataSetChanged")
+    fun addDataToList(articleList: List<Article>,dataInput:Boolean) {
         dataList.clear()
         dataList.addAll(articleList)
-        notifyItemRangeChanged(0, dataList.size)
+        dataEmpty = dataInput
+        notifyDataSetChanged()
     }
 }

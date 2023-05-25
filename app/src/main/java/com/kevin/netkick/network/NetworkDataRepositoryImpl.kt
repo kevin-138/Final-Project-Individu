@@ -1,5 +1,6 @@
 package com.kevin.netkick.network
 
+import PagingModel
 import TeamResponseModel
 import android.util.Log
 import androidx.paging.Pager
@@ -20,8 +21,10 @@ import com.kevin.netkick.domain.entity.statistics.StatisticResponse
 import com.kevin.netkick.domain.entity.teams.TeamResponse
 import com.kevin.netkick.domain.entity.trophies.TrophiesResponse
 import com.kevin.netkick.network.model.coach.CoachResponseModel
+import com.kevin.netkick.network.model.coach.ResponseCModel
 import com.kevin.netkick.network.model.countries.CountryResponseModel
 import com.kevin.netkick.network.model.fixtures.FixturesResponseModel
+import com.kevin.netkick.network.model.fixtures.ResponseFModel
 import com.kevin.netkick.network.model.league.LeagueResponseModel
 import com.kevin.netkick.network.model.news.NewsResponseModel
 import com.kevin.netkick.network.model.player.PlayerResponseModel
@@ -50,6 +53,12 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(FixturesResponseModel.transformToEntity(footballApi.getLiveMatches(live)))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(FixturesResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                ))
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -61,6 +70,12 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(TeamResponseModel.transfromToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(TeamResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                ))
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -72,6 +87,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(CountryResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(CountryResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -87,6 +109,12 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(NewsResponseModel.transformsToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(NewsResponse(
+                    status = "",
+                    totalResults = 0,
+                    articles = listOf(),
+                    error = e.message ?: ""
+                ))
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -98,6 +126,12 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(TeamResponseModel.transfromToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(TeamResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                ))
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -121,6 +155,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(LeagueResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(LeagueResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -132,6 +173,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(LeagueResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(LeagueResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -143,6 +191,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(StandingsResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(StandingsResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -154,6 +209,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(PlayerResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(PlayerResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -165,6 +227,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(CoachResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(CoachResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -176,6 +245,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(TrophiesResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(TrophiesResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -187,6 +263,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(TeamResponseModel.transfromToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(TeamResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -198,6 +281,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(PlayerResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(PlayerResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -210,6 +300,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
             } catch (e: Exception) {
                 Log.d("errorrr", e.toString())
                 e.printStackTrace()
+                emit(TrophiesResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -221,6 +318,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(RoundsResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(RoundsResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -236,6 +340,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(FixturesResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(FixturesResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }
@@ -247,6 +358,13 @@ class NetworkDataRepositoryImpl @Inject constructor(
                 emit(StatisticResponseModel.transformToEntity(response))
             } catch (e: Exception) {
                 e.printStackTrace()
+                emit(StatisticResponse(
+                    paging = PagingModel.transformsToEntity(PagingModel(0, 0)),
+                    results = 0,
+                    response = listOf(),
+                    error = e.message ?: ""
+                )
+                )
             }
         }.flowOn(Dispatchers.IO)
     }

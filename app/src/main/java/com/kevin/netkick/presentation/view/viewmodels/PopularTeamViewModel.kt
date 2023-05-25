@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 class PopularTeamViewModel @Inject constructor(private val useCase: DomainUseCase) : ViewModel() {
 
-    private val _popularTeamsFlow = MutableStateFlow(TeamResponse(Paging(0, 0), 0, listOf()))
+    private val _popularTeamsFlow = MutableStateFlow(TeamResponse(Paging(0, 0), 0, listOf(),error = ""))
     val popularTeamsFlow: StateFlow<TeamResponse> = _popularTeamsFlow
 
     suspend fun getPopularTeams() {
@@ -28,7 +28,7 @@ class PopularTeamViewModel @Inject constructor(private val useCase: DomainUseCas
         }
     }
 
-    private val _detailTeamsFlow = MutableStateFlow(TeamResponse(Paging(0, 0), 0, listOf()))
+    private val _detailTeamsFlow = MutableStateFlow(TeamResponse(Paging(0, 0), 0, listOf(),error = ""))
     val detailTeamsFlow: StateFlow<TeamResponse> = _detailTeamsFlow
 
     suspend fun getPopularTeamDetail(id: Int) {

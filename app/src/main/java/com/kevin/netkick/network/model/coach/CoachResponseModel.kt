@@ -17,7 +17,8 @@ data class CoachResponseModel(
             return CoachResponse(
                 paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
                 results = it.results ?: 0,
-                response = ResponseCModel.transformToListEntity(it.response ?: listOf())
+                response = ResponseCModel.transformToListEntity(it.response ?: listOf()),
+                error = ""
             )
         }
     }

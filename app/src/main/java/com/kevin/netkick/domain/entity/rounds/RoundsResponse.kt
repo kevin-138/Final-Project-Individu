@@ -6,4 +6,5 @@ data class RoundsResponse(
     val paging: Paging,
     val results: Int,
     val response: List<String>,
+    val error: String
 )

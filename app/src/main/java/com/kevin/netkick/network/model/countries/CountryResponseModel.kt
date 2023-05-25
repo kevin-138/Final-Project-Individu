@@ -13,7 +13,8 @@ data class CountryResponseModel(
             return CountryResponse(
                 results = it.results ?: 0,
                 paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
-                response = CountryCModel.transformToListEntity(it.response ?: listOf())
+                response = CountryCModel.transformToListEntity(it.response ?: listOf()),
+                error = ""
             )
         }
     }
