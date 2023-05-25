@@ -38,7 +38,6 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         checkOnline(true)
 
         binding.tvSeeAllPopularTeams.setOnClickListener {

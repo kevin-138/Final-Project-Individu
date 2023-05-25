@@ -27,7 +27,7 @@ data class LeaguePModel(
                         it.season
                     }
                     is Int -> {  it.season.toString() }
-                    is Double -> {it.season.toString()}
+                    is Double -> {it.season.toString().substringBefore('.'," ")}
                     else -> {"0"}
                 }
             )
