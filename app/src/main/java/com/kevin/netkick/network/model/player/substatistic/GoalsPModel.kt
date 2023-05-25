@@ -12,9 +12,9 @@ data class GoalsPModel(
     val conceded: Int?,
     @SerializedName("saves")
     val saves: Int?,
-){
-    companion object{
-        fun transformToEntity(it:GoalsPModel):GoalsP{
+) {
+    companion object {
+        fun transformToEntity(it: GoalsPModel): GoalsP {
             return GoalsP(
                 total = it.total ?: 0,
                 assists = it.assists ?: 0,

@@ -11,11 +11,11 @@ data class CoachResponseModel(
     val results: Int?,
     @SerializedName("response")
     val response: List<ResponseCModel>?
-){
-    companion object{
-        fun transformToEntity(it:CoachResponseModel):CoachResponse{
+) {
+    companion object {
+        fun transformToEntity(it: CoachResponseModel): CoachResponse {
             return CoachResponse(
-                paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0,0)),
+                paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
                 results = it.results ?: 0,
                 response = ResponseCModel.transformToListEntity(it.response ?: listOf())
             )

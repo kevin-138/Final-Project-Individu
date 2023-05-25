@@ -14,12 +14,12 @@ data class AllModel(
     val played: Int?,
     @SerializedName("win")
     val win: Int?
-){
-    companion object{
-        fun transformToEntity(it:AllModel):All{
+) {
+    companion object {
+        fun transformToEntity(it: AllModel): All {
             return All(
                 draw = it.draw ?: 0,
-                goals = GoalsStModel.transformToEntity(it.goals ?: GoalsStModel(0,0)),
+                goals = GoalsStModel.transformToEntity(it.goals ?: GoalsStModel(0, 0)),
                 lose = it.lose ?: 0,
                 played = it.played ?: 0,
                 win = it.win ?: 0

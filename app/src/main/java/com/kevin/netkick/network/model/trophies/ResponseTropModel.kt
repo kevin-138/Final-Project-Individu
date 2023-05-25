@@ -12,15 +12,15 @@ data class ResponseTropModel(
     val season: String?,
     @SerializedName("place")
     val place: String?
-){
+) {
     companion object {
-        fun transformToListEntity(item: List<ResponseTropModel>):List<ResponseTrop>{
+        fun transformToListEntity(item: List<ResponseTropModel>): List<ResponseTrop> {
             return item.map {
                 transformToEntity(it)
             }
         }
 
-        fun transformToEntity(it:ResponseTropModel):ResponseTrop{
+        fun transformToEntity(it: ResponseTropModel): ResponseTrop {
             return ResponseTrop(
                 league = it.league ?: "",
                 country = it.country ?: "",

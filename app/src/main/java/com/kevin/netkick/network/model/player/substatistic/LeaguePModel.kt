@@ -14,21 +14,27 @@ data class LeaguePModel(
     val logo: String?,
     @SerializedName("season")
     val season: Any?
-){
-    companion object{
-        fun transformToEntity(it:LeaguePModel):LeagueP{
+) {
+    companion object {
+        fun transformToEntity(it: LeaguePModel): LeagueP {
             return LeagueP(
                 id = it.id ?: 0,
                 name = it.name ?: "",
                 country = it.country ?: "",
                 logo = it.logo ?: "",
-                season = when (it.season){
+                season = when (it.season) {
                     is String -> {
                         it.season
                     }
-                    is Int -> {  it.season.toString() }
-                    is Double -> {it.season.toString().substringBefore('.'," ")}
-                    else -> {"0"}
+                    is Int -> {
+                        it.season.toString()
+                    }
+                    is Double -> {
+                        it.season.toString().substringBefore('.', " ")
+                    }
+                    else -> {
+                        "0"
+                    }
                 }
             )
         }

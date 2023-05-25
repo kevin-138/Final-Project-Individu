@@ -12,21 +12,29 @@ data class SeasonModel(
     val end: String?,
     @SerializedName("coverage")
     val coverage: CoverageModel?
-){
-    companion object{
-        fun transformToEntityList(item: List<SeasonModel>): List<Season>{
+) {
+    companion object {
+        fun transformToEntityList(item: List<SeasonModel>): List<Season> {
             return item.map {
-                SeasonModel.transformToEntity(
+                transformToEntity(
                     it
                 )
             }
         }
-        fun transformToEntity(it:SeasonModel): Season{
+
+        fun transformToEntity(it: SeasonModel): Season {
             return Season(
                 year = it.year ?: 0,
                 start = it.start ?: "",
                 end = it.end ?: "",
-                coverage =  CoverageModel.transformToEntity(it.coverage ?: CoverageModel(LeagueFixtureModel(false,false,false), false,false)))
+                coverage = CoverageModel.transformToEntity(
+                    it.coverage ?: CoverageModel(
+                        LeagueFixtureModel(false, false, false),
+                        false,
+                        false
+                    )
+                )
+            )
         }
     }
 }

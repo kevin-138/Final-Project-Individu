@@ -5,12 +5,12 @@ import com.kevin.netkick.domain.entity.fixtures.subfixture.VenueF
 
 data class VenueFModel(
     @SerializedName("name")
-    val name:String?,
+    val name: String?,
     @SerializedName("city")
-    val city:String?
-){
-    companion object{
-        fun transformToEntity(it: VenueFModel):VenueF{
+    val city: String?
+) {
+    companion object {
+        fun transformToEntity(it: VenueFModel): VenueF {
             return VenueF(
                 name = it.name ?: "",
                 city = it.city ?: ""

@@ -21,11 +21,14 @@ interface FootballApiService {
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("fixtures")
-    suspend fun getLiveMatches(@Query("live") live:String): FixturesResponseModel
+    suspend fun getLiveMatches(@Query("live") live: String): FixturesResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("teams")
-    suspend fun getPopularTeamsHome(@Query("league") league:Int,@Query("season") season:Int): TeamResponseModel
+    suspend fun getPopularTeamsHome(
+        @Query("league") league: Int,
+        @Query("season") season: Int
+    ): TeamResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("countries")
@@ -33,57 +36,77 @@ interface FootballApiService {
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("teams")
-    suspend fun getTeamsDetail(@Query("id") id:Int): TeamResponseModel
+    suspend fun getTeamsDetail(@Query("id") id: Int): TeamResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("players")
-    suspend fun getPlayerInTeams(@Query("team") team:Int,@Query("season") season: Int, @Query("page") page: Int): PlayerResponseModel
+    suspend fun getPlayerInTeams(
+        @Query("team") team: Int,
+        @Query("season") season: Int,
+        @Query("page") page: Int
+    ): PlayerResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("leagues")
-    suspend fun getLeagueSearch(@Query("search") search:String): LeagueResponseModel
+    suspend fun getLeagueSearch(@Query("search") search: String): LeagueResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("leagues")
-    suspend fun getLeagueFilterCountry(@Query("country") country:String): LeagueResponseModel
+    suspend fun getLeagueFilterCountry(@Query("country") country: String): LeagueResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("standings")
-    suspend fun getLeagueStandings(@Query("league") league:Int,@Query("season") season:Int): StandingsResponseModel
+    suspend fun getLeagueStandings(
+        @Query("league") league: Int,
+        @Query("season") season: Int
+    ): StandingsResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("players/topscorers")
-    suspend fun getLeagueTopscore(@Query("league") league:Int,@Query("season") season:Int): PlayerResponseModel
+    suspend fun getLeagueTopscore(
+        @Query("league") league: Int,
+        @Query("season") season: Int
+    ): PlayerResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("coachs")
-    suspend fun getCoachSearch(@Query("search") search:String): CoachResponseModel
+    suspend fun getCoachSearch(@Query("search") search: String): CoachResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("trophies")
-    suspend fun getCoachTrophy(@Query("coach") coach:Int): TrophiesResponseModel
+    suspend fun getCoachTrophy(@Query("coach") coach: Int): TrophiesResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("trophies")
-    suspend fun getPlayerTrophy(@Query("player") player:Int): TrophiesResponseModel
+    suspend fun getPlayerTrophy(@Query("player") player: Int): TrophiesResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("players")
-    suspend fun getPlayerSearch(@Query("search") search:String,@Query("team") team:Int): PlayerResponseModel
+    suspend fun getPlayerSearch(
+        @Query("search") search: String,
+        @Query("team") team: Int
+    ): PlayerResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("teams")
-    suspend fun getTeamsSearch(@Query("search") search:String): TeamResponseModel
+    suspend fun getTeamsSearch(@Query("search") search: String): TeamResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("fixtures")
-    suspend fun getLeagueFixtures(@Query("league") league:Int,@Query("season") season:Int,@Query("round") round:String): FixturesResponseModel
+    suspend fun getLeagueFixtures(
+        @Query("league") league: Int,
+        @Query("season") season: Int,
+        @Query("round") round: String
+    ): FixturesResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("fixtures/rounds")
-    suspend fun getLeagueRounds(@Query("league") league:Int,@Query("season") season:Int): RoundsResponseModel
+    suspend fun getLeagueRounds(
+        @Query("league") league: Int,
+        @Query("season") season: Int
+    ): RoundsResponseModel
 
     @Headers(NetworkUtils.FOOTBALL_API_KEY)
     @GET("fixtures/statistics")
-    suspend fun getFixtureStatistic(@Query("fixture") fixture:Int): StatisticResponseModel
+    suspend fun getFixtureStatistic(@Query("fixture") fixture: Int): StatisticResponseModel
 }

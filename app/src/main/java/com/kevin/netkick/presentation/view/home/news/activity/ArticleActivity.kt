@@ -28,25 +28,26 @@ class ArticleActivity : AppCompatActivity() {
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
         progressBar.show()
         progressBar.window?.setLayout(400, 400)
         progressBar.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)
     }
 
     private fun receiveIntent() {
-        url = if (intent!=null) {
+        url = if (intent != null) {
             intent.getStringExtra(PresentationUtils.NEWS_URL)!!
-        }else{
+        } else {
             ""
         }
         webViewSetup(url)
     }
 
     @SuppressLint("SetJavaScriptEnabled")
-    private fun webViewSetup(url:String) {
+    private fun webViewSetup(url: String) {
         binding.apply {
-            wvNews.webViewClient= object: WebViewClient(){
+            wvNews.webViewClient = object : WebViewClient() {
                 override fun onPageFinished(view: WebView?, url: String?) {
                     super.onPageFinished(view, url)
                     Timer().schedule(4000L) {

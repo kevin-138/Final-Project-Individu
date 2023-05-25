@@ -32,7 +32,9 @@ class LeagueTopScorerSearchActivity : AppCompatActivity() {
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        (application as NetkickApplication).appComponent.injectIntoLeagueTopScorerSearchActivity(this)
+        (application as NetkickApplication).appComponent.injectIntoLeagueTopScorerSearchActivity(
+            this
+        )
         super.onCreate(savedInstanceState)
         binding = ActivityLeagueTopScorerSearchBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -44,10 +46,10 @@ class LeagueTopScorerSearchActivity : AppCompatActivity() {
     }
 
     private fun setObserver() {
-        viewModel.searchResults.observe(this){
-            if (it.response.isEmpty()){
+        viewModel.searchResults.observe(this) {
+            if (it.response.isEmpty()) {
                 layoutVisibility(true)
-            }else{
+            } else {
                 layoutVisibility(false)
                 adapter.addDataToList(it.response)
             }
@@ -59,7 +61,7 @@ class LeagueTopScorerSearchActivity : AppCompatActivity() {
 
     private fun layoutVisibility(isEmpty: Boolean) {
         binding.apply {
-            when(isEmpty){
+            when (isEmpty) {
                 true -> {
                     tvNothingFoundTopsc.visibility = View.VISIBLE
                     rvLeagueTopsc.visibility = View.INVISIBLE
@@ -83,15 +85,19 @@ class LeagueTopScorerSearchActivity : AppCompatActivity() {
 
     private fun setSearchBar() {
         binding.apply {
-            svLeagueTopsc.setOnQueryTextListener(object : SearchView.OnQueryTextListener,android.widget.SearchView.OnQueryTextListener{
+            svLeagueTopsc.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                android.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
-                        if (query.length < 3) {
-                            Toast.makeText(this@LeagueTopScorerSearchActivity,"Search Field must be at least 3 characters!",
-                                Toast.LENGTH_SHORT).show()
-                        }else{
-                            setProgressBar()
-                            viewModel.setSearchQuery(query)
-                        }
+                    if (query.length < 3) {
+                        Toast.makeText(
+                            this@LeagueTopScorerSearchActivity,
+                            "Search Field must be at least 3 characters!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        setProgressBar()
+                        viewModel.setSearchQuery(query)
+                    }
                     return false
                 }
 
@@ -113,7 +119,8 @@ class LeagueTopScorerSearchActivity : AppCompatActivity() {
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
         progressBar.show()
         progressBar.window?.setLayout(400, 400)
         progressBar.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)

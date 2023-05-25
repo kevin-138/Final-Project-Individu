@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName
 import com.kevin.netkick.domain.entity.standings.ResponseSt
 
 data class ResponseStModel(
+    @SerializedName("league")
     val league: LeagueStModel?
 ){
     companion object{

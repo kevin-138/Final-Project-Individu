@@ -21,24 +21,25 @@ data class ResponseCModel(
     val team: TeamCModel?,
     @SerializedName("career")
     val career: List<CareerModel>?
-){companion object{
-    fun transformToListEntity(item:List<ResponseCModel>):List<ResponseC>{
-        return item.map {
-            transformToEntity(it)
+) {
+    companion object {
+        fun transformToListEntity(item: List<ResponseCModel>): List<ResponseC> {
+            return item.map {
+                transformToEntity(it)
+            }
+        }
+
+        fun transformToEntity(it: ResponseCModel): ResponseC {
+            return ResponseC(
+                id = it.id ?: 0,
+                name = it.name ?: "",
+                age = it.age ?: 0,
+                birth = BirthModel.transformToEntity(it.birth ?: BirthModel("", "", "")),
+                nationality = it.nationality ?: "",
+                photo = it.photo ?: "",
+                team = TeamCModel.transformToEntity(it.team ?: TeamCModel(0, "", "")),
+                career = CareerModel.transformToListEntity(it.career ?: listOf())
+            )
         }
     }
-
-    fun transformToEntity(it:ResponseCModel):ResponseC{
-        return ResponseC(
-            id = it.id ?: 0,
-            name = it.name ?: "",
-            age = it.age ?: 0,
-            birth = BirthModel.transformToEntity(it.birth ?: BirthModel("","","")),
-            nationality = it.nationality ?: "",
-            photo = it.photo ?: "",
-            team = TeamCModel.transformToEntity(it.team ?: TeamCModel(0,"","")),
-            career = CareerModel.transformToListEntity(it.career ?: listOf())
-        )
-    }
-}
 }

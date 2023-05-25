@@ -8,14 +8,15 @@ data class StatsModel(
     val type: String?,
     @SerializedName("value")
     val value: Any?
-){
-    companion object{
-        fun transformToListEntity(item:List<StatsModel>):List<Stats>{
+) {
+    companion object {
+        fun transformToListEntity(item: List<StatsModel>): List<Stats> {
             return item.map {
                 transformToEntity(it)
             }
         }
-        fun transformToEntity(it:StatsModel):Stats{
+
+        fun transformToEntity(it: StatsModel): Stats {
             return Stats(
                 type = it.type ?: "",
                 value = when (it.value) {

@@ -11,16 +11,16 @@ data class ResponseLModel(
     @SerializedName("seasons")
     val seasons: List<SeasonModel>?
 ) {
-    companion object{
-        fun transformToListEntity(item: List<ResponseLModel>):List<ResponseL> {
+    companion object {
+        fun transformToListEntity(item: List<ResponseLModel>): List<ResponseL> {
             return item.map {
                 transformToEntity(it)
             }
         }
 
-        fun transformToEntity (it: ResponseLModel): ResponseL{
+        fun transformToEntity(it: ResponseLModel): ResponseL {
             return ResponseL(
-                league = LeagueModel.transformToEntity(it.league ?: LeagueModel(0,"","","")),
+                league = LeagueModel.transformToEntity(it.league ?: LeagueModel(0, "", "", "")),
                 seasons = SeasonModel.transformToEntityList(it.seasons ?: listOf())
             )
         }

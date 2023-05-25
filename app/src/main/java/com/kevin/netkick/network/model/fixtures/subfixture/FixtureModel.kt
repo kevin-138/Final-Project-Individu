@@ -16,16 +16,16 @@ data class FixtureModel(
     val venue: VenueFModel?,
     @SerializedName("status")
     val status: StatusModel?
-){
-    companion object{
-        fun transformToEntity(it: FixtureModel):Fixture{
+) {
+    companion object {
+        fun transformToEntity(it: FixtureModel): Fixture {
             return Fixture(
                 id = it.id ?: 0,
                 referee = it.referee ?: "",
-                timezone = it.timezone?: "",
+                timezone = it.timezone ?: "",
                 date = it.date ?: "",
-                venue = VenueFModel.transformToEntity(it.venue ?: VenueFModel("","")),
-                status = StatusModel.transformToEntity(it.status ?: StatusModel("","")),
+                venue = VenueFModel.transformToEntity(it.venue ?: VenueFModel("", "")),
+                status = StatusModel.transformToEntity(it.status ?: StatusModel("", "")),
             )
         }
     }

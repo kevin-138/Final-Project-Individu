@@ -35,7 +35,6 @@ object PresentationUtils {
 
     const val LEAGUE_FULL_DATA = "LEAGUE_FULL_DATA"
 
-    const val LEAGUE_ID = "LEAGUE_ID"
     const val LEAGUE_SEASON = "LEAGUE_SEASON"
 
     const val TYPE_ITEM = 0
@@ -43,12 +42,10 @@ object PresentationUtils {
 
     const val WINNER = "Winner"
     const val SECOND = "2nd Place"
-    const val THIRD = "3rd Place"
 
     const val COACH_FULL_DATA = "COACH_FULL_DATA"
     const val PLAYER_FULL_DATA = "PLAYER_FULL_DATA"
 
-    const val COVERAGE = "COVERAGE"
 
     const val FIXTURE_FULL_DATA = "FIXTURE_FULL_DATA"
     const val FIXTURE_REQUIREMENT= "FIXTURE_REQUIREMENT"

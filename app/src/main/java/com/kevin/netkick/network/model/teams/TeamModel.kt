@@ -1,4 +1,3 @@
-
 import com.google.gson.annotations.SerializedName
 import com.kevin.netkick.domain.entity.teams.Team
 
@@ -17,14 +16,14 @@ data class TeamModel(
     val logo: String?,
     @SerializedName("national")
     val national: Boolean?
-){
-    companion object{
+) {
+    companion object {
         fun transformToEntity(it: TeamModel): Team {
             return Team(
                 id = it.id ?: 0,
                 name = it.name ?: "",
                 code = it.code ?: "",
-                country = it.country  ?: "",
+                country = it.country ?: "",
                 founded = it.founded ?: 0,
                 logo = it.logo ?: "",
                 national = it.national ?: false

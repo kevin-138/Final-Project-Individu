@@ -18,9 +18,9 @@ import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
 import javax.inject.Inject
 
 
-class MainActivity: AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
-    private lateinit var activeFragment:Fragment
+    private lateinit var activeFragment: Fragment
     private lateinit var homeFragment: HomeFragment
     private lateinit var exploreFragment: ExploreFragment
     private lateinit var trophiesFragment: TrophiesFragment
@@ -28,7 +28,7 @@ class MainActivity: AppCompatActivity() {
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
 
-    private val viewModel:MainViewModel by viewModels {
+    private val viewModel: MainViewModel by viewModels {
         viewModelFactory
     }
 
@@ -36,7 +36,7 @@ class MainActivity: AppCompatActivity() {
         (application as NetkickApplication).appComponent.injectIntoMainActivity(this)
         super.onCreate(savedInstanceState)
         installSplashScreen().apply {
-            setKeepOnScreenCondition{
+            setKeepOnScreenCondition {
                 viewModel.isLoading.value
             }
         }
@@ -50,7 +50,7 @@ class MainActivity: AppCompatActivity() {
 
     }
 
-    private fun setupFragments(){
+    private fun setupFragments() {
         homeFragment = HomeFragment(viewModel)
         exploreFragment = ExploreFragment(viewModel)
         trophiesFragment = TrophiesFragment()
@@ -63,10 +63,10 @@ class MainActivity: AppCompatActivity() {
         }.commit()
     }
 
-    private fun setupNavigation(){
+    private fun setupNavigation() {
         activeFragment = homeFragment
         binding.bnvNavBar.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.nav_home -> {
                     setCurrentFragment(homeFragment)
                     activeFragment = homeFragment
@@ -87,7 +87,7 @@ class MainActivity: AppCompatActivity() {
         }
     }
 
-    private fun setCurrentFragment(fragment: Fragment){
+    private fun setCurrentFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.hide(activeFragment).show(fragment)

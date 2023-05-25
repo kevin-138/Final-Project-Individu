@@ -11,16 +11,13 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.FixturesItemBinding
-import com.kevin.netkick.databinding.LeagueItemBinding
 import com.kevin.netkick.domain.entity.fixtures.ResponseF
-import com.kevin.netkick.domain.entity.league.ResponseL
-import com.kevin.netkick.domain.entity.league.submembers.Coverage
-import com.kevin.netkick.domain.entity.league.submembers.Season
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.intentmodel.StatisticRequirement
 import com.kevin.netkick.presentation.view.explore.activity.FixturesDetailActivity
 
-class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerView.Adapter<FixturesAdapter.FixtureViewHolder>() {
+class FixturesAdapter(private var dataList: MutableList<ResponseF>) :
+    RecyclerView.Adapter<FixturesAdapter.FixtureViewHolder>() {
     private lateinit var context: Context
     private var leagueLogo = ""
     private var leagueName = ""
@@ -28,8 +25,9 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
     private var round = ""
     private var coverage = false
 
-    inner class FixtureViewHolder(private val binding: FixturesItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bindData(data: ResponseF){
+    inner class FixtureViewHolder(private val binding: FixturesItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bindData(data: ResponseF) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -42,7 +40,7 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
             loadingDrawable2.setColorSchemeColors(Color.WHITE)
             loadingDrawable2.start()
             binding.apply {
-                tvMatchDate.text = data.fixture.date.substringBefore('T'," ")
+                tvMatchDate.text = data.fixture.date.substringBefore('T', " ")
                 tvFixtureMatches.text = context.resources.getString(
                     R.string.goalsFixture,
                     data.goals.home,
@@ -65,16 +63,18 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
                     .error(R.drawable.broken_image_icon)
                     .into(ivLivescoreAwayLogo)
 
-                if (coverage){
+                if (coverage) {
                     root.setOnClickListener {
-                        val intent = Intent(context,FixturesDetailActivity::class.java)
-                        intent.putExtra(PresentationUtils.FIXTURE_FULL_DATA,data)
-                        intent.putExtra(PresentationUtils.FIXTURE_REQUIREMENT, StatisticRequirement(
-                            leagueName = leagueName,
-                            leagueLogo = leagueLogo,
-                            season = season,
-                            round = round
-                        ))
+                        val intent = Intent(context, FixturesDetailActivity::class.java)
+                        intent.putExtra(PresentationUtils.FIXTURE_FULL_DATA, data)
+                        intent.putExtra(
+                            PresentationUtils.FIXTURE_REQUIREMENT, StatisticRequirement(
+                                leagueName = leagueName,
+                                leagueLogo = leagueLogo,
+                                season = season,
+                                round = round
+                            )
+                        )
                         context.startActivity(intent)
                     }
                 }
@@ -85,7 +85,8 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FixtureViewHolder {
         context = parent.context
-        val binding = FixturesItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            FixturesItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return FixtureViewHolder(binding)
     }
 
@@ -93,15 +94,16 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>): RecyclerVie
         return dataList.size
     }
 
-    fun setCv(coverageIntent:Boolean){
+    fun setCv(coverageIntent: Boolean) {
         coverage = coverageIntent
     }
 
-    fun setSr(seasonInp:Int, roundInp:String){
+    fun setSr(seasonInp: Int, roundInp: String) {
         season = seasonInp
         round = roundInp
     }
-    fun setLe(name:String, logo:String){
+
+    fun setLe(name: String, logo: String) {
         leagueLogo = logo
         leagueName = name
     }

@@ -15,11 +15,13 @@ import com.kevin.netkick.domain.entity.player.ResponseP
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.trophies.activity.players.PlayersAchievementActivity
 
-class PlayerAdapter(private var dataList: MutableList<ResponseP>): RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>() {
+class PlayerAdapter(private var dataList: MutableList<ResponseP>) :
+    RecyclerView.Adapter<PlayerAdapter.PlayerViewHolder>() {
     private lateinit var context: Context
 
-    inner class PlayerViewHolder(private val binding: CoachItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bindData(data: ResponseP){
+    inner class PlayerViewHolder(private val binding: CoachItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bindData(data: ResponseP) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -40,7 +42,7 @@ class PlayerAdapter(private var dataList: MutableList<ResponseP>): RecyclerView.
 
                 root.setOnClickListener {
                     val intent = Intent(context, PlayersAchievementActivity::class.java)
-                    intent.putExtra(PresentationUtils.PLAYER_FULL_DATA,data)
+                    intent.putExtra(PresentationUtils.PLAYER_FULL_DATA, data)
                     context.startActivity(intent)
                 }
             }
@@ -49,7 +51,7 @@ class PlayerAdapter(private var dataList: MutableList<ResponseP>): RecyclerView.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
         context = parent.context
-        val binding = CoachItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = CoachItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PlayerViewHolder(binding)
     }
 

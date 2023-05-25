@@ -12,14 +12,15 @@ data class StatisticModel(
     val games: GamesPModel,
     @SerializedName("goals")
     val goals: GoalsPModel
-){
-    companion object{
-        fun transformToListEntity(item: List<StatisticModel>):List<Statistic>{
+) {
+    companion object {
+        fun transformToListEntity(item: List<StatisticModel>): List<Statistic> {
             return item.map {
                 transformToEntity(it)
             }
         }
-        fun transformToEntity(it:StatisticModel):Statistic{
+
+        fun transformToEntity(it: StatisticModel): Statistic {
             return Statistic(
                 TeamPModel.transformToEntity(it.team),
                 LeaguePModel.transformToEntity(it.league),

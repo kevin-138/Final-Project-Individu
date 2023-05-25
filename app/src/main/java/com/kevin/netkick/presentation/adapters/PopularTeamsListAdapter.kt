@@ -14,12 +14,16 @@ import com.kevin.netkick.domain.entity.teams.ResponseT
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.general.activity.TeamDetailActivity
 
-class PopularTeamsListAdapter(private val dataList: MutableList<ResponseT>, private val season: Int): RecyclerView.Adapter<PopularTeamsListAdapter.TeamViewHolder>() {
+class PopularTeamsListAdapter(
+    private val dataList: MutableList<ResponseT>,
+    private val season: Int
+) : RecyclerView.Adapter<PopularTeamsListAdapter.TeamViewHolder>() {
     private lateinit var context: Context
 
-    inner class TeamViewHolder(private val binding: TeamListItemBinding): RecyclerView.ViewHolder(binding.root)  {
+    inner class TeamViewHolder(private val binding: TeamListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data: ResponseT){
+        fun bindData(data: ResponseT) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -36,9 +40,9 @@ class PopularTeamsListAdapter(private val dataList: MutableList<ResponseT>, priv
                     .into(ivTeamLogoList)
 
                 root.setOnClickListener {
-                    val intent = Intent(context,TeamDetailActivity::class.java)
-                    intent.putExtra(PresentationUtils.TEAM_ID,data.team.id)
-                    intent.putExtra(PresentationUtils.TEAM_SEASON,season)
+                    val intent = Intent(context, TeamDetailActivity::class.java)
+                    intent.putExtra(PresentationUtils.TEAM_ID, data.team.id)
+                    intent.putExtra(PresentationUtils.TEAM_SEASON, season)
                     context.startActivity(intent)
                 }
             }
@@ -47,7 +51,8 @@ class PopularTeamsListAdapter(private val dataList: MutableList<ResponseT>, priv
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
         context = parent.context
-        val binding = TeamListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            TeamListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TeamViewHolder(binding)
     }
 
@@ -63,6 +68,6 @@ class PopularTeamsListAdapter(private val dataList: MutableList<ResponseT>, priv
     fun addDataToList(teamList: List<ResponseT>) {
         dataList.clear()
         dataList.addAll(teamList)
-        notifyItemRangeChanged(0,dataList.size)
+        notifyItemRangeChanged(0, dataList.size)
     }
 }

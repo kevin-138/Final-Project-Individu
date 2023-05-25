@@ -12,10 +12,12 @@ import com.kevin.netkick.R
 import com.kevin.netkick.databinding.TopscorerItemBinding
 import com.kevin.netkick.domain.entity.player.ResponseP
 
-class PlayersTopAdapter(private var dataList: MutableList<ResponseP>): RecyclerView.Adapter<PlayersTopAdapter.PlayerViewHolder>() {
+class PlayersTopAdapter(private var dataList: MutableList<ResponseP>) :
+    RecyclerView.Adapter<PlayersTopAdapter.PlayerViewHolder>() {
     private lateinit var context: Context
 
-    inner class PlayerViewHolder(private val binding: TopscorerItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class PlayerViewHolder(private val binding: TopscorerItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bindData(data: ResponseP) {
             val loadingDrawable1 = CircularProgressDrawable(context)
@@ -46,9 +48,9 @@ class PlayersTopAdapter(private var dataList: MutableList<ResponseP>): RecyclerV
                 tvPlayerName.text = data.players.name
                 tvPlayerNationality.text = data.players.nationality
                 tvPlayerPosition.text = data.statistics[0].games.position
-                tvPlayerRating.text = if (data.statistics[0].games.rating.length > 3){
-                    data.statistics[0].games.rating.substring(0,3)
-                }else{
+                tvPlayerRating.text = if (data.statistics[0].games.rating.length > 3) {
+                    data.statistics[0].games.rating.substring(0, 3)
+                } else {
                     data.statistics[0].games.rating
                 }
                 tvPlayerAppearances.text = data.statistics[0].games.appearances.toString()
@@ -60,7 +62,8 @@ class PlayersTopAdapter(private var dataList: MutableList<ResponseP>): RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
         context = parent.context
-        val binding = TopscorerItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            TopscorerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return PlayerViewHolder(binding)
     }
 

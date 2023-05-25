@@ -39,7 +39,10 @@ import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
-class NetworkDataRepositoryImpl @Inject constructor(private val footballApi:FootballApiService, private val newsApi:NewsApiService):DomainRepository {
+class NetworkDataRepositoryImpl @Inject constructor(
+    private val footballApi: FootballApiService,
+    private val newsApi: NewsApiService
+) : DomainRepository {
 
     override suspend fun getLiveMatches(live: String): Flow<FixturesResponse> {
         return flow {

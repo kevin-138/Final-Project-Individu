@@ -10,6 +10,10 @@ interface NewsApiService {
 
     @Headers(NetworkUtils.NEWS_API_KEY)
     @GET("top-headlines")
-    suspend fun getNewsHeadline(@Query("country") country:String, @Query("category") category:String, @Query("q") q:String): NewsResponseModel
+    suspend fun getNewsHeadline(
+        @Query("country") country: String,
+        @Query("category") category: String,
+        @Query("q") q: String
+    ): NewsResponseModel
 
 }

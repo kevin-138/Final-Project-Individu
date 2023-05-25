@@ -15,12 +15,14 @@ import com.kevin.netkick.domain.entity.coach.ResponseC
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.trophies.activity.coach.CoachDetailActivity
 
-class CoachSearchAdapter(private var dataList: MutableList<ResponseC>): RecyclerView.Adapter<CoachSearchAdapter.CoachViewHolder>() {
+class CoachSearchAdapter(private var dataList: MutableList<ResponseC>) :
+    RecyclerView.Adapter<CoachSearchAdapter.CoachViewHolder>() {
     private lateinit var context: Context
 
-    inner class CoachViewHolder(private val binding: CoachItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class CoachViewHolder(private val binding: CoachItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data:ResponseC){
+        fun bindData(data: ResponseC) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -40,8 +42,8 @@ class CoachSearchAdapter(private var dataList: MutableList<ResponseC>): Recycler
                 tvPlayerBdate.text = data.birth.date
 
                 root.setOnClickListener {
-                    val intent = Intent(context,CoachDetailActivity::class.java)
-                    intent.putExtra(PresentationUtils.COACH_FULL_DATA,data)
+                    val intent = Intent(context, CoachDetailActivity::class.java)
+                    intent.putExtra(PresentationUtils.COACH_FULL_DATA, data)
                     context.startActivity(intent)
                 }
             }
@@ -50,7 +52,7 @@ class CoachSearchAdapter(private var dataList: MutableList<ResponseC>): Recycler
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoachViewHolder {
         context = parent.context
-        val binding = CoachItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = CoachItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CoachViewHolder(binding)
     }
 

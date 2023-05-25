@@ -12,13 +12,15 @@ import com.kevin.netkick.R
 import com.kevin.netkick.databinding.PlayerCareerItemBinding
 import com.kevin.netkick.domain.entity.player.substatistic.Statistic
 
-class PlayerCareerAdapter(private var dataList: MutableList<Statistic>): RecyclerView.Adapter<PlayerCareerAdapter.CareerViewHolder>() {
+class PlayerCareerAdapter(private var dataList: MutableList<Statistic>) :
+    RecyclerView.Adapter<PlayerCareerAdapter.CareerViewHolder>() {
     private lateinit var context: Context
 
-    inner class CareerViewHolder(private val binding: PlayerCareerItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class CareerViewHolder(private val binding: PlayerCareerItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
 
-        fun bindData(data: Statistic){
+        fun bindData(data: Statistic) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -33,14 +35,15 @@ class PlayerCareerAdapter(private var dataList: MutableList<Statistic>): Recycle
                     .into(ivLeagueLogoList)
 
                 tvLeagueName.text = data.league.name
-                tvLeagueSeason.text = data.league.season.toString()
+                tvLeagueSeason.text = data.league.season
             }
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CareerViewHolder {
         context = parent.context
-        val binding = PlayerCareerItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            PlayerCareerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CareerViewHolder(binding)
     }
 

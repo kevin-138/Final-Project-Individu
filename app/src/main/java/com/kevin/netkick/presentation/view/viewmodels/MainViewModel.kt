@@ -18,12 +18,12 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 import kotlin.time.Duration.Companion.seconds
 
-class MainViewModel @Inject constructor(private val useCase: DomainUseCase):ViewModel() {
+class MainViewModel @Inject constructor(private val useCase: DomainUseCase) : ViewModel() {
     private val _isLoading = MutableStateFlow(true)
     val isLoading = _isLoading.asStateFlow()
 
     init {
-        viewModelScope.launch{
+        viewModelScope.launch {
             delay(3.seconds)
             _isLoading.value = false
         }
@@ -32,37 +32,40 @@ class MainViewModel @Inject constructor(private val useCase: DomainUseCase):View
     var runnedHome = false
     var runnedExplore = false
 
-    private val _liveScoreFlow = MutableStateFlow(FixturesResponse(Paging(0,0),0, listOf()))
-    val liveScoreFlow : StateFlow<FixturesResponse> =  _liveScoreFlow
+    private val _liveScoreFlow = MutableStateFlow(FixturesResponse(Paging(0, 0), 0, listOf()))
+    val liveScoreFlow: StateFlow<FixturesResponse> = _liveScoreFlow
 
-    suspend fun getLiveMatches(live:String){
+    suspend fun getLiveMatches(live: String) {
         useCase.getLiveMatches(live).collectLatest {
             _liveScoreFlow.value = it
             runnedHome = true
         }
     }
 
-    private val _popularTeamsFlow = MutableStateFlow(TeamResponse(Paging(0,0),0, listOf()))
-    val popularTeamsFlow : StateFlow<TeamResponse> =  _popularTeamsFlow
+    private val _popularTeamsFlow = MutableStateFlow(TeamResponse(Paging(0, 0), 0, listOf()))
+    val popularTeamsFlow: StateFlow<TeamResponse> = _popularTeamsFlow
 
-    suspend fun getPopularTeams(){
-        useCase.getPopularTeamsHome(league = NetworkUtils.POPULAR_LEAGUE, season = NetworkUtils.POPULAR_SEASON).collectLatest {
+    suspend fun getPopularTeams() {
+        useCase.getPopularTeamsHome(
+            league = NetworkUtils.POPULAR_LEAGUE,
+            season = NetworkUtils.POPULAR_SEASON
+        ).collectLatest {
             _popularTeamsFlow.value = it
         }
     }
 
-    private val _newsHeadlinesFlow = MutableStateFlow(NewsResponse("",0, listOf()))
+    private val _newsHeadlinesFlow = MutableStateFlow(NewsResponse("", 0, listOf()))
     val newsHeadlineFlow: StateFlow<NewsResponse> = _newsHeadlinesFlow
 
-    suspend fun getNewsHeadline(){
+    suspend fun getNewsHeadline() {
         useCase.getNewsHeadlines().collectLatest {
             _newsHeadlinesFlow.value = it
         }
     }
 
-    private val _allCountriesFLow = MutableStateFlow(CountryResponse(0, Paging(0,0), listOf()))
+    private val _allCountriesFLow = MutableStateFlow(CountryResponse(0, Paging(0, 0), listOf()))
     val allCountriesFlow: StateFlow<CountryResponse> = _allCountriesFLow
-    suspend fun getAllCountries(){
+    suspend fun getAllCountries() {
         useCase.getAllCountries().collectLatest {
             _allCountriesFLow.value = it
             runnedExplore = true

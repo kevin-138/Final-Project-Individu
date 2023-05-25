@@ -18,9 +18,9 @@ data class VenueModel(
     val surface: String?,
     @SerializedName("image")
     val image: String?
-){
-    companion object{
-        fun transformToEntity(it:VenueModel):Venue {
+) {
+    companion object {
+        fun transformToEntity(it: VenueModel): Venue {
             return Venue(
                 id = it.id ?: 0,
                 name = it.name ?: "",

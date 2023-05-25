@@ -63,12 +63,15 @@ class TeamsSearchActivity : AppCompatActivity() {
 
     private fun setSearchBar() {
         binding.apply {
-            svTeams.setOnQueryTextListener(object : SearchView.OnQueryTextListener,android.widget.SearchView.OnQueryTextListener{
+            svTeams.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                android.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     if (query.length < 3) {
-                        Toast.makeText(this@TeamsSearchActivity,"Search Field must be at least 3 characters!",
-                            Toast.LENGTH_SHORT).show()
-                    }else{
+                        Toast.makeText(
+                            this@TeamsSearchActivity, "Search Field must be at least 3 characters!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
                         setProgressBar()
                         viewModel.setTeamsSearchQuery(query)
                         Timer().schedule(2000L) {
@@ -86,10 +89,10 @@ class TeamsSearchActivity : AppCompatActivity() {
     }
 
     private fun setObserver() {
-        viewModel.teamsSearchResults.observe(this){
-            if (it.response.isEmpty()){
+        viewModel.teamsSearchResults.observe(this) {
+            if (it.response.isEmpty()) {
                 layoutVisibility(true)
-            }else{
+            } else {
                 layoutVisibility(false)
                 adapter.addDataToList(it.response)
             }
@@ -98,7 +101,7 @@ class TeamsSearchActivity : AppCompatActivity() {
 
     private fun layoutVisibility(isEmpty: Boolean) {
         binding.apply {
-            when(isEmpty){
+            when (isEmpty) {
                 true -> {
                     tvNothingFoundTeams.visibility = View.VISIBLE
                     rvTeamList.visibility = View.INVISIBLE
@@ -113,7 +116,8 @@ class TeamsSearchActivity : AppCompatActivity() {
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
         progressBar.show()
         progressBar.window?.setLayout(400, 400)
         progressBar.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)

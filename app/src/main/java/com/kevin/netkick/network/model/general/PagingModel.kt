@@ -1,5 +1,3 @@
-
-
 import com.google.gson.annotations.SerializedName
 import com.kevin.netkick.domain.entity.general.Paging
 
@@ -8,8 +6,8 @@ data class PagingModel(
     val current: Int,
     @SerializedName("total")
     val total: Int
-){
-    companion object{
+) {
+    companion object {
         fun transformsToEntity(it: PagingModel): Paging {
             return Paging(
                 current = it.current,

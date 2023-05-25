@@ -1,6 +1,5 @@
 package com.kevin.netkick.presentation.view.trophies.activity.players
 
-import android.app.Activity
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
@@ -13,13 +12,9 @@ import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
 import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
-import com.kevin.netkick.databinding.ActivityCoachDetailBinding
 import com.kevin.netkick.databinding.ActivityPlayersAchievementBinding
-import com.kevin.netkick.domain.entity.coach.ResponseC
 import com.kevin.netkick.domain.entity.player.ResponseP
-import com.kevin.netkick.domain.entity.player.subplayer.Player
 import com.kevin.netkick.presentation.PresentationUtils
-import com.kevin.netkick.presentation.adapters.CoachCareerAdapter
 import com.kevin.netkick.presentation.adapters.PlayerCareerAdapter
 import com.kevin.netkick.presentation.adapters.TrophyAdapter
 import com.kevin.netkick.presentation.view.viewmodels.TrophiesViewModel
@@ -43,6 +38,7 @@ class PlayersAchievementActivity : AppCompatActivity() {
     private val viewModel: TrophiesViewModel by viewModels {
         viewModelFactory
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as NetkickApplication).appComponent.injectIntoPlayersAchievementActivity(this)
         super.onCreate(savedInstanceState)
@@ -71,7 +67,7 @@ class PlayersAchievementActivity : AppCompatActivity() {
             intent.getParcelableExtra(PresentationUtils.PLAYER_FULL_DATA)
         }
 
-        if (playerData  != null) {
+        if (playerData != null) {
             setProgressBar()
             setLayout()
             getLiveData()
@@ -82,12 +78,20 @@ class PlayersAchievementActivity : AppCompatActivity() {
         binding.apply {
             adapterCareeer = PlayerCareerAdapter(mutableListOf())
             rvPlayerCareer.layoutManager =
-                LinearLayoutManager(this@PlayersAchievementActivity, LinearLayoutManager.HORIZONTAL, false)
-            rvPlayerCareer.adapter =  adapterCareeer
+                LinearLayoutManager(
+                    this@PlayersAchievementActivity,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
+            rvPlayerCareer.adapter = adapterCareeer
 
             adapterTrophy = TrophyAdapter(mutableListOf())
             rvPlayerTrophies.layoutManager =
-                LinearLayoutManager(this@PlayersAchievementActivity, LinearLayoutManager.HORIZONTAL, false)
+                LinearLayoutManager(
+                    this@PlayersAchievementActivity,
+                    LinearLayoutManager.HORIZONTAL,
+                    false
+                )
             rvPlayerTrophies.adapter = adapterTrophy
         }
     }

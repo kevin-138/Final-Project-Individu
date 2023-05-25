@@ -21,7 +21,6 @@ import com.kevin.netkick.domain.entity.league.submembers.Season
 import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.LeagueStandingsAdapter
-import com.kevin.netkick.presentation.intentmodel.StatAvailability
 import com.kevin.netkick.presentation.view.viewmodels.ExploreViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
 import javax.inject.Inject
@@ -61,14 +60,14 @@ class LeagueStandingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkIntent(){
-            leagueData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                intent.getParcelableExtra(PresentationUtils.LEAGUE_FULL_DATA, ResponseL::class.java)
-            }else{
-                intent.getParcelableExtra(PresentationUtils.LEAGUE_FULL_DATA)
-            }
+    private fun checkIntent() {
+        leagueData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            intent.getParcelableExtra(PresentationUtils.LEAGUE_FULL_DATA, ResponseL::class.java)
+        } else {
+            intent.getParcelableExtra(PresentationUtils.LEAGUE_FULL_DATA)
+        }
 
-            if (leagueData != null){
+        if (leagueData != null) {
             setObserver()
             setLayout(leagueData!!)
             setSpinner(leagueData!!)
@@ -80,12 +79,16 @@ class LeagueStandingsActivity : AppCompatActivity() {
         val listSeason = leagueData.seasons.map {
             it.year
         }
-        val arrayAdapter = ArrayAdapter(this, com.bumptech.glide.R.layout.support_simple_spinner_dropdown_item, listSeason)
+        val arrayAdapter = ArrayAdapter(
+            this,
+            com.bumptech.glide.R.layout.support_simple_spinner_dropdown_item,
+            listSeason
+        )
         binding.apply {
             spLeagueSeason.adapter = arrayAdapter
 
             spLeagueSeason.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
+                AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
                     parent: AdapterView<*>?,
                     view: View?,
@@ -101,10 +104,10 @@ class LeagueStandingsActivity : AppCompatActivity() {
                     changeMatchesButtons(leagueSeasonSelected[0].coverage.fixtures.events)
                     setMatchesButton(leagueSeasonSelected[0])
 
-                    if (leagueSeasonSelected[0].coverage.standings){
+                    if (leagueSeasonSelected[0].coverage.standings) {
                         noStandingsData(false)
                         getOnlineData(leagueData.league.id, listSeason[position])
-                    }else{
+                    } else {
                         noStandingsData(true)
                         progressBar.dismiss()
                     }
@@ -118,10 +121,10 @@ class LeagueStandingsActivity : AppCompatActivity() {
                     changeMatchesButtons(leagueSeasonDefault[0].coverage.fixtures.events)
                     setMatchesButton(leagueSeasonDefault[0])
 
-                    if (leagueSeasonDefault[0].coverage.standings){
+                    if (leagueSeasonDefault[0].coverage.standings) {
                         noStandingsData(false)
                         getOnlineData(leagueData.league.id, listSeason[0])
-                    }else{
+                    } else {
                         noStandingsData(true)
                         progressBar.dismiss()
                     }
@@ -131,7 +134,7 @@ class LeagueStandingsActivity : AppCompatActivity() {
         }
     }
 
-    fun changeMatchesButtons(available:Boolean){
+    fun changeMatchesButtons(available: Boolean) {
         binding.apply {
             btMatchesLeague.visibility = if (available) View.VISIBLE else View.INVISIBLE
         }
@@ -141,33 +144,34 @@ class LeagueStandingsActivity : AppCompatActivity() {
         binding.apply {
             ibGroupNext.setOnClickListener {
                 adapter.next()
-                tvLeagueGroupTitle.text = getString(R.string.group,adapter.getCurrentGroup())
+                tvLeagueGroupTitle.text = getString(R.string.group, adapter.getCurrentGroup())
             }
             ibGroupPrev.setOnClickListener {
                 adapter.pref()
-                tvLeagueGroupTitle.text  = getString(R.string.group,adapter.getCurrentGroup())
+                tvLeagueGroupTitle.text = getString(R.string.group, adapter.getCurrentGroup())
             }
         }
     }
 
-    private fun setMatchesButton(season:Season){
+    private fun setMatchesButton(season: Season) {
         binding.apply {
             btMatchesLeague.setOnClickListener {
-                val intentMatches = Intent(this@LeagueStandingsActivity,FixturesActivity::class.java)
-                intentMatches.putExtra(PresentationUtils.LEAGUE_FULL_DATA,leagueData)
-                intentMatches.putExtra(PresentationUtils.LEAGUE_SEASON,season)
+                val intentMatches =
+                    Intent(this@LeagueStandingsActivity, FixturesActivity::class.java)
+                intentMatches.putExtra(PresentationUtils.LEAGUE_FULL_DATA, leagueData)
+                intentMatches.putExtra(PresentationUtils.LEAGUE_SEASON, season)
                 startActivity(intentMatches)
             }
         }
     }
 
-    private fun noStandingsData(boolean: Boolean){
-        if (boolean){
+    private fun noStandingsData(boolean: Boolean) {
+        if (boolean) {
             binding.apply {
                 tvNoStandings.visibility = View.VISIBLE
                 hsvStandings.visibility = View.INVISIBLE
             }
-        }else{
+        } else {
             binding.apply {
                 tvNoStandings.visibility = View.INVISIBLE
                 hsvStandings.visibility = View.VISIBLE
@@ -175,11 +179,11 @@ class LeagueStandingsActivity : AppCompatActivity() {
         }
     }
 
-    private fun getOnlineData(id:Int, season:Int) {
-        viewModel.setSearchQuery(Pair(id,season))
+    private fun getOnlineData(id: Int, season: Int) {
+        viewModel.setSearchQuery(Pair(id, season))
     }
 
-    private fun setLayout(data:ResponseL) {
+    private fun setLayout(data: ResponseL) {
         val loadingDrawable1 = CircularProgressDrawable(this)
         loadingDrawable1.strokeWidth = 5f
         loadingDrawable1.centerRadius = 30f
@@ -187,8 +191,8 @@ class LeagueStandingsActivity : AppCompatActivity() {
         loadingDrawable1.start()
 
         binding.apply {
-                tvLeagueName.text = data.league.name
-                tvLeagueType.text = data.league.type
+            tvLeagueName.text = data.league.name
+            tvLeagueType.text = data.league.type
 
             Glide.with(this@LeagueStandingsActivity)
                 .load(data.league.logo)
@@ -204,19 +208,20 @@ class LeagueStandingsActivity : AppCompatActivity() {
             adapter = LeagueStandingsAdapter(arrayListOf(listOf()))
             rvStandings.layoutManager = LinearLayoutManager(this@LeagueStandingsActivity)
             rvStandings.adapter = adapter
-            tvLeagueGroupTitle.text = getString(R.string.group,"1")
+            tvLeagueGroupTitle.text = getString(R.string.group, "1")
         }
     }
 
     private fun setObserver() {
-        viewModel.standingResults.observe(this){
+        viewModel.standingResults.observe(this) {
             adapter.addDataToList(it.response[0].league.standings as ArrayList<List<Standings>>)
             progressBar.dismiss()
         }
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
         progressBar.show()
         progressBar.window?.setLayout(400, 400)
         progressBar.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)

@@ -13,10 +13,12 @@ import com.kevin.netkick.databinding.LiveScoreItemBinding
 import com.kevin.netkick.domain.entity.fixtures.ResponseF
 
 
-class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEmpty: Boolean): RecyclerView.Adapter<LiveScoreAdapter.LiveViewHolder>() {
+class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEmpty: Boolean) :
+    RecyclerView.Adapter<LiveScoreAdapter.LiveViewHolder>() {
     private lateinit var context: Context
 
-    inner class LiveViewHolder(private val binding: LiveScoreItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class LiveViewHolder(private val binding: LiveScoreItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
         fun bindData(data: ResponseF, context: Context) {
 
             val loadingDrawable1 = CircularProgressDrawable(context)
@@ -48,7 +50,7 @@ class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEm
                 tvTimeMatchStart.text = context.resources.getString(
                     R.string.DateLiveTime,
                     data.fixture.timezone,
-                    data.fixture.date.substring(11,16)
+                    data.fixture.date.substring(11, 16)
                 )
                 Glide.with(itemView)
                     .load(data.teams.homeTeam.logo)
@@ -107,18 +109,18 @@ class LiveScoreAdapter(private val dataList: List<ResponseF>, private val dataEm
     }
 
     override fun getItemCount(): Int {
-        return if (dataEmpty){
+        return if (dataEmpty) {
             1
-        }else{
+        } else {
             dataList.size
         }
     }
 
     override fun onBindViewHolder(holder: LiveScoreAdapter.LiveViewHolder, position: Int) {
-        if (dataEmpty){
+        if (dataEmpty) {
             holder.bindDataEmpty()
-        }else{
-            holder.bindData(dataList[position],context)
+        } else {
+            holder.bindData(dataList[position], context)
         }
     }
 

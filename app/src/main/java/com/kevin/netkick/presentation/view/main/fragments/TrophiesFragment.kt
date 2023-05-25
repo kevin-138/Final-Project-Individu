@@ -17,8 +17,8 @@ class TrophiesFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        binding = FragmentTrophiesBinding.inflate(inflater,container,false)
+    ): View {
+        binding = FragmentTrophiesBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -41,11 +41,11 @@ class TrophiesFragment : Fragment() {
         }
     }
 
-    fun checkOnline(current:Boolean = false) {
+    fun checkOnline(current: Boolean = false) {
         val onlineCheck = activity?.let { PresentationUtils.isOnline(requireActivity()) }
-        if (onlineCheck != true){
-            if (current){
-                PresentationUtils.networkDialog(requireActivity(),PresentationUtils.TROPHIES)
+        if (onlineCheck != true) {
+            if (current) {
+                PresentationUtils.networkDialog(requireActivity(), PresentationUtils.TROPHIES)
             }
         }
     }

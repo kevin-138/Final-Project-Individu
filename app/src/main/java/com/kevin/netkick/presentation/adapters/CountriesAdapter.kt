@@ -16,13 +16,15 @@ import com.kevin.netkick.domain.entity.league.ResponseL
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.explore.activity.LeagueSearchActivity
 
-class CountriesAdapter(private var dataList: MutableList<CountryC>):RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
+class CountriesAdapter(private var dataList: MutableList<CountryC>) :
+    RecyclerView.Adapter<CountriesAdapter.CountryViewHolder>() {
     private lateinit var context: Context
     private var dataListMemory = mutableListOf<CountryC>()
 
-    inner class CountryViewHolder(private val binding: CountryItemBinding):RecyclerView.ViewHolder(binding.root) {
+    inner class CountryViewHolder(private val binding: CountryItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data:CountryC){
+        fun bindData(data: CountryC) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -33,15 +35,15 @@ class CountriesAdapter(private var dataList: MutableList<CountryC>):RecyclerView
 
                 tvCountryName.text = data.name
 
-            Glide.with(itemView)
-                .load(data.flag)
-                .placeholder(loadingDrawable1)
-                .error(R.drawable.broken_image_icon)
-                .into(ivCountryFlag)
+                Glide.with(itemView)
+                    .load(data.flag)
+                    .placeholder(loadingDrawable1)
+                    .error(R.drawable.broken_image_icon)
+                    .into(ivCountryFlag)
 
                 root.setOnClickListener {
                     val intent = Intent(context, LeagueSearchActivity::class.java)
-                    intent.putExtra(PresentationUtils.COUNTRY_CODE,data.name)
+                    intent.putExtra(PresentationUtils.COUNTRY_CODE, data.name)
                     context.startActivity(intent)
                 }
             }
@@ -50,18 +52,18 @@ class CountriesAdapter(private var dataList: MutableList<CountryC>):RecyclerView
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CountryViewHolder {
         context = parent.context
-        val binding = CountryItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = CountryItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CountryViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-       return dataList.size
+        return dataList.size
     }
 
-    fun filterData(query:String):Int{
+    fun filterData(query: String): Int {
         val dataListFiltered: MutableList<CountryC> = mutableListOf()
         for (item in dataListMemory) {
-            if (item.name.contains(query,true)) {
+            if (item.name.contains(query, true)) {
                 dataListFiltered.add(item)
             }
         }
@@ -91,7 +93,6 @@ class CountriesAdapter(private var dataList: MutableList<CountryC>):RecyclerView
         dataListMemory.addAll(countryList)
         notifyDataSetChanged()
     }
-
 
 
 }

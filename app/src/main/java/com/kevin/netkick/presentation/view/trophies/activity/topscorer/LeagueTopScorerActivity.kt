@@ -126,8 +126,8 @@ class LeagueTopScorerActivity : AppCompatActivity() {
         }
     }
 
-    private fun getOnlineData(id:Int, season:Int) {
-        viewModel.setTopScoreQuery(Pair(id,season))
+    private fun getOnlineData(id: Int, season: Int) {
+        viewModel.setTopScoreQuery(Pair(id, season))
     }
 
     private fun noTopScorerData(boolean: Boolean) {

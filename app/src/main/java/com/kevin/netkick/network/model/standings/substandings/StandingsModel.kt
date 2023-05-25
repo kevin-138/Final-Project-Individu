@@ -18,23 +18,24 @@ data class StandingsModel(
     val description: String?,
     @SerializedName("all")
     val all: AllModel?
-){
-    companion object{
+) {
+    companion object {
 
-        fun transformToListEntity(item:List<StandingsModel>):List<Standings>{
+        fun transformToListEntity(item: List<StandingsModel>): List<Standings> {
             return item.map {
                 transformToEntity(it)
             }
         }
-        fun transformToEntity(it:StandingsModel):Standings{
+
+        fun transformToEntity(it: StandingsModel): Standings {
             return Standings(
                 rank = it.rank ?: 0,
-                team = TeamStModel.transformToEntity(it.team ?: TeamStModel(0,"","")),
+                team = TeamStModel.transformToEntity(it.team ?: TeamStModel(0, "", "")),
                 points = it.points ?: 0,
                 goalsDiff = it.goalsDiff ?: 0,
                 group = it.group ?: "",
                 description = it.description ?: "",
-                all = AllModel.transformToEntity(it.all ?: AllModel(0, GoalsStModel(0,0),0,0,0))
+                all = AllModel.transformToEntity(it.all ?: AllModel(0, GoalsStModel(0, 0), 0, 0, 0))
             )
         }
     }

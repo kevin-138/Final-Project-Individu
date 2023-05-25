@@ -3,7 +3,6 @@ package com.kevin.netkick.network.model.statistics
 import PagingModel
 import com.google.gson.annotations.SerializedName
 import com.kevin.netkick.domain.entity.statistics.StatisticResponse
-import com.kevin.netkick.domain.entity.trophies.TrophiesResponse
 
 data class StatisticResponseModel(
     @SerializedName("paging")
@@ -12,11 +11,11 @@ data class StatisticResponseModel(
     val results: Int?,
     @SerializedName("response")
     val response: List<ResponseSModel>?
-){
-    companion object{
+) {
+    companion object {
         fun transformToEntity(it: StatisticResponseModel): StatisticResponse {
             return StatisticResponse(
-                paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0,0)),
+                paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
                 results = it.results ?: 0,
                 response = ResponseSModel.transformToListEntity(it.response ?: listOf())
             )

@@ -13,9 +13,11 @@ import com.kevin.netkick.R
 import com.kevin.netkick.databinding.PlayerTeamItemBinding
 import com.kevin.netkick.domain.entity.player.ResponseP
 
-class PlayersPagingAdapter: PagingDataAdapter<ResponseP, PlayersPagingAdapter.PlayerViewHolder>(DiffCallback) {
+class PlayersPagingAdapter :
+    PagingDataAdapter<ResponseP, PlayersPagingAdapter.PlayerViewHolder>(DiffCallback) {
     private lateinit var context: Context
-    class PlayerViewHolder(val binding: PlayerTeamItemBinding):ViewHolder(binding.root)
+
+    class PlayerViewHolder(val binding: PlayerTeamItemBinding) : ViewHolder(binding.root)
 
     companion object {
 
@@ -55,13 +57,19 @@ class PlayersPagingAdapter: PagingDataAdapter<ResponseP, PlayersPagingAdapter.Pl
                 .placeholder(loadingDrawable1)
                 .error(R.drawable.broken_image_icon)
                 .into(ivPlayerPhoto)
-            
+
         }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlayerViewHolder {
         context = parent.context
-        return PlayerViewHolder(PlayerTeamItemBinding.inflate(LayoutInflater.from(parent.context), parent, false ))
+        return PlayerViewHolder(
+            PlayerTeamItemBinding.inflate(
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
+        )
     }
 
 

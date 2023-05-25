@@ -126,7 +126,7 @@ class CoachDetailActivity : AppCompatActivity() {
         binding.apply {
             adapterCareer = CoachCareerAdapter(mutableListOf())
             rvCoachCareer.layoutManager =
-            LinearLayoutManager(this@CoachDetailActivity, LinearLayoutManager.HORIZONTAL, false)
+                LinearLayoutManager(this@CoachDetailActivity, LinearLayoutManager.HORIZONTAL, false)
             rvCoachCareer.adapter = adapterCareer
 
             adapterTrophy = TrophyAdapter(mutableListOf())

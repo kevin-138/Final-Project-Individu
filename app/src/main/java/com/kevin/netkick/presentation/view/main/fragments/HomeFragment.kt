@@ -73,8 +73,13 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
         lifecycleScope.launch {
             mainViewModel.getPopularTeams()
             mainViewModel.popularTeamsFlow.collectLatest {
-                val popularTeamsPreview = if (it.response.size > 14){it.response.slice(0..14) } else listOf()
-                popularTeamsAdapter = PopularTeamsPreviewAdapter(popularTeamsPreview,PresentationUtils.POPULAR_SEASON)
+                val popularTeamsPreview = if (it.response.size > 14) {
+                    it.response.slice(0..14)
+                } else listOf()
+                popularTeamsAdapter = PopularTeamsPreviewAdapter(
+                    popularTeamsPreview,
+                    PresentationUtils.POPULAR_SEASON
+                )
                 binding.apply {
                     rvPopularTeams.layoutManager =
                         LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
@@ -112,7 +117,8 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
             else -> {
                 binding.apply {
                     tvSeeAllNews.visibility = View.VISIBLE
-                    newsAdapter = NewsHeadlinePreviewAdapter(data.articles.slice(0..3).toMutableList(), false)
+                    newsAdapter =
+                        NewsHeadlinePreviewAdapter(data.articles.slice(0..3).toMutableList(), false)
                     setupNewsAdapter(newsAdapter)
                 }
             }
@@ -131,7 +137,6 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
             rvNewsHeadline.adapter = newsAdapter
         }
     }
-
 
 
     private fun getLiveMatches() {

@@ -28,7 +28,7 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentExploreBinding.inflate(inflater,container,false)
+        binding = FragmentExploreBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -47,14 +47,15 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
     private fun setAdapter() {
         adapter = CountriesAdapter(dataList)
         binding.apply {
-            rvCountriesLeague.layoutManager = GridLayoutManager(requireContext(),3)
+            rvCountriesLeague.layoutManager = GridLayoutManager(requireContext(), 3)
             rvCountriesLeague.adapter = adapter
         }
     }
 
     private fun setSearchBar() {
         binding.apply {
-            svCountry.setOnQueryTextListener(object : SearchView.OnQueryTextListener,android.widget.SearchView.OnQueryTextListener{
+            svCountry.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                android.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String?): Boolean {
                     return false
                 }
@@ -67,20 +68,20 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
         }
     }
 
-    fun checkOnline(current:Boolean = false) {
+    fun checkOnline(current: Boolean = false) {
         val onlineCheck = activity?.let { PresentationUtils.isOnline(requireActivity()) }
-        if (onlineCheck == true){
-            if (!mainViewModel.runnedExplore){
+        if (onlineCheck == true) {
+            if (!mainViewModel.runnedExplore) {
                 getLiveData()
             }
-        }else{
-            if (current){
-                PresentationUtils.networkDialog(requireActivity(),PresentationUtils.EXPLORE)
+        } else {
+            if (current) {
+                PresentationUtils.networkDialog(requireActivity(), PresentationUtils.EXPLORE)
             }
         }
     }
 
-    private fun getLiveData(){
+    private fun getLiveData() {
         lifecycleScope.launch {
             mainViewModel.getAllCountries()
             mainViewModel.allCountriesFlow.collectLatest {
@@ -88,7 +89,6 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
             }
         }
     }
-
 
 
 }

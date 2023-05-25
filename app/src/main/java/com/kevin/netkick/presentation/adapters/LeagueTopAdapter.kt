@@ -15,11 +15,13 @@ import com.kevin.netkick.domain.entity.league.ResponseL
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.trophies.activity.topscorer.LeagueTopScorerActivity
 
-class LeagueTopAdapter(private var dataList: MutableList<ResponseL>): RecyclerView.Adapter<LeagueTopAdapter.LeagueViewHolder>() {
+class LeagueTopAdapter(private var dataList: MutableList<ResponseL>) :
+    RecyclerView.Adapter<LeagueTopAdapter.LeagueViewHolder>() {
     private lateinit var context: Context
 
-    inner class LeagueViewHolder(private val binding: LeagueItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bindData(data: ResponseL){
+    inner class LeagueViewHolder(private val binding: LeagueItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bindData(data: ResponseL) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -37,8 +39,8 @@ class LeagueTopAdapter(private var dataList: MutableList<ResponseL>): RecyclerVi
                 tvLeagueType.text = data.league.type
 
                 root.setOnClickListener {
-                    val intent = Intent(context,LeagueTopScorerActivity::class.java)
-                    intent.putExtra(PresentationUtils.LEAGUE_FULL_DATA,data)
+                    val intent = Intent(context, LeagueTopScorerActivity::class.java)
+                    intent.putExtra(PresentationUtils.LEAGUE_FULL_DATA, data)
                     context.startActivity(intent)
                 }
             }
@@ -50,7 +52,7 @@ class LeagueTopAdapter(private var dataList: MutableList<ResponseL>): RecyclerVi
         viewType: Int
     ): LeagueTopAdapter.LeagueViewHolder {
         context = parent.context
-        val binding = LeagueItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = LeagueItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LeagueViewHolder(binding)
     }
 

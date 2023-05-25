@@ -9,32 +9,34 @@ import com.kevin.netkick.network.model.player.substatistic.StatisticModel
 
 data class ResponsePModel(
     @SerializedName("player")
-    val players:PlayerModel?,
+    val players: PlayerModel?,
     @SerializedName("statistics")
     val statistics: List<StatisticModel>?
-){
-    companion object{
-        fun transformToListEntity(item:List<ResponsePModel>):List<ResponseP>{
+) {
+    companion object {
+        fun transformToListEntity(item: List<ResponsePModel>): List<ResponseP> {
             return item.map {
                 transformToEntity(it)
             }
         }
-        private fun transformToEntity(it: ResponsePModel):ResponseP{
+
+        private fun transformToEntity(it: ResponsePModel): ResponseP {
             return ResponseP(
-                players = PlayerModel.transformToEntity(it.players ?: PlayerModel(
-                    id = 0,
-                    name = "",
-                    firstname = "",
-                    lastname = "",
-                    age = 0,
-                    birth = BirthModel("","",""),
-                    nationality = "",
-                    height = "",
-                    weight = "",
-                    photo = ""
+                players = PlayerModel.transformToEntity(
+                    it.players ?: PlayerModel(
+                        id = 0,
+                        name = "",
+                        firstname = "",
+                        lastname = "",
+                        age = 0,
+                        birth = BirthModel("", "", ""),
+                        nationality = "",
+                        height = "",
+                        weight = "",
+                        photo = ""
                     )
                 ),
-                statistics =  StatisticModel.transformToListEntity(it.statistics ?: listOf())
+                statistics = StatisticModel.transformToListEntity(it.statistics ?: listOf())
             )
         }
     }

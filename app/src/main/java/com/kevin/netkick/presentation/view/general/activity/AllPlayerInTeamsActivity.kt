@@ -57,19 +57,19 @@ class AllPlayerInTeamsActivity : AppCompatActivity() {
 
     private fun getTeamDataIntent() {
         teamData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            intent.getParcelableExtra(PresentationUtils.TEAM_FULL_DATA,ResponseT::class.java)
-        }else{
+            intent.getParcelableExtra(PresentationUtils.TEAM_FULL_DATA, ResponseT::class.java)
+        } else {
             intent.getParcelableExtra(PresentationUtils.TEAM_FULL_DATA)
         }
 
-        season =  intent.getIntExtra(PresentationUtils.TEAM_SEASON,0)
+        season = intent.getIntExtra(PresentationUtils.TEAM_SEASON, 0)
 
-        if (teamData!=null){
+        if (teamData != null) {
             setTeamDisplay()
         }
     }
 
-    private fun setTeamDisplay(){
+    private fun setTeamDisplay() {
         val loadingDrawable1 = CircularProgressDrawable(this)
         loadingDrawable1.strokeWidth = 5f
         loadingDrawable1.centerRadius = 30f
@@ -93,7 +93,8 @@ class AllPlayerInTeamsActivity : AppCompatActivity() {
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
         progressBar.show()
         progressBar.window?.setLayout(400, 400)
         progressBar.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)
@@ -110,14 +111,14 @@ class AllPlayerInTeamsActivity : AppCompatActivity() {
 
     private fun getPlayerList() {
         lifecycleScope.launch {
-            viewModel.getTeamPlayers(this, teamData!!.team.id,season!!)
+            viewModel.getTeamPlayers(this, teamData!!.team.id, season!!)
                 .collectLatest {
-                    adapter.submitData(lifecycle,it)
+                    adapter.submitData(lifecycle, it)
 
                     Timer().schedule(2000L) {
                         progressBar.dismiss()
                     }
-            }
+                }
         }
     }
 

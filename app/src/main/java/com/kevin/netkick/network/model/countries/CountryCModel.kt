@@ -10,19 +10,21 @@ data class CountryCModel(
     val code: String?,
     @SerializedName("flag")
     val flag: String?
-){
-    companion object{
-        fun transformToListEntity(item:List<CountryCModel?>):List<CountryC>{
+) {
+    companion object {
+        fun transformToListEntity(item: List<CountryCModel?>): List<CountryC> {
             return item.map {
-                transformToEntity(it ?: CountryCModel(
-                    name = "",
-                    code = "",
-                    flag = ""
-                ))
+                transformToEntity(
+                    it ?: CountryCModel(
+                        name = "",
+                        code = "",
+                        flag = ""
+                    )
+                )
             }
         }
 
-        fun transformToEntity(it:CountryCModel):CountryC{
+        fun transformToEntity(it: CountryCModel): CountryC {
             return CountryC(
                 name = it.name ?: "",
                 code = it.code ?: "",

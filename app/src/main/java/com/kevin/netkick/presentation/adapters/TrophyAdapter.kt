@@ -11,18 +11,20 @@ import com.kevin.netkick.domain.entity.trophies.ResponseTrop
 import com.kevin.netkick.presentation.PresentationUtils
 
 
-class TrophyAdapter(private var dataList: MutableList<ResponseTrop>): RecyclerView.Adapter<TrophyAdapter.TrophyViewHolder>() {
+class TrophyAdapter(private var dataList: MutableList<ResponseTrop>) :
+    RecyclerView.Adapter<TrophyAdapter.TrophyViewHolder>() {
     private lateinit var context: Context
 
-    inner class TrophyViewHolder(private val binding: TrophyItemBinding): RecyclerView.ViewHolder(binding.root){
-        fun bindData(data: ResponseTrop){
+    inner class TrophyViewHolder(private val binding: TrophyItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bindData(data: ResponseTrop) {
 
             binding.apply {
                 tvTrophiesCountry.text = data.country
                 tvTrophiesLeague.text = data.league
                 tvTrophiesPlace.text = data.place
                 tvTrophiesSeason.text = data.season
-                when(data.place){
+                when (data.place) {
                     PresentationUtils.WINNER -> {
                         ivTrophyLogo.setImageResource(R.drawable.trophy_gold)
                     }
@@ -37,9 +39,12 @@ class TrophyAdapter(private var dataList: MutableList<ResponseTrop>): RecyclerVi
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TrophyAdapter.TrophyViewHolder {
+    override fun onCreateViewHolder(
+        parent: ViewGroup,
+        viewType: Int
+    ): TrophyAdapter.TrophyViewHolder {
         context = parent.context
-        val binding = TrophyItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = TrophyItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TrophyViewHolder(binding)
     }
 

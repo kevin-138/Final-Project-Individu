@@ -10,9 +10,9 @@ data class TeamStModel(
     val name: String?,
     @SerializedName("logo")
     val logo: String?
-){
-    companion object{
-        fun transformToEntity(it:TeamStModel):TeamSt{
+) {
+    companion object {
+        fun transformToEntity(it: TeamStModel): TeamSt {
             return TeamSt(
                 id = it.id ?: 0,
                 name = it.name ?: "",

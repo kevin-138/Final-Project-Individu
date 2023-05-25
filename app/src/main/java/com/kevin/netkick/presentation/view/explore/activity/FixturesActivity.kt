@@ -24,7 +24,6 @@ import com.kevin.netkick.presentation.view.viewmodels.ExploreViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import java.sql.Time
 import java.util.*
 import javax.inject.Inject
 import kotlin.concurrent.schedule
@@ -73,21 +72,21 @@ class FixturesActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkIntent(){
+    private fun checkIntent() {
         leagueData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(PresentationUtils.LEAGUE_FULL_DATA, ResponseL::class.java)
-        }else{
+        } else {
             intent.getParcelableExtra(PresentationUtils.LEAGUE_FULL_DATA)
         }
         season = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             intent.getParcelableExtra(PresentationUtils.LEAGUE_SEASON, Season::class.java)
-        }else{
+        } else {
             intent.getParcelableExtra(PresentationUtils.LEAGUE_SEASON)
         }
 
         adapter.setCv(season!!.coverage.fixtures.statistic)
 
-        if (leagueData != null){
+        if (leagueData != null) {
             setObserver()
             getSpinnerSeason()
             setLayout(leagueData!!)
@@ -96,7 +95,7 @@ class FixturesActivity : AppCompatActivity() {
 
     private fun getSpinnerSeason() {
         lifecycleScope.launch {
-            viewModel.getLeagueRoundsBySeason(leagueData!!.league.id,season!!.year)
+            viewModel.getLeagueRoundsBySeason(leagueData!!.league.id, season!!.year)
             viewModel.leagueRounds.collectLatest {
                 setSpinner(it.response)
             }
@@ -104,7 +103,11 @@ class FixturesActivity : AppCompatActivity() {
     }
 
     private fun setSpinner(rounds: List<String>) {
-        val arrayAdapter = ArrayAdapter(this, com.bumptech.glide.R.layout.support_simple_spinner_dropdown_item, rounds)
+        val arrayAdapter = ArrayAdapter(
+            this,
+            com.bumptech.glide.R.layout.support_simple_spinner_dropdown_item,
+            rounds
+        )
         binding.apply {
             spLeagueRound.adapter = arrayAdapter
 
@@ -118,28 +121,28 @@ class FixturesActivity : AppCompatActivity() {
                 ) {
                     setProgressBar()
                     val roundSelected = rounds[position]
-                    adapter.setSr(season!!.year,roundSelected)
-                    adapter.setLe(leagueData!!.league.name,leagueData!!.league.logo)
-                    getOnlineData(leagueData!!.league.id, season!!.year ,roundSelected)
+                    adapter.setSr(season!!.year, roundSelected)
+                    adapter.setLe(leagueData!!.league.name, leagueData!!.league.logo)
+                    getOnlineData(leagueData!!.league.id, season!!.year, roundSelected)
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                     setProgressBar()
                     val roundSelected = rounds[0]
-                    adapter.setSr(season!!.year,roundSelected)
-                    adapter.setLe(leagueData!!.league.name,leagueData!!.league.logo)
-                    getOnlineData(leagueData!!.league.id, season!!.year,roundSelected)
+                    adapter.setSr(season!!.year, roundSelected)
+                    adapter.setLe(leagueData!!.league.name, leagueData!!.league.logo)
+                    getOnlineData(leagueData!!.league.id, season!!.year, roundSelected)
                 }
             }
 
         }
     }
 
-    private fun getOnlineData(league:Int, season:Int, round:String) {
-        viewModel.setFixtureQuery(Triple(league,season,round))
+    private fun getOnlineData(league: Int, season: Int, round: String) {
+        viewModel.setFixtureQuery(Triple(league, season, round))
     }
 
-    private fun setLayout(data:ResponseL) {
+    private fun setLayout(data: ResponseL) {
         val loadingDrawable1 = CircularProgressDrawable(this)
         loadingDrawable1.strokeWidth = 5f
         loadingDrawable1.centerRadius = 30f
@@ -160,14 +163,15 @@ class FixturesActivity : AppCompatActivity() {
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
         progressBar.show()
         progressBar.window?.setLayout(400, 400)
         progressBar.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)
     }
 
     private fun setObserver() {
-        viewModel.fixtureResult.observe(this){
+        viewModel.fixtureResult.observe(this) {
             adapter.addDataToList(it.response)
             Timer().schedule(1500L) {
                 progressBar.dismiss()

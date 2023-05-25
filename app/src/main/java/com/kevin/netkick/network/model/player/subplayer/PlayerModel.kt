@@ -15,7 +15,7 @@ data class PlayerModel(
     @SerializedName("age")
     val age: Int?,
     @SerializedName("birth")
-    val birth:BirthModel?,
+    val birth: BirthModel?,
     @SerializedName("nationality")
     val nationality: String?,
     @SerializedName("height")
@@ -24,16 +24,16 @@ data class PlayerModel(
     val weight: String?,
     @SerializedName("photo")
     val photo: String?
-){
-    companion object{
-        fun transformToEntity(it:PlayerModel):Player{
+) {
+    companion object {
+        fun transformToEntity(it: PlayerModel): Player {
             return Player(
                 id = it.id ?: 0,
                 name = it.name ?: "",
                 firstname = it.firstname ?: "",
                 lastname = it.lastname ?: "",
                 age = it.age ?: 0,
-                birth = BirthModel.transformToEntity(it.birth ?: BirthModel("","","")),
+                birth = BirthModel.transformToEntity(it.birth ?: BirthModel("", "", "")),
                 nationality = it.nationality ?: "",
                 height = it.height ?: "",
                 weight = it.weight ?: "",

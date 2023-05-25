@@ -11,11 +11,11 @@ data class FixturesResponseModel(
     val results: Int?,
     @SerializedName("response")
     val response: List<ResponseFModel?>?
-){
-    companion object{
-        fun transformToEntity(it:FixturesResponseModel):FixturesResponse{
+) {
+    companion object {
+        fun transformToEntity(it: FixturesResponseModel): FixturesResponse {
             return FixturesResponse(
-                paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0,0)),
+                paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
                 results = it.results ?: 0,
                 response = ResponseFModel.transformToListEntity(it.response ?: listOf())
             )

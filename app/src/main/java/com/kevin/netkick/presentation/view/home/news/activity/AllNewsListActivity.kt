@@ -21,7 +21,7 @@ import javax.inject.Inject
 class AllNewsListActivity : AppCompatActivity() {
     private lateinit var binding: ActivityAllNewsListBinding
     private lateinit var newsAdapter: NewsHeadlinePreviewAdapter
-    private lateinit var progressBar:AlertDialog
+    private lateinit var progressBar: AlertDialog
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -29,6 +29,7 @@ class AllNewsListActivity : AppCompatActivity() {
     private val viewModel: MainViewModel by viewModels {
         viewModelFactory
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as NetkickApplication).appComponent.injectIntoAllNewsListActivity(this)
         super.onCreate(savedInstanceState)
@@ -44,16 +45,17 @@ class AllNewsListActivity : AppCompatActivity() {
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
     }
 
     private fun checkOnline() {
-            val onlineCheck = PresentationUtils.isOnline(this)
-            if (onlineCheck) {
-                getNewsHeadline()
-            } else {
-                PresentationUtils.networkDialog(this)
-            }
+        val onlineCheck = PresentationUtils.isOnline(this)
+        if (onlineCheck) {
+            getNewsHeadline()
+        } else {
+            PresentationUtils.networkDialog(this)
+        }
     }
 
     private fun setupNewsAdapter() {

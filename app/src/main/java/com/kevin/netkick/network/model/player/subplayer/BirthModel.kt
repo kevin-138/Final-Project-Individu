@@ -10,9 +10,9 @@ data class BirthModel(
     val place: String?,
     @SerializedName("country")
     val country: String?
-){
-    companion object{
-        fun transformToEntity(it:BirthModel?):Birth {
+) {
+    companion object {
+        fun transformToEntity(it: BirthModel?): Birth {
             return Birth(
                 date = it?.date ?: "",
                 place = it?.place ?: "",

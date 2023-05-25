@@ -14,12 +14,14 @@ import com.kevin.netkick.domain.entity.teams.ResponseT
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.general.activity.TeamDetailActivity
 
-class PopularTeamsPreviewAdapter(private val dataList:List<ResponseT>, private val season: Int):RecyclerView.Adapter<PopularTeamsPreviewAdapter.TeamsViewHolder>() {
+class PopularTeamsPreviewAdapter(private val dataList: List<ResponseT>, private val season: Int) :
+    RecyclerView.Adapter<PopularTeamsPreviewAdapter.TeamsViewHolder>() {
     private lateinit var context: Context
 
-    inner class TeamsViewHolder(private val binding: PopularTeamItemBinding) : RecyclerView.ViewHolder(binding.root) {
+    inner class TeamsViewHolder(private val binding: PopularTeamItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data:ResponseT){
+        fun bindData(data: ResponseT) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -35,8 +37,8 @@ class PopularTeamsPreviewAdapter(private val dataList:List<ResponseT>, private v
 
                 binding.root.setOnClickListener {
                     val intent = Intent(context, TeamDetailActivity::class.java)
-                    intent.putExtra(PresentationUtils.TEAM_ID,data.team.id)
-                    intent.putExtra(PresentationUtils.TEAM_SEASON,season)
+                    intent.putExtra(PresentationUtils.TEAM_ID, data.team.id)
+                    intent.putExtra(PresentationUtils.TEAM_SEASON, season)
                     context.startActivity(intent)
                 }
             }

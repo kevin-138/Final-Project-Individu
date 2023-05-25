@@ -14,23 +14,25 @@ data class ArticleModel(
     val url: String?,
     @SerializedName("publishedAt")
     val publishedAt: String?
-){
-    companion object{
-        fun transformToListEntity(item: List<ArticleModel?>):List<Article>{
+) {
+    companion object {
+        fun transformToListEntity(item: List<ArticleModel?>): List<Article> {
             return item.map {
-                    transformToEntity(it ?: ArticleModel(
-                        source = SourceModel("",""),
+                transformToEntity(
+                    it ?: ArticleModel(
+                        source = SourceModel("", ""),
                         author = "",
                         title = "",
                         url = "",
                         publishedAt = ""
-                    ))
+                    )
+                )
             }
         }
 
-        fun transformToEntity(it: ArticleModel):Article{
+        fun transformToEntity(it: ArticleModel): Article {
             return Article(
-                source = SourceModel.transformsToEntity(it.source ?: SourceModel("","")),
+                source = SourceModel.transformsToEntity(it.source ?: SourceModel("", "")),
                 author = it.author ?: "",
                 title = it.title ?: "",
                 url = it.url ?: "",

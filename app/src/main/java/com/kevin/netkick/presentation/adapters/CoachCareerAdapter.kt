@@ -12,12 +12,14 @@ import com.kevin.netkick.R
 import com.kevin.netkick.databinding.CareerItemBinding
 import com.kevin.netkick.domain.entity.coach.Career
 
-class CoachCareerAdapter(private var dataList: MutableList<Career>): RecyclerView.Adapter<CoachCareerAdapter.CoachViewHolder>() {
+class CoachCareerAdapter(private var dataList: MutableList<Career>) :
+    RecyclerView.Adapter<CoachCareerAdapter.CoachViewHolder>() {
     private lateinit var context: Context
 
-    inner class CoachViewHolder(private val binding: CareerItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class CoachViewHolder(private val binding: CareerItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data: Career){
+        fun bindData(data: Career) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -40,7 +42,7 @@ class CoachCareerAdapter(private var dataList: MutableList<Career>): RecyclerVie
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoachViewHolder {
         context = parent.context
-        val binding = CareerItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = CareerItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return CoachViewHolder(binding)
     }
 

@@ -8,11 +8,11 @@ data class GoalsFModel(
     val home: Int?,
     @SerializedName("away")
     val away: Int?
-){
-    companion object{
-        fun transformToEntity(it:GoalsFModel):GoalsF{
+) {
+    companion object {
+        fun transformToEntity(it: GoalsFModel): GoalsF {
             return GoalsF(
-                it.home ?: 0,it.away ?: 0
+                it.home ?: 0, it.away ?: 0
             )
         }
     }

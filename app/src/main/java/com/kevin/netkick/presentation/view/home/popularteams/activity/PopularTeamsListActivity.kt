@@ -19,8 +19,8 @@ import javax.inject.Inject
 
 class PopularTeamsListActivity : AppCompatActivity() {
     lateinit var binding: ActivityPopularTeamsListBinding
-    private lateinit var progressBar:AlertDialog
-    private lateinit var adapter:PopularTeamsListAdapter
+    private lateinit var progressBar: AlertDialog
+    private lateinit var adapter: PopularTeamsListAdapter
 
     @Inject
     lateinit var viewModelFactory: ViewModelFactory
@@ -68,13 +68,14 @@ class PopularTeamsListActivity : AppCompatActivity() {
 
     private fun setupAdapter() {
         binding.apply {
-            adapter = PopularTeamsListAdapter(arrayListOf(),PresentationUtils.POPULAR_SEASON)
+            adapter = PopularTeamsListAdapter(arrayListOf(), PresentationUtils.POPULAR_SEASON)
             rvPopularTeamsList.layoutManager = LinearLayoutManager(this@PopularTeamsListActivity)
             rvPopularTeamsList.adapter = adapter
         }
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
     }
 }

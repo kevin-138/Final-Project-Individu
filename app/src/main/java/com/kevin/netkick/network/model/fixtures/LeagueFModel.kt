@@ -16,9 +16,9 @@ data class LeagueFModel(
     val season: Int?,
     @SerializedName("round")
     val round: String?
-){
+) {
     companion object {
-        fun transformToEntity(it:LeagueFModel):LeagueF{
+        fun transformToEntity(it: LeagueFModel): LeagueF {
             return LeagueF(
                 id = it.id ?: 0,
                 name = it.name ?: "",

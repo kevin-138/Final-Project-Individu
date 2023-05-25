@@ -15,12 +15,14 @@ import com.kevin.netkick.domain.entity.teams.ResponseT
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.trophies.activity.players.PlayersSearchActivity
 
-class TeamSearchAdapter(private val dataList: MutableList<ResponseT>): RecyclerView.Adapter<TeamSearchAdapter.TeamViewHolder>() {
+class TeamSearchAdapter(private val dataList: MutableList<ResponseT>) :
+    RecyclerView.Adapter<TeamSearchAdapter.TeamViewHolder>() {
     private lateinit var context: Context
 
-    inner class TeamViewHolder(private val binding: TeamListItemBinding):RecyclerView.ViewHolder(binding.root) {
+    inner class TeamViewHolder(private val binding: TeamListItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data: ResponseT){
+        fun bindData(data: ResponseT) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -38,7 +40,7 @@ class TeamSearchAdapter(private val dataList: MutableList<ResponseT>): RecyclerV
 
                 root.setOnClickListener {
                     val intent = Intent(context, PlayersSearchActivity::class.java)
-                    intent.putExtra(PresentationUtils.TEAM_SEARCH_DATA,data)
+                    intent.putExtra(PresentationUtils.TEAM_SEARCH_DATA, data)
                     context.startActivity(intent)
                 }
             }
@@ -47,7 +49,8 @@ class TeamSearchAdapter(private val dataList: MutableList<ResponseT>): RecyclerV
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamViewHolder {
         context = parent.context
-        val binding = TeamListItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding =
+            TeamListItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TeamViewHolder(binding)
     }
 

@@ -18,19 +18,20 @@ data class LeagueStModel(
     val season: Int?,
     @SerializedName("standings")
     val standings: List<List<StandingsModel>>?
-){
-    companion object{
-        fun transformToEntity(it:LeagueStModel):LeagueSt{
+) {
+    companion object {
+        fun transformToEntity(it: LeagueStModel): LeagueSt {
             return LeagueSt(
                 id = it.id ?: 0,
                 name = it.name ?: "",
                 country = it.country ?: "",
                 logo = it.logo ?: "",
                 season = it.season ?: 0,
-                standings = transformStandingToEntity(it.standings?: listOf())
+                standings = transformStandingToEntity(it.standings ?: listOf())
             )
         }
-        private fun transformStandingToEntity(item: List<List<StandingsModel>>):List<List<Standings>>{
+
+        private fun transformStandingToEntity(item: List<List<StandingsModel>>): List<List<Standings>> {
             return item.map {
                 StandingsModel.transformToListEntity(it)
             }

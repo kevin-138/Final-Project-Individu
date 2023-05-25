@@ -8,9 +8,9 @@ data class SubScoreModel(
     val home: Int?,
     @SerializedName("away")
     val away: Int?
-){
-    companion object{
-        fun transformToEntity(it:SubScoreModel):SubScore{
+) {
+    companion object {
+        fun transformToEntity(it: SubScoreModel): SubScore {
             return SubScore(
                 home = it.home ?: 0,
                 away = it.away ?: 0

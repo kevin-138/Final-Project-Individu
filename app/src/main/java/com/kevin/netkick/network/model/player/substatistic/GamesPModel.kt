@@ -16,9 +16,9 @@ data class GamesPModel(
     val rating: String?,
     @SerializedName("captain")
     val captain: Boolean?
-){
-    companion object{
-        fun transformToEntity(it: GamesPModel):GamesP{
+) {
+    companion object {
+        fun transformToEntity(it: GamesPModel): GamesP {
             return GamesP(
                 appearances = it.appearances ?: 0,
                 lineups = it.lineups ?: 0,

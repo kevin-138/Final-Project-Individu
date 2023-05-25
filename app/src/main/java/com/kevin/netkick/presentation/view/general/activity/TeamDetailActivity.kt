@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 class TeamDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityTeamDetailBinding
-    private lateinit var progressBar:AlertDialog
+    private lateinit var progressBar: AlertDialog
     private var season: Int? = null
 
     @Inject
@@ -42,8 +42,10 @@ class TeamDetailActivity : AppCompatActivity() {
         }
         checkOnline()
     }
+
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
         progressBar.show()
         progressBar.window?.setLayout(400, 400)
         progressBar.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)
@@ -72,10 +74,10 @@ class TeamDetailActivity : AppCompatActivity() {
         loadingDrawable2.setColorSchemeColors(Color.WHITE)
         loadingDrawable2.start()
 
-        if (intent!=null){
-            season = intent.getIntExtra(PresentationUtils.TEAM_SEASON,0)
+        if (intent != null) {
+            season = intent.getIntExtra(PresentationUtils.TEAM_SEASON, 0)
             lifecycleScope.launch {
-                viewModel.getPopularTeamDetail(intent.getIntExtra(PresentationUtils.TEAM_ID,0))
+                viewModel.getPopularTeamDetail(intent.getIntExtra(PresentationUtils.TEAM_ID, 0))
                 viewModel.detailTeamsFlow.collectLatest {
                     val dataTeam = it.response[0]
                     binding.apply {
@@ -83,7 +85,7 @@ class TeamDetailActivity : AppCompatActivity() {
                             .load(dataTeam.venue.image)
                             .placeholder(loadingDrawable1)
                             .error(R.drawable.broken_image_icon)
-                            .into( ivVenueStadium)
+                            .into(ivVenueStadium)
 
                         Glide.with(binding.root)
                             .load(dataTeam.team.logo)
@@ -92,8 +94,8 @@ class TeamDetailActivity : AppCompatActivity() {
                             .into(ivTeamLogoDetail)
 
                         tvTeamDetailName.text = dataTeam.team.name
-                        tvTeamDetailCode.text = getString(R.string.country_code,dataTeam.team.code)
-                        tvTeamDetailDate.text = getString(R.string.est_year,dataTeam.team.founded)
+                        tvTeamDetailCode.text = getString(R.string.country_code, dataTeam.team.code)
+                        tvTeamDetailDate.text = getString(R.string.est_year, dataTeam.team.founded)
                         tvTeamCountryCode.text = dataTeam.team.country
                         tvTeamVenueName.text = dataTeam.venue.name
                         tvTeamVenueCity.text = dataTeam.venue.city
@@ -103,12 +105,18 @@ class TeamDetailActivity : AppCompatActivity() {
 
 
                         binding.btnSeeAllPlayers.setOnClickListener {
-                            val intentPlayers = Intent(this@TeamDetailActivity,AllPlayerInTeamsActivity::class.java)
-                            intentPlayers.putExtra(PresentationUtils.TEAM_FULL_DATA,dataTeam)
-                            intentPlayers.putExtra(PresentationUtils.TEAM_SEASON,
-                                if (season != 0){
+                            val intentPlayers = Intent(
+                                this@TeamDetailActivity,
+                                AllPlayerInTeamsActivity::class.java
+                            )
+                            intentPlayers.putExtra(PresentationUtils.TEAM_FULL_DATA, dataTeam)
+                            intentPlayers.putExtra(
+                                PresentationUtils.TEAM_SEASON,
+                                if (season != 0) {
                                     season
-                                }else {PresentationUtils.POPULAR_SEASON }
+                                } else {
+                                    PresentationUtils.POPULAR_SEASON
+                                }
                             )
                             this@TeamDetailActivity.startActivity(intentPlayers)
                         }

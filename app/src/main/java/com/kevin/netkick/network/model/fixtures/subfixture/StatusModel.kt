@@ -8,9 +8,9 @@ data class StatusModel(
     val long: String?,
     @SerializedName("short")
     val short: String?
-){
-    companion object{
-        fun transformToEntity(it:StatusModel):Status{
+) {
+    companion object {
+        fun transformToEntity(it: StatusModel): Status {
             return Status(
                 long = it.long ?: "",
                 short = it.short ?: ""

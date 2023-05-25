@@ -49,10 +49,10 @@ class LeagueSearchActivity : AppCompatActivity() {
     }
 
     private fun setObserver() {
-        viewModel.searchResults.observe(this){
-            if (it.response.isEmpty()){
+        viewModel.searchResults.observe(this) {
+            if (it.response.isEmpty()) {
                 layoutVisibility(true)
-            }else{
+            } else {
                 layoutVisibility(false)
                 adapter.addDataToList(it.response)
             }
@@ -65,7 +65,7 @@ class LeagueSearchActivity : AppCompatActivity() {
 
     private fun layoutVisibility(isEmpty: Boolean) {
         binding.apply {
-            when(isEmpty){
+            when (isEmpty) {
                 true -> {
                     tvNothingFound.visibility = View.VISIBLE
                     rvCountriesLeague.visibility = View.INVISIBLE
@@ -96,11 +96,11 @@ class LeagueSearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkIntent(){
-        if (intent.getStringExtra(PresentationUtils.COUNTRY_CODE).isNullOrEmpty()){
+    private fun checkIntent() {
+        if (intent.getStringExtra(PresentationUtils.COUNTRY_CODE).isNullOrEmpty()) {
             setObserver()
             setSearchBar(false)
-        }else{
+        } else {
             setProgressBar()
             getData()
             setSearchBar(true)
@@ -119,15 +119,19 @@ class LeagueSearchActivity : AppCompatActivity() {
 
     }
 
-    private fun setSearchBar(filteredByCountry:Boolean) {
+    private fun setSearchBar(filteredByCountry: Boolean) {
         binding.apply {
-            svLeague.setOnQueryTextListener(object : SearchView.OnQueryTextListener,android.widget.SearchView.OnQueryTextListener{
+            svLeague.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                android.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
-                    if (!filteredByCountry){
+                    if (!filteredByCountry) {
                         if (query.length < 3) {
-                            Toast.makeText(this@LeagueSearchActivity,"Search Field must be at least 3 characters!",
-                                Toast.LENGTH_SHORT).show()
-                        }else{
+                            Toast.makeText(
+                                this@LeagueSearchActivity,
+                                "Search Field must be at least 3 characters!",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        } else {
                             setProgressBar()
                             viewModel.setSearchQuery(query)
                         }
@@ -136,8 +140,8 @@ class LeagueSearchActivity : AppCompatActivity() {
                 }
 
                 override fun onQueryTextChange(inputTxt: String): Boolean {
-                    if (filteredByCountry){
-                        when(adapter.filterData(inputTxt)){
+                    if (filteredByCountry) {
+                        when (adapter.filterData(inputTxt)) {
                             1 -> binding.apply {
                                 tvNothingFound.visibility = View.VISIBLE
                                 rvCountriesLeague.visibility = View.INVISIBLE
@@ -156,12 +160,12 @@ class LeagueSearchActivity : AppCompatActivity() {
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
         progressBar.show()
         progressBar.window?.setLayout(400, 400)
         progressBar.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)
     }
-
 
 
 }

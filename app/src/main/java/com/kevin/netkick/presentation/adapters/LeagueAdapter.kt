@@ -15,12 +15,14 @@ import com.kevin.netkick.domain.entity.league.ResponseL
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.explore.activity.LeagueStandingsActivity
 
-class LeagueAdapter(private var dataList: MutableList<ResponseL>): RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder>() {
+class LeagueAdapter(private var dataList: MutableList<ResponseL>) :
+    RecyclerView.Adapter<LeagueAdapter.LeagueViewHolder>() {
     private lateinit var context: Context
     private var dataListMemory = mutableListOf<ResponseL>()
 
-    inner class LeagueViewHolder(private val binding: LeagueItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bindData(data: ResponseL){
+    inner class LeagueViewHolder(private val binding: LeagueItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        fun bindData(data: ResponseL) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -38,8 +40,8 @@ class LeagueAdapter(private var dataList: MutableList<ResponseL>): RecyclerView.
                 tvLeagueType.text = data.league.type
 
                 root.setOnClickListener {
-                    val intent = Intent(context,LeagueStandingsActivity::class.java)
-                    intent.putExtra(PresentationUtils.LEAGUE_FULL_DATA,data)
+                    val intent = Intent(context, LeagueStandingsActivity::class.java)
+                    intent.putExtra(PresentationUtils.LEAGUE_FULL_DATA, data)
                     context.startActivity(intent)
                 }
             }
@@ -49,22 +51,22 @@ class LeagueAdapter(private var dataList: MutableList<ResponseL>): RecyclerView.
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LeagueViewHolder {
         context = parent.context
-        val binding = LeagueItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = LeagueItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LeagueViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-         return dataList.size
+        return dataList.size
     }
 
     override fun onBindViewHolder(holder: LeagueViewHolder, position: Int) {
         holder.bindData(dataList[position])
     }
 
-    fun filterData(query:String):Int{
+    fun filterData(query: String): Int {
         val dataListFiltered: MutableList<ResponseL> = mutableListOf()
         for (item in dataListMemory) {
-            if (item.league.name.contains(query,true)) {
+            if (item.league.name.contains(query, true)) {
                 dataListFiltered.add(item)
             }
         }

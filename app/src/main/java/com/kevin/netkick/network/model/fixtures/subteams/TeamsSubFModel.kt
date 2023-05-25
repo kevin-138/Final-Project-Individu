@@ -12,9 +12,9 @@ data class TeamsSubFModel(
     val logo: String?,
     @SerializedName("winner")
     val winner: Boolean?
-){
-    companion object{
-        fun transformToEntity(it:TeamsSubFModel):TeamsSubF{
+) {
+    companion object {
+        fun transformToEntity(it: TeamsSubFModel): TeamsSubF {
             return TeamsSubF(
                 id = it.id ?: 0,
                 name = it.name ?: "",

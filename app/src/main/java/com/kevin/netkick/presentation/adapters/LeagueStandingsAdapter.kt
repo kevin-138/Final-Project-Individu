@@ -20,29 +20,31 @@ import com.kevin.netkick.domain.entity.standings.substandings.TeamSt
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.general.activity.TeamDetailActivity
 
-class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>): RecyclerView.Adapter<RecyclerView.ViewHolder>() {
+class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>) :
+    RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     private lateinit var context: Context
     private var currentGroup = 0
     private var standingsList = arrayListOf<Standings>()
     private var season = 0
 
-    fun next(){
-        if (currentGroup != getGroupSize()-1){
-            currentGroup  += 1
+    fun next() {
+        if (currentGroup != getGroupSize() - 1) {
+            currentGroup += 1
             setGroup(currentGroup)
         }
     }
 
-    fun pref(){
-        if (currentGroup != 0){
+    fun pref() {
+        if (currentGroup != 0) {
             currentGroup -= 1
             setGroup(currentGroup)
         }
     }
 
 
-    inner class StandingsItemViewHolder(private val itemBinding: StandingListItemBinding):RecyclerView.ViewHolder(itemBinding.root) {
-        fun bindData(data:Standings){
+    inner class StandingsItemViewHolder(private val itemBinding: StandingListItemBinding) :
+        RecyclerView.ViewHolder(itemBinding.root) {
+        fun bindData(data: Standings) {
             val loadingDrawable1 = CircularProgressDrawable(context)
             loadingDrawable1.strokeWidth = 5f
             loadingDrawable1.centerRadius = 30f
@@ -68,31 +70,38 @@ class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>): 
 
                 root.setOnClickListener {
                     val intent = Intent(context, TeamDetailActivity::class.java)
-                    intent.putExtra(PresentationUtils.TEAM_ID,data.team.id)
-                    intent.putExtra(PresentationUtils.TEAM_SEASON,season)
+                    intent.putExtra(PresentationUtils.TEAM_ID, data.team.id)
+                    intent.putExtra(PresentationUtils.TEAM_SEASON, season)
                     context.startActivity(intent)
                 }
             }
         }
     }
 
-    inner class StandingsHeaderViewHolder(private val headerBinding: StandingsHeaderBinding):RecyclerView.ViewHolder(headerBinding.root)
+    inner class StandingsHeaderViewHolder(headerBinding: StandingsHeaderBinding) :
+        RecyclerView.ViewHolder(headerBinding.root)
 
     override fun getItemViewType(position: Int): Int {
         return when (position) {
             0 -> PresentationUtils.TYPE_HEADER
-            else ->  PresentationUtils.TYPE_ITEM
+            else -> PresentationUtils.TYPE_ITEM
         }
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int):RecyclerView.ViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         context = parent.context
-        return when(viewType){
-            PresentationUtils.TYPE_HEADER -> StandingsHeaderViewHolder(StandingsHeaderBinding.inflate(
-                LayoutInflater.from(context),parent,false))
-            PresentationUtils.TYPE_ITEM -> StandingsItemViewHolder(StandingListItemBinding.inflate(
-                LayoutInflater.from(context),parent,false))
+        return when (viewType) {
+            PresentationUtils.TYPE_HEADER -> StandingsHeaderViewHolder(
+                StandingsHeaderBinding.inflate(
+                    LayoutInflater.from(context), parent, false
+                )
+            )
+            PresentationUtils.TYPE_ITEM -> StandingsItemViewHolder(
+                StandingListItemBinding.inflate(
+                    LayoutInflater.from(context), parent, false
+                )
+            )
             else -> throw IllegalArgumentException("Invalid View Type!")
         }
 
@@ -102,30 +111,33 @@ class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>): 
         return dataList.size
     }
 
-    fun setSeason(inputSeason:Int){
+    fun setSeason(inputSeason: Int) {
         season = inputSeason
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun setGroup(group:Int){
+    fun setGroup(group: Int) {
         currentGroup = group
         standingsList.clear()
         standingsList.addAll(dataList[currentGroup] as ArrayList<Standings>)
-        standingsList.add(0,Standings(0,TeamSt(0,"",""),0,0,"","",All(0,GoalsSt(0,0),0,0,0)))
+        standingsList.add(
+            0,
+            Standings(0, TeamSt(0, "", ""), 0, 0, "", "", All(0, GoalsSt(0, 0), 0, 0, 0))
+        )
 //        dataList[currentGroup].toMutableList().add(0, Standings(0, TeamSt(0,"",""),0,0,"","", All(0, GoalsSt(0,0),0,0,0)))
         notifyDataSetChanged()
     }
 
-    fun getCurrentGroup():String{
-        return (currentGroup+1).toString()
+    fun getCurrentGroup(): String {
+        return (currentGroup + 1).toString()
     }
 
     override fun getItemCount(): Int {
-            return standingsList.size
+        return standingsList.size
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder){
+        when (holder) {
             is StandingsHeaderViewHolder -> {
 //            ini bisa ga ada coba dicek dlu
             }
@@ -136,7 +148,7 @@ class LeagueStandingsAdapter(private var dataList: ArrayList<List<Standings>>): 
     }
 
     @SuppressLint("NotifyDataSetChanged")
-    fun addDataToList(inputData:  ArrayList<List<Standings>>) {
+    fun addDataToList(inputData: ArrayList<List<Standings>>) {
         dataList.clear()
         dataList.addAll(inputData)
         setGroup(0)

@@ -10,14 +10,14 @@ data class NewsResponseModel(
     val totalResults: Int?,
     @SerializedName("articles")
     val articles: List<ArticleModel?>?
-){
-    companion object{
-        fun transformsToEntity(it: NewsResponseModel): NewsResponse{
-                return NewsResponse(
-                    status = it.status ?: "",
-                    totalResults = it.totalResults ?: 0,
-                    articles = ArticleModel.transformToListEntity(it.articles ?: listOf())
-                )
+) {
+    companion object {
+        fun transformsToEntity(it: NewsResponseModel): NewsResponse {
+            return NewsResponse(
+                status = it.status ?: "",
+                totalResults = it.totalResults ?: 0,
+                articles = ArticleModel.transformToListEntity(it.articles ?: listOf())
+            )
         }
     }
 }

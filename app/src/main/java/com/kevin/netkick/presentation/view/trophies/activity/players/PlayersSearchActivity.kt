@@ -36,6 +36,7 @@ class PlayersSearchActivity : AppCompatActivity() {
     private val viewModel: TrophiesViewModel by viewModels {
         viewModelFactory
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         (application as NetkickApplication).appComponent.injectIntoPlayersSearchActivity(this)
         super.onCreate(savedInstanceState)
@@ -91,17 +92,21 @@ class PlayersSearchActivity : AppCompatActivity() {
 
     private fun setSearchBar() {
         binding.apply {
-            svPlayer.setOnQueryTextListener(object : SearchView.OnQueryTextListener,android.widget.SearchView.OnQueryTextListener{
+            svPlayer.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                android.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
-                        if (query.length < 4) {
-                            Toast.makeText(this@PlayersSearchActivity,"Search Field must be at least 4 characters!",
-                                Toast.LENGTH_SHORT).show()
-                        }else{
-                            setProgressBar()
-                            viewModel.setPlayerSearchQuery(Pair(query,teamData!!.team.id))
-                            Timer().schedule(2000L) {
-                                progressBar.dismiss()
-                            }
+                    if (query.length < 4) {
+                        Toast.makeText(
+                            this@PlayersSearchActivity,
+                            "Search Field must be at least 4 characters!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
+                        setProgressBar()
+                        viewModel.setPlayerSearchQuery(Pair(query, teamData!!.team.id))
+                        Timer().schedule(2000L) {
+                            progressBar.dismiss()
+                        }
                     }
                     return false
                 }
@@ -114,17 +119,18 @@ class PlayersSearchActivity : AppCompatActivity() {
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
         progressBar.show()
         progressBar.window?.setLayout(400, 400)
         progressBar.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)
     }
 
     private fun setObserver() {
-        viewModel.playerSearchResults.observe(this){
-            if (it.response.isEmpty()){
+        viewModel.playerSearchResults.observe(this) {
+            if (it.response.isEmpty()) {
                 layoutVisibility(true)
-            }else{
+            } else {
                 layoutVisibility(false)
                 adapter.addDataToList(it.response)
             }
@@ -133,7 +139,7 @@ class PlayersSearchActivity : AppCompatActivity() {
 
     private fun layoutVisibility(isEmpty: Boolean) {
         binding.apply {
-            when(isEmpty){
+            when (isEmpty) {
                 true -> {
                     tvNothingFoundPlayer.visibility = View.VISIBLE
                     rvPlayerList.visibility = View.INVISIBLE

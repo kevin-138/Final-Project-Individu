@@ -52,10 +52,10 @@ class CoachSearchActivity : AppCompatActivity() {
     }
 
     private fun setObserver() {
-        viewModel.coachSearchResults.observe(this){
-            if (it.response.isEmpty()){
+        viewModel.coachSearchResults.observe(this) {
+            if (it.response.isEmpty()) {
                 layoutVisibility(true)
-            }else{
+            } else {
                 layoutVisibility(false)
                 adapter.addDataToList(it.response)
             }
@@ -65,7 +65,7 @@ class CoachSearchActivity : AppCompatActivity() {
 
     private fun layoutVisibility(isEmpty: Boolean) {
         binding.apply {
-            when(isEmpty){
+            when (isEmpty) {
                 true -> {
                     tvNothingFoundTopsc.visibility = View.VISIBLE
                     rvCoach.visibility = View.INVISIBLE
@@ -91,12 +91,15 @@ class CoachSearchActivity : AppCompatActivity() {
 
     private fun setSearchBar() {
         binding.apply {
-            svCoach.setOnQueryTextListener(object : SearchView.OnQueryTextListener,android.widget.SearchView.OnQueryTextListener{
+            svCoach.setOnQueryTextListener(object : SearchView.OnQueryTextListener,
+                android.widget.SearchView.OnQueryTextListener {
                 override fun onQueryTextSubmit(query: String): Boolean {
                     if (query.length < 4) {
-                        Toast.makeText(this@CoachSearchActivity,"Search Field must be at least 3 characters!",
-                            Toast.LENGTH_SHORT).show()
-                    }else{
+                        Toast.makeText(
+                            this@CoachSearchActivity, "Search Field must be at least 3 characters!",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    } else {
                         setProgressBar()
                         viewModel.setCoachSearchQuery(query)
                         Timer().schedule(2000L) {
@@ -114,7 +117,8 @@ class CoachSearchActivity : AppCompatActivity() {
     }
 
     private fun setProgressBar() {
-        progressBar = AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
+        progressBar =
+            AlertDialog.Builder(this).setCancelable(false).setView(R.layout.loading).create()
         progressBar.show()
         progressBar.window?.setLayout(400, 400)
         progressBar.window?.setBackgroundDrawableResource(R.drawable.connection_dialog_background)

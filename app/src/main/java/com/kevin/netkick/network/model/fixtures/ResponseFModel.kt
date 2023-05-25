@@ -10,7 +10,7 @@ import com.kevin.netkick.network.model.fixtures.subscore.SubScoreModel
 import com.kevin.netkick.network.model.fixtures.subteams.TeamsFModel
 import com.kevin.netkick.network.model.fixtures.subteams.TeamsSubFModel
 
-data class  ResponseFModel(
+data class ResponseFModel(
     @SerializedName("fixture")
     val fixture: FixtureModel?,
     @SerializedName("league")
@@ -21,41 +21,52 @@ data class  ResponseFModel(
     val goals: GoalsFModel?,
     @SerializedName("score")
     val score: ScoreModel?
-){
-    companion object{
-        fun transformToListEntity(item: List<ResponseFModel?>):List<ResponseF>{
+) {
+    companion object {
+        fun transformToListEntity(item: List<ResponseFModel?>): List<ResponseF> {
             return item.map {
-                transformToEntity(it ?: ResponseFModel(
-                    fixture = FixtureModel(
-                        0,"","","", VenueFModel("",""), StatusModel("","")
-                    ),
-                    league = LeagueFModel(
-                        0,"","","",0,""
-                    ),
-                    teams = TeamsFModel(
-                        TeamsSubFModel(0,"","",false),TeamsSubFModel(0,"","",false)
-                    ),
-                    goals = GoalsFModel(0,0),
-                    score = ScoreModel(SubScoreModel(0,0),SubScoreModel(0,0))
-                )
+                transformToEntity(
+                    it ?: ResponseFModel(
+                        fixture = FixtureModel(
+                            0, "", "", "", VenueFModel("", ""), StatusModel("", "")
+                        ),
+                        league = LeagueFModel(
+                            0, "", "", "", 0, ""
+                        ),
+                        teams = TeamsFModel(
+                            TeamsSubFModel(0, "", "", false), TeamsSubFModel(0, "", "", false)
+                        ),
+                        goals = GoalsFModel(0, 0),
+                        score = ScoreModel(SubScoreModel(0, 0), SubScoreModel(0, 0))
+                    )
                 )
             }
         }
 
-        fun transformToEntity(it:ResponseFModel):ResponseF{
+        fun transformToEntity(it: ResponseFModel): ResponseF {
             return ResponseF(
                 fixture = FixtureModel.transformToEntity(
-                    it.fixture ?: FixtureModel(0,"","","", VenueFModel("",""), StatusModel("",""))
+                    it.fixture ?: FixtureModel(
+                        0,
+                        "",
+                        "",
+                        "",
+                        VenueFModel("", ""),
+                        StatusModel("", "")
+                    )
                 ),
                 league = LeagueFModel.transformToEntity(
-                    it.league ?: LeagueFModel(0,"","","",0,"")
+                    it.league ?: LeagueFModel(0, "", "", "", 0, "")
                 ),
                 teams = TeamsFModel.transformToEntity(
-                    it.teams ?: TeamsFModel(TeamsSubFModel(0,"","",false),TeamsSubFModel(0,"","",false))
+                    it.teams ?: TeamsFModel(
+                        TeamsSubFModel(0, "", "", false),
+                        TeamsSubFModel(0, "", "", false)
+                    )
                 ),
-                goals = GoalsFModel.transformToEntity(it.goals ?: GoalsFModel(0,0)),
+                goals = GoalsFModel.transformToEntity(it.goals ?: GoalsFModel(0, 0)),
                 score = ScoreModel.transformToEntity(
-                    it.score ?: ScoreModel(SubScoreModel(0,0),SubScoreModel(0,0))
+                    it.score ?: ScoreModel(SubScoreModel(0, 0), SubScoreModel(0, 0))
                 )
             )
         }

@@ -8,9 +8,9 @@ data class SourceModel(
     val id: String?,
     @SerializedName("name")
     val name: String?
-){
-    companion object{
-        fun transformsToEntity(it:SourceModel):Source{
+) {
+    companion object {
+        fun transformsToEntity(it: SourceModel): Source {
             return Source(
                 id = it.id ?: "",
                 name = it.name ?: ""

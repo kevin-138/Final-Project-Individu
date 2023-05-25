@@ -10,19 +10,19 @@ data class CareerModel(
     val end: String?,
     @SerializedName("team")
     val team: TeamCModel?
-){
-    companion object{
-        fun transformToListEntity(item:List<CareerModel>):List<Career>{
+) {
+    companion object {
+        fun transformToListEntity(item: List<CareerModel>): List<Career> {
             return item.map {
                 transformToEntity(it)
             }
         }
 
-        fun transformToEntity(it:CareerModel):Career{
+        fun transformToEntity(it: CareerModel): Career {
             return Career(
                 start = it.start ?: "-",
                 end = it.end ?: "-",
-                team = TeamCModel.transformToEntity(it.team ?: TeamCModel(0,"",""))
+                team = TeamCModel.transformToEntity(it.team ?: TeamCModel(0, "", ""))
             )
         }
     }

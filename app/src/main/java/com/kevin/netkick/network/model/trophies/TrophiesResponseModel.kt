@@ -11,11 +11,11 @@ data class TrophiesResponseModel(
     val results: Int?,
     @SerializedName("response")
     val response: List<ResponseTropModel>?
-){
-    companion object{
-        fun transformToEntity(it:TrophiesResponseModel):TrophiesResponse{
+) {
+    companion object {
+        fun transformToEntity(it: TrophiesResponseModel): TrophiesResponse {
             return TrophiesResponse(
-                paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0,0)),
+                paging = PagingModel.transformsToEntity(it.paging ?: PagingModel(0, 0)),
                 results = it.results ?: 0,
                 response = ResponseTropModel.transformToListEntity(it.response ?: listOf())
             )

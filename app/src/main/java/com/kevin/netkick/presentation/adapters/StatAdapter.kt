@@ -2,53 +2,51 @@ package com.kevin.netkick.presentation.adapters
 
 import android.annotation.SuppressLint
 import android.content.Context
-import android.icu.lang.UCharacter.GraphemeClusterBreak.L
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.kevin.netkick.databinding.FixturesItemBinding
 import com.kevin.netkick.databinding.StatItemBinding
-import com.kevin.netkick.domain.entity.fixtures.ResponseF
 import com.kevin.netkick.domain.entity.statistics.ResponseS
 import com.kevin.netkick.domain.entity.statistics.Stats
 
-class StatAdapter(private var dataList: MutableList<ResponseS>): RecyclerView.Adapter<StatAdapter.ViewHolder>() {
+class StatAdapter(private var dataList: MutableList<ResponseS>) :
+    RecyclerView.Adapter<StatAdapter.ViewHolder>() {
     private lateinit var context: Context
 
-    inner class ViewHolder(private val binding: StatItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class ViewHolder(private val binding: StatItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(home: Stats, away:Stats){
+        fun bindData(home: Stats, away: Stats) {
             binding.apply {
                 tvStTitle1.text = home.type
 
 
-
-                val valueHome = if (home.value.contains('%')){
+                val valueHome = if (home.value.contains('%')) {
                     home.value.substringBefore('%').toInt()
-                }else if (home.value.contains('.')){
+                } else if (home.value.contains('.')) {
                     home.value.substringBefore('.').toInt()
-                } else{
+                } else {
                     home.value.toInt()
                 }
 
-                val valueAway =if (away.value.contains('%')){
+                val valueAway = if (away.value.contains('%')) {
                     away.value.substringBefore('%').toInt()
-                } else if (away.value.contains('.')){
+                } else if (away.value.contains('.')) {
                     away.value.substringBefore('.').toInt()
                 } else {
                     away.value.toInt()
                 }
 
-                val max = valueHome+valueAway
+                val max = valueHome + valueAway
 
-                tvAwaySog.text = if (away.value.contains('.')){
+                tvAwaySog.text = if (away.value.contains('.')) {
                     valueAway.toString()
-                }else{
+                } else {
                     away.value
                 }
-                tvHomeSog.text = if (home.value.contains('.')){
+                tvHomeSog.text = if (home.value.contains('.')) {
                     valueHome.toString()
-                }else{
+                } else {
                     home.value
                 }
 
@@ -63,12 +61,12 @@ class StatAdapter(private var dataList: MutableList<ResponseS>): RecyclerView.Ad
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
-        val binding =  StatItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        val binding = StatItemBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
-        return if(dataList.isEmpty()) {
+        return if (dataList.isEmpty()) {
             0
         } else {
             dataList[0].statistics.size
@@ -76,8 +74,9 @@ class StatAdapter(private var dataList: MutableList<ResponseS>): RecyclerView.Ad
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindData(dataList[0].statistics[position],dataList[1].statistics[position])
+        holder.bindData(dataList[0].statistics[position], dataList[1].statistics[position])
     }
+
     @SuppressLint("NotifyDataSetChanged")
     fun addDataToList(statisticList: List<ResponseS>) {
         dataList.clear()

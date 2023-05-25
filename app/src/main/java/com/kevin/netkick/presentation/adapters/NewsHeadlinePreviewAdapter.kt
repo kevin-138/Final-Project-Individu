@@ -11,20 +11,24 @@ import com.kevin.netkick.domain.entity.news.Article
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.view.home.news.activity.ArticleActivity
 
-class NewsHeadlinePreviewAdapter(private val dataList: MutableList<Article>, private val dataEmpty: Boolean):RecyclerView.Adapter<NewsHeadlinePreviewAdapter.NewsViewHolder>() {
+class NewsHeadlinePreviewAdapter(
+    private val dataList: MutableList<Article>,
+    private val dataEmpty: Boolean
+) : RecyclerView.Adapter<NewsHeadlinePreviewAdapter.NewsViewHolder>() {
     private lateinit var context: Context
 
-    inner class NewsViewHolder(private val binding: NewsHeadlineItemBinding): RecyclerView.ViewHolder(binding.root) {
+    inner class NewsViewHolder(private val binding: NewsHeadlineItemBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
-        fun bindData(data: Article){
+        fun bindData(data: Article) {
             changeVisibility(1)
             binding.apply {
                 tvArticleAuthor.text = data.author
                 tvNewsArticleTitle.text = data.title
                 tvArticleDate.text = PresentationUtils.newsDateFormatter(data.publishedAt)
                 btnNewsDetail.setOnClickListener {
-                    val intent = Intent(context,ArticleActivity::class.java)
-                    intent.putExtra(PresentationUtils.NEWS_URL,data.url)
+                    val intent = Intent(context, ArticleActivity::class.java)
+                    intent.putExtra(PresentationUtils.NEWS_URL, data.url)
                     context.startActivity(intent)
                 }
             }
@@ -35,7 +39,7 @@ class NewsHeadlinePreviewAdapter(private val dataList: MutableList<Article>, pri
         }
 
         private fun changeVisibility(state: Int) {
-            when(state){
+            when (state) {
                 1 -> {
                     binding.apply {
                         tvNewsArticleTitle.visibility = View.VISIBLE
@@ -59,7 +63,6 @@ class NewsHeadlinePreviewAdapter(private val dataList: MutableList<Article>, pri
     }
 
 
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         context = parent.context
         val binding =
@@ -68,23 +71,27 @@ class NewsHeadlinePreviewAdapter(private val dataList: MutableList<Article>, pri
     }
 
     override fun getItemCount(): Int {
-        return if (dataEmpty){
+        return if (dataEmpty) {
             1
-        }else{
+        } else {
             dataList.size
         }
     }
 
-    override fun onBindViewHolder(holder: NewsHeadlinePreviewAdapter.NewsViewHolder, position: Int) {
-        if (dataEmpty){
+    override fun onBindViewHolder(
+        holder: NewsHeadlinePreviewAdapter.NewsViewHolder,
+        position: Int
+    ) {
+        if (dataEmpty) {
             holder.bindDataEmpty()
         } else {
             holder.bindData(dataList[position])
         }
     }
+
     fun addDataToList(articleList: List<Article>) {
         dataList.clear()
         dataList.addAll(articleList)
-        notifyItemRangeChanged(0,dataList.size)
+        notifyItemRangeChanged(0, dataList.size)
     }
 }

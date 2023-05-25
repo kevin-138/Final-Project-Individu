@@ -8,9 +8,9 @@ data class GoalsStModel(
     val goalsAgainst: Int?,
     @SerializedName("for")
     val goalsFor: Int?
-){
-    companion object{
-        fun transformToEntity(it:GoalsStModel):GoalsSt {
+) {
+    companion object {
+        fun transformToEntity(it: GoalsStModel): GoalsSt {
             return GoalsSt(
                 goalsAgainst = it.goalsAgainst ?: 0,
                 goalsFor = it.goalsFor ?: 0
