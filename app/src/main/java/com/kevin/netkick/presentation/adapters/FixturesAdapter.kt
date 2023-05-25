@@ -63,8 +63,9 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>) :
                     .error(R.drawable.broken_image_icon)
                     .into(ivLivescoreAwayLogo)
 
-                if (coverage) {
+
                     root.setOnClickListener {
+                        if (coverage) {
                         val intent = Intent(context, FixturesDetailActivity::class.java)
                         intent.putExtra(PresentationUtils.FIXTURE_FULL_DATA, data)
                         intent.putExtra(
@@ -76,7 +77,9 @@ class FixturesAdapter(private var dataList: MutableList<ResponseF>) :
                             )
                         )
                         context.startActivity(intent)
-                    }
+                    }else{
+                            PresentationUtils.errorToast(context,"Statistic Not Available")
+                        }
                 }
 
             }
