@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -56,17 +55,17 @@ class HomeFragment() : Fragment() {
 
     private fun setupAdapters() {
         binding.apply {
-        val pageSnapHelper = PagerSnapHelper()
-        liveScoreAdapter = LiveScoreAdapter(mutableListOf(),false)
-       rvLivescore.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
-        rvLivescore.adapter = liveScoreAdapter
-        pageSnapHelper.attachToRecyclerView(binding.rvLivescore)
+            val pageSnapHelper = PagerSnapHelper()
+            liveScoreAdapter = LiveScoreAdapter(mutableListOf(), false)
+            rvLivescore.layoutManager =
+                LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            rvLivescore.adapter = liveScoreAdapter
+            pageSnapHelper.attachToRecyclerView(binding.rvLivescore)
 
-        popularTeamsAdapter = PopularTeamsPreviewAdapter(
-           mutableListOf(),
-            PresentationUtils.POPULAR_SEASON
-        )
+            popularTeamsAdapter = PopularTeamsPreviewAdapter(
+                mutableListOf(),
+                PresentationUtils.POPULAR_SEASON
+            )
             rvPopularTeams.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             rvPopularTeams.adapter = popularTeamsAdapter
@@ -76,9 +75,9 @@ class HomeFragment() : Fragment() {
                     return false
                 }
             }
-                newsAdapter = NewsHeadlinePreviewAdapter(mutableListOf(), true)
-                rvNewsHeadline.layoutManager = noScrollLayoutManager
-                rvNewsHeadline.adapter = newsAdapter
+            newsAdapter = NewsHeadlinePreviewAdapter(mutableListOf(), true)
+            rvNewsHeadline.layoutManager = noScrollLayoutManager
+            rvNewsHeadline.adapter = newsAdapter
         }
 
 
@@ -111,9 +110,12 @@ class HomeFragment() : Fragment() {
                     it.response.slice(0..14)
                 } else listOf()
                 if (it.error.isNotBlank()) {
-                    PresentationUtils.errorToast(requireContext(),it.error)
+                    PresentationUtils.errorToast(requireContext(), it.error)
                 } else {
-                    popularTeamsAdapter.addDataToList(popularTeamsPreview, PresentationUtils.POPULAR_SEASON)
+                    popularTeamsAdapter.addDataToList(
+                        popularTeamsPreview,
+                        PresentationUtils.POPULAR_SEASON
+                    )
                 }
             }
         }
@@ -125,7 +127,7 @@ class HomeFragment() : Fragment() {
             mainViewModel.newsHeadlineFlow.collectLatest {
                 setupNewsLayout(it)
                 if (it.error.isNotBlank()) {
-                    PresentationUtils.errorToast(requireContext(),it.error)
+                    PresentationUtils.errorToast(requireContext(), it.error)
                 } else {
                     setupNewsLayout(it)
                 }
@@ -163,7 +165,7 @@ class HomeFragment() : Fragment() {
             mainViewModel.getLiveMatches(PresentationUtils.LIVE_PARAMS)
             mainViewModel.liveScoreFlow.collectLatest {
                 if (it.error.isNotBlank()) {
-                    PresentationUtils.errorToast(requireContext(),it.error)
+                    PresentationUtils.errorToast(requireContext(), it.error)
                 } else {
                     liveScoreAdapter.addDataToList(it.response, it.response.isEmpty())
                 }
