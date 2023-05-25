@@ -21,7 +21,9 @@ import com.kevin.netkick.presentation.view.viewmodels.TrophiesViewModel
 import com.kevin.netkick.presentation.view.viewmodels.factory.ViewModelFactory
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import java.util.*
 import javax.inject.Inject
+import kotlin.concurrent.schedule
 
 class CoachDetailActivity : AppCompatActivity() {
     private lateinit var binding: ActivityCoachDetailBinding
@@ -77,7 +79,9 @@ class CoachDetailActivity : AppCompatActivity() {
             viewModel.getTrophies(coachData!!.id)
             viewModel.trophiesFlow.collectLatest {
                 adapterTrophy.addDataToList(it.response)
-                progressBar.dismiss()
+                Timer().schedule(2000L) {
+                    progressBar.dismiss()
+                }
             }
         }
     }
