@@ -9,6 +9,7 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
@@ -172,7 +173,11 @@ class FixturesActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.fixtureResult.observe(this) {
-            adapter.addDataToList(it.response)
+            if (it.error.isNotBlank()) {
+                PresentationUtils.errorToast(this,it.error)
+            } else {
+                 adapter.addDataToList(it.response)
+            }
             Timer().schedule(1500L) {
                 progressBar.dismiss()
             }

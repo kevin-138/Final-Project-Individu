@@ -214,7 +214,11 @@ class LeagueStandingsActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.standingResults.observe(this) {
-            adapter.addDataToList(it.response[0].league.standings as ArrayList<List<Standings>>)
+            if (it.error.isNotBlank()) {
+                PresentationUtils.errorToast(this,it.error)
+            } else {
+                adapter.addDataToList(it.response[0].league.standings as ArrayList<List<Standings>>)
+            }
             progressBar.dismiss()
         }
     }

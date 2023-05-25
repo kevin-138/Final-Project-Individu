@@ -143,7 +143,11 @@ class PlayersAchievementActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.getPlayerTrophies(playerData!!.players.id)
             viewModel.playerTrophiesFlow.collectLatest {
-                adapterTrophy.addDataToList(it.response)
+                if (it.error.isNotBlank()) {
+                    PresentationUtils.errorToast(this@PlayersAchievementActivity,it.error)
+                } else {
+                    adapterTrophy.addDataToList(it.response)
+                }
                 Timer().schedule(2000L) {
                     progressBar.dismiss()
                 }

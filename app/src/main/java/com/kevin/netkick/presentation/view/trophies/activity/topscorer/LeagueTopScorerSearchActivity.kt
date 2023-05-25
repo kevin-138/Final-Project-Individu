@@ -47,11 +47,15 @@ class LeagueTopScorerSearchActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.searchResults.observe(this) {
-            if (it.response.isEmpty()) {
-                layoutVisibility(true)
+            if (it.error.isNotBlank()) {
+                PresentationUtils.errorToast(this,it.error)
             } else {
-                layoutVisibility(false)
-                adapter.addDataToList(it.response)
+                if (it.response.isEmpty()) {
+                    layoutVisibility(true)
+                } else {
+                    layoutVisibility(false)
+                    adapter.addDataToList(it.response)
+                }
             }
             Timer().schedule(1000L) {
                 progressBar.dismiss()

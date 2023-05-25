@@ -78,7 +78,12 @@ class CoachDetailActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.getTrophies(coachData!!.id)
             viewModel.trophiesFlow.collectLatest {
-                adapterTrophy.addDataToList(it.response)
+                if (it.error.isNotBlank()) {
+                    PresentationUtils.errorToast(this@CoachDetailActivity,it.error)
+                } else {
+                    adapterTrophy.addDataToList(it.response)
+                }
+
                 Timer().schedule(2000L) {
                     progressBar.dismiss()
                 }

@@ -54,7 +54,11 @@ class LeagueSearchActivity : AppCompatActivity() {
                 layoutVisibility(true)
             } else {
                 layoutVisibility(false)
-                adapter.addDataToList(it.response)
+                if (it.error.isNotBlank()) {
+                    PresentationUtils.errorToast(this,it.error)
+                } else {
+                    adapter.addDataToList(it.response)
+                }
             }
             Timer().schedule(1500L) {
                 progressBar.dismiss()
@@ -112,7 +116,11 @@ class LeagueSearchActivity : AppCompatActivity() {
             intent.getStringExtra(PresentationUtils.COUNTRY_CODE)
                 ?.let { viewModel.getLeagueFilterCountry(it) }
             viewModel.leagueByCountryFlow.collectLatest {
-                adapter.addDataToList(it.response)
+                if (it.error.isNotBlank()) {
+                    PresentationUtils.errorToast(this@LeagueSearchActivity,it.error)
+                } else {
+                    adapter.addDataToList(it.response)
+                }
                 progressBar.dismiss()
             }
         }

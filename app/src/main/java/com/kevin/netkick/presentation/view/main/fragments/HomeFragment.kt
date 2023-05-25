@@ -111,7 +111,7 @@ class HomeFragment() : Fragment() {
                     it.response.slice(0..14)
                 } else listOf()
                 if (it.error.isNotBlank()) {
-                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                    PresentationUtils.errorToast(requireContext(),it.error)
                 } else {
                     popularTeamsAdapter.addDataToList(popularTeamsPreview, PresentationUtils.POPULAR_SEASON)
                 }
@@ -124,7 +124,11 @@ class HomeFragment() : Fragment() {
             mainViewModel.getNewsHeadline()
             mainViewModel.newsHeadlineFlow.collectLatest {
                 setupNewsLayout(it)
-
+                if (it.error.isNotBlank()) {
+                    PresentationUtils.errorToast(requireContext(),it.error)
+                } else {
+                    setupNewsLayout(it)
+                }
             }
         }
     }
@@ -159,7 +163,7 @@ class HomeFragment() : Fragment() {
             mainViewModel.getLiveMatches(PresentationUtils.LIVE_PARAMS)
             mainViewModel.liveScoreFlow.collectLatest {
                 if (it.error.isNotBlank()) {
-                    Toast.makeText(requireContext(), it.error, Toast.LENGTH_SHORT).show()
+                    PresentationUtils.errorToast(requireContext(),it.error)
                 } else {
                     liveScoreAdapter.addDataToList(it.response, it.response.isEmpty())
                 }

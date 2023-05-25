@@ -59,7 +59,11 @@ class PopularTeamsListActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.getPopularTeams()
             viewModel.popularTeamsFlow.collectLatest {
-                adapter.addDataToList(it.response)
+                if (it.error.isNotBlank()) {
+                    PresentationUtils.errorToast(this@PopularTeamsListActivity,it.error)
+                } else {
+                    adapter.addDataToList(it.response)
+                }
                 progressBar.dismiss()
             }
         }

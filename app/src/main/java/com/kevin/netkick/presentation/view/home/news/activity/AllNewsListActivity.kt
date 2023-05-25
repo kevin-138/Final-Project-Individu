@@ -10,6 +10,7 @@ import com.kevin.netkick.NetkickApplication
 import com.kevin.netkick.R
 import com.kevin.netkick.databinding.ActivityAllNewsListBinding
 import com.kevin.netkick.domain.entity.news.NewsResponse
+import com.kevin.netkick.domain.entity.standings.substandings.Standings
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.NewsHeadlinePreviewAdapter
 import com.kevin.netkick.presentation.view.viewmodels.MainViewModel
@@ -73,7 +74,11 @@ class AllNewsListActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.getNewsHeadline()
             viewModel.newsHeadlineFlow.collectLatest {
-                setupNewsLayout(it)
+                if (it.error.isNotBlank()) {
+                    PresentationUtils.errorToast(this@AllNewsListActivity,it.error)
+                } else {
+                    setupNewsLayout(it)
+                }
                 progressBar.dismiss()
             }
         }

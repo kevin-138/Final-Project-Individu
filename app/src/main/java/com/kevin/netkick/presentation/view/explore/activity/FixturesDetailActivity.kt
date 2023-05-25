@@ -95,7 +95,11 @@ class FixturesDetailActivity : AppCompatActivity() {
         lifecycleScope.launch {
             viewModel.getFixtureStatistic(fixtureData!!.fixture.id)
             viewModel.fixtureStatistics.collectLatest {
-                adapter.addDataToList(it.response)
+                if (it.error.isNotBlank()) {
+                    PresentationUtils.errorToast(this@FixturesDetailActivity,it.error)
+                } else {
+                    adapter.addDataToList(it.response)
+                }
                 progressBar.dismiss()
             }
         }

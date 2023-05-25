@@ -2,10 +2,14 @@ package com.kevin.netkick.presentation
 
 import android.app.Activity
 import android.content.Context
+import android.graphics.Color
+import android.graphics.PorterDuff
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentActivity
 import com.kevin.netkick.R
 import com.kevin.netkick.presentation.view.main.fragments.ExploreFragment
@@ -124,6 +128,11 @@ object PresentationUtils {
     fun newsDateFormatter(date:String):String{
         return date.split("T")[0]
     }
+
+    fun errorToast(context: Context,error:String){
+        val toast = Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+    }
+
 
 
 }

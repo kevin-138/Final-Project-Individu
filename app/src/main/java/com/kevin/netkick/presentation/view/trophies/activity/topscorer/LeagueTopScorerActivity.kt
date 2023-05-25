@@ -147,7 +147,12 @@ class LeagueTopScorerActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.topScoreResults.observe(this) {
-            adapter.addDataToList(it.response)
+            if (it.error.isNotBlank()) {
+                PresentationUtils.errorToast(this,it.error)
+            } else {
+                adapter.addDataToList(it.response)
+            }
+
             Timer().schedule(2000L) {
                 progressBar.dismiss()
             }

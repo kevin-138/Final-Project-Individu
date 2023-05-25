@@ -128,11 +128,15 @@ class PlayersSearchActivity : AppCompatActivity() {
 
     private fun setObserver() {
         viewModel.playerSearchResults.observe(this) {
-            if (it.response.isEmpty()) {
-                layoutVisibility(true)
+            if (it.error.isNotBlank()) {
+                PresentationUtils.errorToast(this,it.error)
             } else {
-                layoutVisibility(false)
-                adapter.addDataToList(it.response)
+                if (it.response.isEmpty()) {
+                    layoutVisibility(true)
+                } else {
+                    layoutVisibility(false)
+                    adapter.addDataToList(it.response)
+                }
             }
         }
     }

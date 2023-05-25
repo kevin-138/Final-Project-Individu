@@ -79,49 +79,54 @@ class TeamDetailActivity : AppCompatActivity() {
             lifecycleScope.launch {
                 viewModel.getPopularTeamDetail(intent.getIntExtra(PresentationUtils.TEAM_ID, 0))
                 viewModel.detailTeamsFlow.collectLatest {
-                    val dataTeam = it.response[0]
-                    binding.apply {
-                        Glide.with(binding.root)
-                            .load(dataTeam.venue.image)
-                            .placeholder(loadingDrawable1)
-                            .error(R.drawable.broken_image_icon)
-                            .into(ivVenueStadium)
+                    if (it.error.isNotBlank()) {
+                        PresentationUtils.errorToast(this@TeamDetailActivity,it.error)
+                    } else {
+                        val dataTeam = it.response[0]
+                        binding.apply {
+                            Glide.with(binding.root)
+                                .load(dataTeam.venue.image)
+                                .placeholder(loadingDrawable1)
+                                .error(R.drawable.broken_image_icon)
+                                .into(ivVenueStadium)
 
-                        Glide.with(binding.root)
-                            .load(dataTeam.team.logo)
-                            .placeholder(loadingDrawable2)
-                            .error(R.drawable.broken_image_icon)
-                            .into(ivTeamLogoDetail)
+                            Glide.with(binding.root)
+                                .load(dataTeam.team.logo)
+                                .placeholder(loadingDrawable2)
+                                .error(R.drawable.broken_image_icon)
+                                .into(ivTeamLogoDetail)
 
-                        tvTeamDetailName.text = dataTeam.team.name
-                        tvTeamDetailCode.text = getString(R.string.country_code, dataTeam.team.code)
-                        tvTeamDetailDate.text = getString(R.string.est_year, dataTeam.team.founded)
-                        tvTeamCountryCode.text = dataTeam.team.country
-                        tvTeamVenueName.text = dataTeam.venue.name
-                        tvTeamVenueCity.text = dataTeam.venue.city
-                        tvTeamVenueSurface.text = dataTeam.venue.surface
-                        tvTeamVenueCapacity.text = dataTeam.venue.capacity.toString()
-                        tvTeamVenueAddress.text = dataTeam.venue.address
+                            tvTeamDetailName.text = dataTeam.team.name
+                            tvTeamDetailCode.text = getString(R.string.country_code, dataTeam.team.code)
+                            tvTeamDetailDate.text = getString(R.string.est_year, dataTeam.team.founded)
+                            tvTeamCountryCode.text = dataTeam.team.country
+                            tvTeamVenueName.text = dataTeam.venue.name
+                            tvTeamVenueCity.text = dataTeam.venue.city
+                            tvTeamVenueSurface.text = dataTeam.venue.surface
+                            tvTeamVenueCapacity.text = dataTeam.venue.capacity.toString()
+                            tvTeamVenueAddress.text = dataTeam.venue.address
 
 
-                        binding.btnSeeAllPlayers.setOnClickListener {
-                            val intentPlayers = Intent(
-                                this@TeamDetailActivity,
-                                AllPlayerInTeamsActivity::class.java
-                            )
-                            intentPlayers.putExtra(PresentationUtils.TEAM_FULL_DATA, dataTeam)
-                            intentPlayers.putExtra(
-                                PresentationUtils.TEAM_SEASON,
-                                if (season != 0) {
-                                    season
-                                } else {
-                                    PresentationUtils.POPULAR_SEASON
-                                }
-                            )
-                            this@TeamDetailActivity.startActivity(intentPlayers)
+                            binding.btnSeeAllPlayers.setOnClickListener {
+                                val intentPlayers = Intent(
+                                    this@TeamDetailActivity,
+                                    AllPlayerInTeamsActivity::class.java
+                                )
+                                intentPlayers.putExtra(PresentationUtils.TEAM_FULL_DATA, dataTeam)
+                                intentPlayers.putExtra(
+                                    PresentationUtils.TEAM_SEASON,
+                                    if (season != 0) {
+                                        season
+                                    } else {
+                                        PresentationUtils.POPULAR_SEASON
+                                    }
+                                )
+                                this@TeamDetailActivity.startActivity(intentPlayers)
+                            }
+
                         }
-                        progressBar.dismiss()
                     }
+                    progressBar.dismiss()
                 }
             }
         }
