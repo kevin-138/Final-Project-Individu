@@ -14,15 +14,17 @@ import com.kevin.netkick.domain.entity.country.CountryC
 import com.kevin.netkick.presentation.PresentationUtils
 import com.kevin.netkick.presentation.adapters.CountriesAdapter
 import com.kevin.netkick.presentation.view.explore.activity.LeagueSearchActivity
+import com.kevin.netkick.presentation.view.main.activity.MainActivity
 import com.kevin.netkick.presentation.view.viewmodels.MainViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
+class ExploreFragment() : Fragment() {
     private lateinit var binding: FragmentExploreBinding
     private lateinit var adapter: CountriesAdapter
     private lateinit var dataList: ArrayList<CountryC>
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +36,7 @@ class ExploreFragment(private val mainViewModel: MainViewModel) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainViewModel = (activity as MainActivity).provideMainViewModel()
         dataList = ArrayList()
         setAdapter()
         setSearchBar()

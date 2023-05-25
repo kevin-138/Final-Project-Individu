@@ -51,8 +51,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupFragments() {
-        homeFragment = HomeFragment(viewModel)
-        exploreFragment = ExploreFragment(viewModel)
+        homeFragment = HomeFragment()
+        exploreFragment = ExploreFragment()
         trophiesFragment = TrophiesFragment()
         supportFragmentManager.beginTransaction().apply {
             add(R.id.fl_home_activity, homeFragment)
@@ -85,6 +85,10 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+    }
+
+    fun provideMainViewModel():MainViewModel{
+        return viewModel
     }
 
     private fun setCurrentFragment(fragment: Fragment) {

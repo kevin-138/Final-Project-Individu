@@ -40,7 +40,9 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         android:layout_marginTop="5dp"
-        android:layout_marginHorizontal="15dp"
+        android:layout_marginStart="10dp"
+        android:scrollbars="vertical"
+        style="@style/scrollbar_style"
         tools:listitem="@layout/news_headline_item"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

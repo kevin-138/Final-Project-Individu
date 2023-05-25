@@ -17,16 +17,18 @@ import com.kevin.netkick.presentation.adapters.NewsHeadlinePreviewAdapter
 import com.kevin.netkick.presentation.adapters.PopularTeamsPreviewAdapter
 import com.kevin.netkick.presentation.view.home.news.activity.AllNewsListActivity
 import com.kevin.netkick.presentation.view.home.popularteams.activity.PopularTeamsListActivity
+import com.kevin.netkick.presentation.view.main.activity.MainActivity
 import com.kevin.netkick.presentation.view.viewmodels.MainViewModel
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
-class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
+class HomeFragment() : Fragment() {
     private lateinit var binding: FragmentHomeBinding
     private lateinit var liveScoreAdapter: LiveScoreAdapter
     private lateinit var popularTeamsAdapter: PopularTeamsPreviewAdapter
     private lateinit var newsAdapter: NewsHeadlinePreviewAdapter
+    private lateinit var mainViewModel: MainViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -38,6 +40,7 @@ class HomeFragment(private val mainViewModel: MainViewModel) : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        mainViewModel = (activity as MainActivity).provideMainViewModel()
         checkOnline(true)
 
         binding.tvSeeAllPopularTeams.setOnClickListener {
