@@ -3,14 +3,13 @@ package com.kevin.netkick.presentation
 import android.app.Activity
 import android.content.Context
 import android.graphics.Color
-import android.graphics.PorterDuff
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
-import androidx.core.content.ContentProviderCompat.requireContext
 import androidx.fragment.app.FragmentActivity
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.kevin.netkick.R
 import com.kevin.netkick.presentation.view.main.fragments.ExploreFragment
 import com.kevin.netkick.presentation.view.main.fragments.HomeFragment
@@ -130,9 +129,17 @@ object PresentationUtils {
     }
 
     fun errorToast(context: Context,error:String){
-        val toast = Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
+        Toast.makeText(context, error, Toast.LENGTH_SHORT).show()
     }
 
+    fun loadingDrawableBar(context: Context):CircularProgressDrawable{
+        val loadingDrawable = CircularProgressDrawable(context)
+        loadingDrawable.strokeWidth = 5f
+        loadingDrawable.centerRadius = 30f
+        loadingDrawable.setColorSchemeColors(Color.WHITE)
+        loadingDrawable.start()
+        return loadingDrawable
+    }
 
 
 }
