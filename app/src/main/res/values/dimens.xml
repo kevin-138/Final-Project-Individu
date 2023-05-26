@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="pd_1">4dp</dimen>
+    <dimen name="foureight">48dp</dimen>
+    <dimen name="ten">10dp</dimen>
+    <dimen name="twenty">20dp</dimen>
+    <dimen name="twentfive">25dp</dimen>
+    <dimen name="five">5dp</dimen>
+    <dimen name="ninety">90dp</dimen>
+    <dimen name="fifteen">15dp</dimen>
 </resources>

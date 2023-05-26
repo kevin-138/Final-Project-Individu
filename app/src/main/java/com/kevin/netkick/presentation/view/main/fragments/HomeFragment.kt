@@ -136,27 +136,22 @@ class HomeFragment() : Fragment() {
     }
 
     private fun setupNewsLayout(data: NewsResponse) {
+        binding.apply {
         when {
             data.totalResults == 0 -> {
-                binding.apply {
                     tvSeeAllNews.visibility = View.INVISIBLE
                     newsAdapter.addDataToList(data.articles.toMutableList(), true)
-                }
             }
             data.totalResults <= 4 -> {
-                binding.apply {
                     tvSeeAllNews.visibility = View.INVISIBLE
                     newsAdapter.addDataToList(data.articles.toMutableList(), false)
-                }
             }
             else -> {
-                binding.apply {
                     tvSeeAllNews.visibility = View.VISIBLE
                     newsAdapter.addDataToList(data.articles.slice(0..3).toMutableList(), false)
                 }
             }
         }
-
     }
 
 

@@ -9,12 +9,12 @@
 
     <ImageButton
         android:id="@+id/ib_back_button"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:layout_marginVertical="10dp"
+        android:layout_width="@dimen/foureight"
+        android:layout_height="@dimen/foureight"
+        android:layout_marginVertical="@dimen/ten"
         android:background="@color/transparant"
         android:src="@drawable/arrrowssc"
-        android:layout_marginStart="20dp"
+        android:layout_marginStart="@dimen/twenty"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         tools:ignore="SpeakableTextPresentCheck" />
@@ -27,7 +27,7 @@
         android:textSize="30sp"
         android:textColor="@color/white"
         android:textStyle="bold"
-        android:layout_marginHorizontal="25dp"
+        android:layout_marginHorizontal="@dimen/twentfive"
         app:layout_constraintTop_toBottomOf="@id/ib_back_button"
         app:layout_constraintStart_toStartOf="parent"/>
 
@@ -39,7 +39,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        android:layout_marginTop="5dp"
+        android:layout_marginTop="@dimen/five"
         android:scrollbars="vertical"
         style="@style/scrollbar_style"
         tools:listitem="@layout/news_headline_item"/>
