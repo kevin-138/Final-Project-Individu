@@ -2,7 +2,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".presentation.view.main.fragments.HomeFragment"
     android:background="@color/background1">
@@ -10,6 +10,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
             android:id="@+id/tv_netkick_logo"
             android:layout_width="0dp"
@@ -95,18 +96,15 @@
             android:id="@+id/shimmer_popular_teams"
             android:layout_width="match_parent"
             android:layout_height="80dp"
-            android:layout_marginTop="5dp"
-            android:clipToPadding="false"
-            android:paddingHorizontal="15dp"
             app:shimmer_repeat_mode="restart"
             app:shimmer_shape="radial"
-            app:layout_constraintBottom_toTopOf="@id/tv_news_title"
+            android:layout_marginTop="5dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_popular_teams_title"
             >
 
-                <include layout="@layout/popular_teams_shimmer_item"/>
+                <include layout="@layout/popular_teams_shimmer_item" />
 
         </com.facebook.shimmer.ShimmerFrameLayout>
 
@@ -115,7 +113,6 @@
             android:layout_width="match_parent"
             android:layout_height="80dp"
             android:layout_marginTop="5dp"
-            android:clipToPadding="false"
             android:paddingHorizontal="15dp"
             app:layout_constraintBottom_toTopOf="@id/tv_news_title"
             app:layout_constraintEnd_toEndOf="parent"
@@ -138,41 +135,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
 
-        <com.facebook.shimmer.ShimmerFrameLayout
-            android:id="@+id/shimmer_news"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:shimmer_repeat_mode="restart"
-            app:shimmer_shape="radial"
-            app:layout_constraintTop_toBottomOf="@id/tv_news_title"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="20dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical">
-
-                <include layout="@layout/news_shimmer_item"/>
-                <include layout="@layout/news_shimmer_item"/>
-                <include layout="@layout/news_shimmer_item"/>
-
-            </LinearLayout>
-
-        </com.facebook.shimmer.ShimmerFrameLayout>
-
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_news_headline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintTop_toBottomOf="@id/tv_news_title"
+            android:layout_marginBottom="20dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            android:layout_marginBottom="20dp"
-            tools:listitem="@layout/news_headline_item"/>
+            app:layout_constraintTop_toBottomOf="@id/tv_news_title"
+            tools:listitem="@layout/news_headline_item" />
 
         <TextView
             android:id="@+id/tv_see_all_news"
@@ -188,6 +160,5 @@
             />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
 
 </ScrollView>

@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.kevin.netkick.R
 import com.kevin.netkick.databinding.FragmentHomeBinding
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.presentation.PresentationUtils
@@ -32,7 +31,6 @@ class HomeFragment() : Fragment() {
     private lateinit var newsAdapter: NewsHeadlinePreviewAdapter
     private lateinit var mainViewModel: MainViewModel
     private lateinit var liveScoreShimmer: ShimmerFrameLayout
-    private lateinit var newsShimmer: ShimmerFrameLayout
     private lateinit var popularTeamsShimmer: ShimmerFrameLayout
 
     override fun onCreateView(
@@ -69,6 +67,7 @@ class HomeFragment() : Fragment() {
             pageSnapHelper.attachToRecyclerView(binding.rvLivescore)
             liveScoreShimmer =  binding.shimmerLiveScore
             liveScoreShimmer.startShimmer()
+
             //popular teams
             popularTeamsAdapter = PopularTeamsPreviewAdapter(
                 mutableListOf(),
@@ -89,8 +88,6 @@ class HomeFragment() : Fragment() {
             newsAdapter = NewsHeadlinePreviewAdapter(mutableListOf(), true)
             rvNewsHeadline.layoutManager = noScrollLayoutManager
             rvNewsHeadline.adapter = newsAdapter
-            newsShimmer = binding.shimmerNews
-            newsShimmer.startShimmer()
         }
 
 
@@ -106,8 +103,9 @@ class HomeFragment() : Fragment() {
             if (current) {
                 PresentationUtils.networkDialog(requireActivity(), PresentationUtils.HOME)
                 liveScoreShimmer.stopShimmer()
-                newsShimmer.stopShimmer()
                 popularTeamsShimmer.stopShimmer()
+                liveScoreShimmer.visibility = View.GONE
+                popularTeamsShimmer.visibility = View.GONE
             }
         }
     }
@@ -132,8 +130,10 @@ class HomeFragment() : Fragment() {
                         popularTeamsPreview,
                         PresentationUtils.POPULAR_SEASON
                     )
-                    popularTeamsShimmer.stopShimmer()
+
                 }
+                popularTeamsShimmer.stopShimmer()
+                popularTeamsShimmer.visibility = View.GONE
             }
         }
     }
@@ -168,7 +168,6 @@ class HomeFragment() : Fragment() {
                     newsAdapter.addDataToList(data.articles.slice(0..3).toMutableList(), false)
                 }
             }
-            newsShimmer.stopShimmer()
         }
     }
 
@@ -182,6 +181,7 @@ class HomeFragment() : Fragment() {
                 } else {
                     liveScoreAdapter.addDataToList(it.response, it.response.isEmpty())
                     liveScoreShimmer.stopShimmer()
+                    liveScoreShimmer.visibility = View.GONE
                 }
             }
         }
