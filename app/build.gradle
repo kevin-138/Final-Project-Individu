@@ -38,6 +38,9 @@ android {
 }
 
 dependencies {
+    //shimmer
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
     //svglide
     implementation 'com.github.2coffees1team:GlideToVectorYou:v2.0.0'
 

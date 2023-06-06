@@ -9,6 +9,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
+import com.facebook.shimmer.ShimmerFrameLayout
+import com.kevin.netkick.R
 import com.kevin.netkick.databinding.FragmentHomeBinding
 import com.kevin.netkick.domain.entity.news.NewsResponse
 import com.kevin.netkick.presentation.PresentationUtils
@@ -29,6 +31,9 @@ class HomeFragment() : Fragment() {
     private lateinit var popularTeamsAdapter: PopularTeamsPreviewAdapter
     private lateinit var newsAdapter: NewsHeadlinePreviewAdapter
     private lateinit var mainViewModel: MainViewModel
+    private lateinit var liveScoreShimmer: ShimmerFrameLayout
+    private lateinit var newsShimmer: ShimmerFrameLayout
+    private lateinit var popularTeamsShimmer: ShimmerFrameLayout
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,8 +46,8 @@ class HomeFragment() : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         mainViewModel = (activity as MainActivity).provideMainViewModel()
-        checkOnline(true)
         setupAdapters()
+        checkOnline(true)
         binding.tvSeeAllPopularTeams.setOnClickListener {
             val intentPopular = Intent(requireContext(), PopularTeamsListActivity::class.java)
             requireContext().startActivity(intentPopular)
@@ -55,13 +60,16 @@ class HomeFragment() : Fragment() {
 
     private fun setupAdapters() {
         binding.apply {
+            //livescore
             val pageSnapHelper = PagerSnapHelper()
             liveScoreAdapter = LiveScoreAdapter(mutableListOf(), false)
             rvLivescore.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             rvLivescore.adapter = liveScoreAdapter
             pageSnapHelper.attachToRecyclerView(binding.rvLivescore)
-
+            liveScoreShimmer =  binding.shimmerLiveScore
+            liveScoreShimmer.startShimmer()
+            //popular teams
             popularTeamsAdapter = PopularTeamsPreviewAdapter(
                 mutableListOf(),
                 PresentationUtils.POPULAR_SEASON
@@ -69,7 +77,10 @@ class HomeFragment() : Fragment() {
             rvPopularTeams.layoutManager =
                 LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
             rvPopularTeams.adapter = popularTeamsAdapter
+            popularTeamsShimmer = binding.shimmerPopularTeams
+            popularTeamsShimmer.startShimmer()
 
+            //news
             val noScrollLayoutManager = object : LinearLayoutManager(requireContext()) {
                 override fun canScrollVertically(): Boolean {
                     return false
@@ -78,6 +89,8 @@ class HomeFragment() : Fragment() {
             newsAdapter = NewsHeadlinePreviewAdapter(mutableListOf(), true)
             rvNewsHeadline.layoutManager = noScrollLayoutManager
             rvNewsHeadline.adapter = newsAdapter
+            newsShimmer = binding.shimmerNews
+            newsShimmer.startShimmer()
         }
 
 
@@ -92,6 +105,9 @@ class HomeFragment() : Fragment() {
         } else {
             if (current) {
                 PresentationUtils.networkDialog(requireActivity(), PresentationUtils.HOME)
+                liveScoreShimmer.stopShimmer()
+                newsShimmer.stopShimmer()
+                popularTeamsShimmer.stopShimmer()
             }
         }
     }
@@ -116,6 +132,7 @@ class HomeFragment() : Fragment() {
                         popularTeamsPreview,
                         PresentationUtils.POPULAR_SEASON
                     )
+                    popularTeamsShimmer.stopShimmer()
                 }
             }
         }
@@ -137,20 +154,21 @@ class HomeFragment() : Fragment() {
 
     private fun setupNewsLayout(data: NewsResponse) {
         binding.apply {
-        when {
-            data.totalResults == 0 -> {
+            when {
+                data.totalResults == 0 -> {
                     tvSeeAllNews.visibility = View.INVISIBLE
                     newsAdapter.addDataToList(data.articles.toMutableList(), true)
-            }
-            data.totalResults <= 4 -> {
+                }
+                data.totalResults <= 4 -> {
                     tvSeeAllNews.visibility = View.INVISIBLE
                     newsAdapter.addDataToList(data.articles.toMutableList(), false)
-            }
-            else -> {
+                }
+                else -> {
                     tvSeeAllNews.visibility = View.VISIBLE
                     newsAdapter.addDataToList(data.articles.slice(0..3).toMutableList(), false)
                 }
             }
+            newsShimmer.stopShimmer()
         }
     }
 
@@ -163,6 +181,7 @@ class HomeFragment() : Fragment() {
                     PresentationUtils.errorToast(requireContext(), it.error)
                 } else {
                     liveScoreAdapter.addDataToList(it.response, it.response.isEmpty())
+                    liveScoreShimmer.stopShimmer()
                 }
             }
         }

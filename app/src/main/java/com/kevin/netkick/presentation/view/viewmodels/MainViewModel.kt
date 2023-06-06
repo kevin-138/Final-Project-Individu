@@ -24,7 +24,7 @@ class MainViewModel @Inject constructor(private val useCase: DomainUseCase) : Vi
 
     init {
         viewModelScope.launch {
-            delay(3.seconds)
+            delay(1.seconds)
             _isLoading.value = false
         }
     }
